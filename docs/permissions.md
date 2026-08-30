@@ -22,6 +22,10 @@ Claude Code gives you three layers; Atlas never edits any of them for you.
 `gh pr merge` on the deny rail is the mechanical form of Atlas's core promise: merge is
 never automated — the deny rail makes that true even if a prompt goes wrong.
 
+These are prefix rules: flags typed after arguments (`git push origin --force`,
+`rm -fr`) evade them. The rail is a floor, not a proof — judgment and review still do
+the real work.
+
 2. **The allow list** — the safe regulars (reads, searches, your build/test commands) so
    agents run at full speed without paging you constantly. Build yours from what you
    actually approve during the first few runs; approvals accumulate.

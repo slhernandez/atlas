@@ -169,7 +169,7 @@ When the implementor reports the PR URL:
    hygiene (subjects, no attribution lines, no unrelated files) and the PR
    body (per the PR-body template in the implementor agent definition,
    including the unlabeled accessible overview).
-3. Write the review doc to `reviews/`. Verdict + summary go to the operator
+3. Write the review doc to `reviews/` from the journal's review template. Verdict + summary go to the operator
    **in chat**; post nothing on the PR itself unless the operator asks.
    End this message with a clearly-marked **"READY FOR YOU"** block: the PR
    link, the manual steps that are theirs (smoke test, gates), and the merge

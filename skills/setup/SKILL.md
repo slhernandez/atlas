@@ -22,9 +22,9 @@ Check, then print a report card (✓ / ⚠, one line each, each ⚠ with its one
 | git installed | `git --version` | **BLOCK**: point at the platform's installer (on macOS the first `git` run offers the developer tools) |
 | inside a git repository | `git rev-parse --show-toplevel` | **BLOCK**: "Atlas runs inside a git repository. `cd` into your project and re-run `/atlas:setup`." |
 | git identity | `git config user.name` + `user.email` | ⚠ offer to set them now (ask for the values; this is git config, not Claude settings) |
-| remote reachable | `git ls-remote --heads origin` (quiet, timeout) | ⚠ "reads from `origin` failed — check your remote/credentials before a run needs to push" |
+| remote reachable | `GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -oBatchMode=yes -oConnectTimeout=5' git ls-remote -q --heads origin` (portable; converts a credential hang into the ⚠) | ⚠ "reads from `origin` failed — check your remote/credentials before a run needs to push" |
 | `gh` present + authed | `gh auth status` | ⚠ "PRs will degrade to push + a compare-URL you open by hand; install/auth `gh` to restore one-step PRs" |
-| permission posture | none (informational) | note: "your first run will ask for permission often; approvals accumulate. See `docs/permissions.md` for the recommended baseline and deny-rail — Atlas never edits your settings itself." |
+| permission posture | none (informational) | note: "your first run will ask for permission often; approvals accumulate. offer to print the recommended deny-rail inline (nine lines, from the permissions doc shipped with the plugin at `docs/permissions.md`) — Atlas never edits your settings itself." |
 
 Proceed past any ⚠. Block only on the two BLOCKs.
 
@@ -44,6 +44,8 @@ Create the structure and seed it from the plugin's templates:
 ```
 
 Resolve the plugin's `templates/` directory relative to this skill file's own location.
+The plan skeleton also lives inside the planner agent (self-containment); the journal
+copies are the operator's reference set.
 Mention, without doing it: initializing the journal as a git repo is a good idea.
 
 ## Step 2 — Tracker

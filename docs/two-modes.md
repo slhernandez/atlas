@@ -11,7 +11,7 @@ gates, and the review standards. The difference is the bus.
 One session runs the whole work item; the session IS the supervisor and spawns the planner
 and implementor as fresh-context subagents. For ticket-sized work: one plan, one PR.
 
-You are needed at exactly five points: scope answers (Phase 0), the plan gate (hard stop),
+You are needed at five gates: scope answers (Phase 0), the plan gate (hard stop),
 the manual smoke test, PR-feedback triage, and merge. Everything between runs unattended
 inside your permission rails.
 
@@ -42,3 +42,6 @@ Every catch comes from **fresh context with a verification mandate** — the pla
 re-verifies the supervisor's research, the supervisor reviews work it didn't author, the
 implementor never sees the research so it has nothing to redesign from, and the human
 holds every gate that matters.
+
+See also `docs/patterns/` for the recurring shapes both modes lean on: the
+generated-client dependency order for multi-repo work, and domain-owned content.

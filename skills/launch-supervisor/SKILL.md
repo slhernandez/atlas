@@ -31,9 +31,10 @@ run searches against the actual repos, stop and go do that first.
 
 ## Phase 1 — Gather the brief (read, do not skim)
 
-1. The work item itself, fetched per the config's tracker (with no tracker, ask the
-   operator for the brief and any documents that carry it). Its description is the
-   authoritative brief.
+1. The work item itself, fetched per the config's tracker — if `~/.claude/atlas.json`
+   is missing, stop and tell the operator to run `/atlas:setup` first. (With tracker
+   `manual`, ask the operator for the brief and any documents that carry it.) Its
+   description is the authoritative brief.
 2. Hunt for a richer source than the item. Meeting notes and roadmap documents in the
    journal usually contain the stakeholders' actual words and are more useful than the
    ticket. Search `<journal>/` for the feature name.
@@ -150,7 +151,7 @@ its altitude and specificity, not its content.
 
 ## Output
 
-Write the prompt to `<journal>/plans/YYYY-MM-DD-<item>-supervisor-kickoff-prompt.md` with a
+Write the prompt to `<journal>/plans/YYYY-MM-DD-<work-item>-supervisor-kickoff-prompt.md` with a
 one-line instruction above the fence saying which repo to launch from. Then tell the
 operator: the path, the launch repo and why, what the new window should report back first,
 and any decision still open. Do not paste the whole prompt into chat — they are about to
