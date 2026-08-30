@@ -9,6 +9,17 @@ signature on everything that matters. Merge is never automated.
 > Private during construction. Structure and docs land phase by phase; installability
 > arrives with the setup wizard in Phase 2.
 
+## Structure
+
+```
+.claude-plugin/     plugin + marketplace manifests
+skills/             /atlas:feature-workflow (kit mode, phases 0-7)
+agents/             workflow-planner · workflow-implementor (fresh-context roles)
+templates/          plan · research · review · dossier · scorecard · HOUSE_RULES seed
+scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
+docs/               (Phase 2)
+```
+
 ## Maintainers
 
 `scripts/lint-isms.sh` guards this tree against origin-specific terms. It requires
