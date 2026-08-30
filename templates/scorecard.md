@@ -8,7 +8,8 @@ grade: <A / B / C / F>
 # Run Scorecard — TICKET-123
 
 > Grade after merge (or abort). Part 3 is graded by an independent session that did not
-> run the work — the writer is never the grader.
+> run the work — the writer is never the grader. (Launch a fresh Claude Code session by
+> hand and point it at this file and the PR; a grader skill is planned for a later phase.)
 
 ## Run metadata
 | | |

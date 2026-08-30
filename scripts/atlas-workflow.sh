@@ -21,11 +21,12 @@ ITEM="$1"
 shift
 EXTRA="${*:-}"
 
-# Normalize a tracker URL to a bare id where the shape is recognizable:
-# Jira-style KEY-123 anywhere in the string, or a GitHub issue URL's number.
-if [[ "$ITEM" =~ ([A-Z][A-Z0-9]+-[0-9]+) ]]; then
+# Normalize a tracker URL to a bare id where the shape is recognizable.
+# Issue-URL shape first: it is anchored, and a Jira-shaped org name in a
+# GitHub URL (github.com/AREA-51/...) must not win over the issue number.
+if [[ "$ITEM" =~ /issues/([0-9]+) ]]; then
   ITEM="${BASH_REMATCH[1]}"
-elif [[ "$ITEM" =~ /issues/([0-9]+) ]]; then
+elif [[ "$ITEM" =~ ([A-Z][A-Z0-9]+-[0-9]+) ]]; then
   ITEM="${BASH_REMATCH[1]}"
 fi
 

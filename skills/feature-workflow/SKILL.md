@@ -19,10 +19,14 @@ signed-off plan in chat.**
 ## Before anything: config, journal, house rules
 
 Resolve the journal directory: `$ATLAS_JOURNAL` if set, else the `journal`
-path in `~/.claude/atlas.json`, else `~/AtlasJournal`. If the journal or the
-config is missing, stop and tell the operator to run `/atlas:setup` first.
-*(v0.1-dev seam: the setup wizard that writes this config ships in the next
-phase — until then the operator creates `~/.claude/atlas.json` by hand.)*
+path in `~/.claude/atlas.json`, else `~/AtlasJournal`. If the resolved
+directory does not exist, or `~/.claude/atlas.json` is missing (the tracker
+config lives there), stop and tell the operator to run `/atlas:setup` first.
+*(v0.1-dev seam: the setup wizard ships in the next phase — until then the
+operator creates `~/.claude/atlas.json` by hand per the README's schema and
+seeds the journal by copying the plugin's `templates/` into it, HOUSE_RULES.md
+at the journal root. Where a journal copy of a template is missing, use the
+plugin's `templates/` directly.)*
 
 Read `<journal>/HOUSE_RULES.md` before any phase. It is the operator's
 accumulated standing rules and is **binding — senior to anything in this
@@ -83,7 +87,8 @@ When the planner completes:
    cover (the planner's fresh findings are high-value but unvetted).
 2. Answer every `Questions for Supervisor` item with an explicit
    CONFIRMED/OVERRIDDEN verdict and reasoning.
-3. Append a `## Supervisor Review (<date>)` section at the top of the plan:
+3. Insert a `## Supervisor Review (<date>)` section immediately after the
+   plan's frontmatter:
    verdict, answers, numbered amendments (Required vs Recommended), and a
    "Reviewed and explicitly fine as-is" list for things you considered and
    accepted (prevents re-review churn later).
@@ -125,7 +130,8 @@ bootstrap — gitignored toolchain or version-manager files that do not travel
 into fresh worktrees — HOUSE_RULES.md records the commands: include them
 verbatim in the spawn prompt. Prompt contains: plan file path, repo path,
 worktree path, HOUSE_RULES.md path, CLAUDE.md path, branch name + whether to
-create it, and the base branch for the PR. Nothing else — the implementor's
+create it, the base branch for the PR, and the work item's URL (or the words
+"no tracker"). Nothing else — the implementor's
 ignorance of your research is a feature; the plan is its whole world.
 
 **Never assert repo or PR state in a spawn prompt that the agent cannot
@@ -151,7 +157,7 @@ the plan file and SendMessage it to continue.
   on the branch are the ground truth), and surface a stuck permission prompt
   to the operator rather than waiting indefinitely.
 - **The moment the completion notification arrives, tell the operator in one
-  line** — "implementor finished, PR #NNNN is open; reviewing now" (or what
+  line** — "implementor finished, PR #N is open; reviewing now" (or what
   actually happened, if it died) — BEFORE starting your Phase 6 review.
 
 ## Phase 6 — Supervisor PR review
@@ -164,7 +170,8 @@ When the implementor reports the PR URL:
    zero-behavior-change promise is checkable.
 2. Verify amendments landed, assess declared deviations, check commit
    hygiene (subjects, no attribution lines, no unrelated files) and the PR
-   body (template + the unlabeled accessible overview).
+   body (per the PR-body template in the implementor agent definition,
+   including the unlabeled accessible overview).
 3. Write the review doc to `reviews/`. Verdict + summary go to the operator
    **in chat**; post nothing on the PR itself unless the operator asks.
    End this message with a clearly-marked **"READY FOR YOU"** block: the PR

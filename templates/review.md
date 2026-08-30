@@ -6,7 +6,7 @@ plan: <plan file path>
 verdict: <APPROVE / FIX LIST / NEEDS DISCUSSION>
 ---
 
-# PR Review — TICKET-123 (PR #NNN)
+# PR Review — TICKET-123 (PR #N)
 
 ## Task-by-task
 | Plan task | Commit(s) | Matches plan? | Notes |

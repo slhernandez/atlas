@@ -10,7 +10,7 @@ last_updated: YYYY-MM-DD
 
 ## RESUME BLOCK (keep current — a brand-new supervisor session must restart from this alone)
 - **Current phase:**
-- **Live threads:** <window/role, what it holds, what it owes>
+- **Live threads:** <session/role, what it holds, what it owes>
 - **Pending prompts (VERBATIM):** <any prompt authored but not yet delivered>
 - **Standing rules for this feature:**
 - **Next action:**
@@ -20,6 +20,8 @@ last_updated: YYYY-MM-DD
 |---|---|---|---|
 
 ## Slices
+<a slice = one plan and one PR's worth of a feature too big for a single plan>
+
 | Slice | Plan file | PR | Status |
 |---|---|---|---|
 

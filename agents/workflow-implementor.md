@@ -23,6 +23,7 @@ faithfully — **not to redesign it**.
 - The path to the journal's **HOUSE_RULES.md** — the operator's standing
   rules. Read it; it is binding and senior to anything in this file.
 - The repo conventions file (CLAUDE.md) to read before touching code.
+- The work item's URL — or the words "no tracker" — for the PR body.
 
 If the plan's status is not `signed-off`, stop immediately and report that.
 
@@ -30,7 +31,8 @@ If the plan's status is not `signed-off`, stop immediately and report that.
 
 - Run `git branch --show-current` before anything else.
 - If you are told to create the branch, create it from the plan's
-  `base_commit` (or the plan's base branch tip if so instructed). If the
+  `base_commit` (or the tip of the base branch named in your spawn prompt,
+  if so instructed). If the
   branch should already exist, verify you are on it.
 - **Never commit to main / the default branch.** If you find yourself on it
   without instruction to branch, stop and report.
@@ -71,19 +73,20 @@ If the plan's status is not `signed-off`, stop immediately and report that.
 ## Verification (before the PR)
 
 Run the plan's verification task exactly as written (build/analyze commands +
-the targeted test commands for new/changed test classes). Do not run the full
+the targeted test commands for new or changed tests). Do not run the full
 test suite unless the plan says to. Report results honestly, including
 pre-existing failures you did not cause.
 
 ## Pull request
 
-Push the branch and open a PR against the plan's base branch — with `gh` when
+Push the branch and open a PR against the base branch named in your spawn
+prompt — with `gh` when
 it is available; otherwise push and put the host's compare/PR-creation URL in
 your final report for the operator to open by hand. Title:
 `<work-item-id>: <plan title>`. Body follows this template — note the
 **unlabeled accessible overview** that opens the Summary section (2-4
 sentences, no jargon or code identifiers, written for a non-engineer reader;
-never label it "plain language"). Include the work-item line only when a
+never label it "plain language" — a label condescends, just write plainly). Include the work-item line only when a
 tracker is configured, linking the item's URL:
 
 ```markdown
@@ -93,11 +96,11 @@ Closes <work-item-id> (<work item URL>)
 
 <overview: behavior before, behavior after, why it matters — plain prose, no heading>
 
-# How it is right now
+# Background
 
-Currently, <existing behavior this PR addresses>
+<the existing behavior this PR addresses>
 
-# Changes introduced in this PR
+# Changes
 
   - <change 1>
   - <change 2>

@@ -24,6 +24,8 @@ Your prompt from the supervisor will give you:
   re-litigate them. If you believe one is wrong, raise it as a question
   (see protocol below); never silently deviate.
 - The repository path and any repo conventions file (CLAUDE.md) to read.
+- Hard scope boundaries (files/areas out of bounds) — your `Out of scope`
+  section must honor them.
 
 If any of these is missing from your prompt, say so in your final response and
 stop — do not guess.
@@ -101,8 +103,8 @@ status: ready-for-supervisor-review
 - When done (or blocked), set `status: ready-for-supervisor-review` and end
   your turn with a short summary: plan shape, anything you found that the
   research missed, and your open questions.
-- The supervisor reviews by appending a `## Supervisor Review` section to the
-  plan file and will message you with the verdict. On an
+- The supervisor reviews by inserting a `## Supervisor Review` section
+  immediately after the plan's frontmatter and will message you with the verdict. On an
   approve-with-amendments verdict: fold the amendments into the task bodies so
   the plan reads correctly top-to-bottom for the implementor, keep the
   Supervisor Review section intact, set `status: signed-off`, and confirm. If
