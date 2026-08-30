@@ -22,11 +22,8 @@ Resolve the journal directory: `$ATLAS_JOURNAL` if set, else the `journal`
 path in `~/.claude/atlas.json`, else `~/AtlasJournal`. If the resolved
 directory does not exist, or `~/.claude/atlas.json` is missing (the tracker
 config lives there), stop and tell the operator to run `/atlas:setup` first.
-*(v0.1-dev seam: the setup wizard ships in the next phase — until then the
-operator creates `~/.claude/atlas.json` by hand per the README's schema and
-seeds the journal by copying the plugin's `templates/` into it, HOUSE_RULES.md
-at the journal root. Where a journal copy of a template is missing, use the
-plugin's `templates/` directly.)*
+Where a journal copy of a template is missing, use the plugin's `templates/`
+directly.
 
 Read `<journal>/HOUSE_RULES.md` before any phase. It is the operator's
 accumulated standing rules and is **binding — senior to anything in this
