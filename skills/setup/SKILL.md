@@ -24,7 +24,7 @@ Check, then print a report card (✓ / ⚠, one line each, each ⚠ with its one
 | git identity | `git config user.name` + `user.email` | ⚠ offer to set them now (ask for the values; this is git config, not Claude settings) |
 | remote reachable | `GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -oBatchMode=yes -oConnectTimeout=5' git ls-remote -q --heads origin` (portable; converts a credential hang into the ⚠) | ⚠ "reads from `origin` failed — check your remote/credentials before a run needs to push" |
 | `gh` present + authed | `gh auth status` | ⚠ "PRs will degrade to push + a compare-URL you open by hand; install/auth `gh` to restore one-step PRs" |
-| permission posture | none (informational) | note: "your first run will ask for permission often; approvals accumulate. offer to print the recommended deny-rail inline (nine lines, from the permissions doc shipped with the plugin at `docs/permissions.md`) — Atlas never edits your settings itself." |
+| permission posture | none (informational) | note: "your first run will ask for permission often; approvals accumulate — Atlas never edits your settings itself." Then offer to print the recommended deny-rail inline (nine lines, from the plugin's `docs/permissions.md`) |
 
 Proceed past any ⚠. Block only on the two BLOCKs.
 
