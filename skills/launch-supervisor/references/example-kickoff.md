@@ -3,10 +3,15 @@
 A fictional but structurally faithful kickoff for epic `PAY-214`, "Notification templates
 as configuration," in a two-repo product (`api-server`, Java; `mobile-app`, TypeScript).
 Every section the skill requires appears here at the specificity the real thing needs.
-Match the altitude, not the content.
+Match the altitude, not the content — including the packaging: the launch-repo
+instruction sits above the fence, and the prompt itself is one fenced block.
 
 ---
 
+Launch this from `~/code/api-server` (the repo with the accumulated memory and the
+auto-loading CLAUDE.md), in a fresh Claude Code window:
+
+````
 You are the SUPERVISOR for the "Notification Templates as Configuration" feature
 (PAY-214, https://tracker.example.com/PAY-214 — Epic, In Progress, assigned to the
 operator). We run the MANUAL multi-session workflow: each role (research/spec writer,
@@ -33,8 +38,9 @@ READ THESE FIRST (in this order)
 - PAY-214 in the tracker. Its description is the authoritative brief.
 - <journal>/research/2026-02-27-notification-audit.md — the audit that motivated the epic;
   contains the product lead's actual words from the roadmap review. Richer than the ticket.
-- api-server/CLAUDE.md (auto-loads when launched there) and your memory directory.
-- mobile-app/CLAUDE.md — does NOT auto-load from an api-server session; read it before any
+- ~/code/api-server/CLAUDE.md (auto-loads when launched there) and your memory
+  directory. (Real prompts use real absolute paths throughout, like this one.)
+- ~/code/mobile-app/CLAUDE.md — does NOT auto-load from an api-server session; read it before any
   client-side work. This feature is explicitly server + client.
 
 WHAT THE FEATURE IS
@@ -67,23 +73,24 @@ relying on any of them, but do not re-discover them from scratch)
 - **The client renders titles CLIENT-SIDE ONLY** from `mobile-app
   src/notifications/render.ts:88-107`; the server sends a type key, not text. Any
   server-side templating proposal must account for this or it misshapes the plan.
-- **The current template registry is** `templates/registry.yaml`, shape
+- **The current template registry is** `templates/registry.yaml:1-58`, shape
   `{type: {template, channels[]}}` — no locale dimension at all; locale is resolved
   client-side. The stakeholder assumes locale lives server-side today; it does not.
 - The closest analogue to model on: the feature-flags config loader
-  (`api-server src/main/java/…/config/FlagDefinitionsService.java`) — env-sectioned,
+  (`api-server src/main/java/…/config/FlagDefinitionsService.java:31-84`) — env-sectioned,
   atomic snapshot, degrade-to-previous on fetch error.
 
 ALREADY DECIDED BY THE OPERATOR (2026-03-01) — do not re-open
 1. **Copy governance: template wording in the new configuration does NOT go through the
-   copy-review process.** Boundary: the exception covers template bodies and button labels
-   defined in the new configuration ONLY; everything still in the properties files keeps
+   copy-review process.** Boundary: the exception covers wording defined in the new
+   configuration ONLY; everything still in the properties files keeps
    the full existing review flow, and if the configuration later grows other
    customer-facing copy, that is a new decision, not a precedent. Design consequence to
    carry into research: the schema itself must enforce locale parity (a type cannot
    publish with a partial locale set), because the review that used to catch it is gone.
-2. **The migration ships behind a flag, default off**, and the flag key is a bare name
-   (no ".enabled" suffix) per HOUSE_RULES.
+2. **The migration ships behind a flag, default off**, and the flag key is a bare name (no
+   ".enabled" suffix) — the reading side appends the suffix itself, so a suffixed key
+   silently never matches.
 
 PHASE SEQUENCE (the product lead was explicit this is a RESEARCH feature first)
 1. RESEARCH — parallel independent proposals: the SAME brief to 2–3 windows that cannot
@@ -104,7 +111,8 @@ STANDING RULES THAT BIT BEFORE (beyond the repos' CLAUDE.md files)
 - Integration branch per repo; slice PRs target it; main stays always-deployable.
 - After pushing an amendment to a branch, CHECK whether its PR is already merged; a push
   to a merged PR's branch is silently a no-op for main.
-- Never poll a deploy or CI run the operator triggered; they report back, then you verify.
+- Deploys and CI runs the operator triggers are theirs to watch — wait for their
+  report, then verify.
 - No AI attribution anywhere; no ticket keys in code comments.
 
 ADJACENT, NOT IN SCOPE (do not fold in, but know it exists): the operator committed to
@@ -116,7 +124,7 @@ and keep the dossier's RESUME BLOCK current from day one, because this will span
 sessions and at least one context wipe.
 
 START BY: reading the sources above, then reporting to the operator (a) your understanding
-of the feature in plain language — they value a genuinely accessible overview alongside
-the technical detail, and it is never labeled as such — and (b) your proposed research
-prompt for the proposal windows. Both decisions above are already made, so nothing blocks
+of the feature in plain language alongside the technical detail, and (b) your proposed
+research prompt for the proposal windows. Both decisions above are already made, so nothing blocks
 you from drafting that prompt in your first pass.
+````
