@@ -1,0 +1,11 @@
+{
+  "name": "atlas",
+  "owner": { "name": "Steve Hernandez" },
+  "plugins": [
+    {
+      "name": "atlas",
+      "source": "./",
+      "description": "The supervised software factory for AI-assisted engineering."
+    }
+  ]
+}

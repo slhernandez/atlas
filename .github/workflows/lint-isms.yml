@@ -1,0 +1,20 @@
+name: lint-isms
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  lint-isms:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scrub check
+        env:
+          BLOCKLIST: ${{ secrets.ATLAS_ISMS_BLOCKLIST }}
+        run: |
+          if [ -z "$BLOCKLIST" ]; then
+            echo "::error::ATLAS_ISMS_BLOCKLIST secret is not set — the scrub gate cannot run."
+            exit 1
+          fi
+          printf '%s\n' "$BLOCKLIST" > /tmp/blocklist.txt
+          ATLAS_ISMS_BLOCKLIST_FILE=/tmp/blocklist.txt bash scripts/lint-isms.sh
