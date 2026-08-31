@@ -67,6 +67,7 @@ branch: <branch or "not yet created">
 base_commit: <hash>
 research: <research doc path>
 status: ready-for-supervisor-review
+last_updated: YYYY-MM-DD
 ---
 
 # TICKET-123 — <title>

@@ -22,11 +22,8 @@ Resolve the journal directory: `$ATLAS_JOURNAL` if set, else the `journal`
 path in `~/.claude/atlas.json`, else `~/AtlasJournal`. If the resolved
 directory does not exist, or `~/.claude/atlas.json` is missing (the tracker
 config lives there), stop and tell the operator to run `/atlas:setup` first.
-*(v0.1-dev seam: the setup wizard ships in the next phase — until then the
-operator creates `~/.claude/atlas.json` by hand per the README's schema and
-seeds the journal by copying the plugin's `templates/` into it, HOUSE_RULES.md
-at the journal root. Where a journal copy of a template is missing, use the
-plugin's `templates/` directly.)*
+Where a journal copy of a template is missing, use the plugin's `templates/`
+directly.
 
 Read `<journal>/HOUSE_RULES.md` before any phase. It is the operator's
 accumulated standing rules and is **binding — senior to anything in this
@@ -172,7 +169,7 @@ When the implementor reports the PR URL:
    hygiene (subjects, no attribution lines, no unrelated files) and the PR
    body (per the PR-body template in the implementor agent definition,
    including the unlabeled accessible overview).
-3. Write the review doc to `reviews/`. Verdict + summary go to the operator
+3. Write the review doc to `reviews/` from the journal's review template. Verdict + summary go to the operator
    **in chat**; post nothing on the PR itself unless the operator asks.
    End this message with a clearly-marked **"READY FOR YOU"** block: the PR
    link, the manual steps that are theirs (smoke test, gates), and the merge

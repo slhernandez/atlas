@@ -13,24 +13,28 @@ signature on everything that matters. Merge is never automated.
 
 ```
 .claude-plugin/     plugin + marketplace manifests
-skills/             /atlas:feature-workflow (single-session subagent mode, phases 0-7)
+skills/             setup (first-run wizard) · feature-workflow (single-session subagent
+                    mode, phases 0-7) · launch-supervisor (multi-session kickoff generator)
 agents/             workflow-planner · workflow-implementor (fresh-context roles)
-templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier (multi-session mode — Phase 2)
+templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier
+                    (the multi-session supervisor's durable memory)
 scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
-docs/               (Phase 2)
+docs/               two-modes guide · permissions · patterns/
 ```
 
-## Configuration (hand-setup until the Phase 2 wizard)
+## Configuration
 
-Create `~/.claude/atlas.json`:
+`/atlas:setup` — the first-run wizard — configures everything below interactively and
+verifies the tracker with a real read. The file it writes, for reference (`$ATLAS_JOURNAL`
+overrides the journal path):
 
 ```json
 { "journal": "~/AtlasJournal", "tracker": "github", "tracker_detail": "owner/repo" }
 ```
 
 `tracker` is `jira-mcp` | `github` | `manual`; `tracker_detail` is the Jira project key or
-the GitHub repo that holds issues (omit for `manual`). Seed the journal by copying this
-plugin's `templates/` into it, with `HOUSE_RULES.md` at the journal root.
+the GitHub repo that holds issues (omit for `manual`). The wizard seeds the journal from
+`templates/`, with `HOUSE_RULES.md` at the journal root.
 
 ## Maintainers
 
