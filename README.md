@@ -22,6 +22,28 @@ scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
 docs/               two-modes guide · permissions · patterns/
 ```
 
+## Install
+
+Three commands in any Claude Code session, run from inside a git repository:
+
+```
+/plugin marketplace add slhernandez/atlas
+/plugin install atlas@atlas
+/atlas:setup
+```
+
+**Or the one-paste install** — paste this into Claude Code and let it do the first two for
+you (every command still asks your permission; the wizard's questions stay yours to answer):
+
+```
+Install the Atlas plugin for me: run `claude plugin marketplace add slhernandez/atlas`,
+then `claude plugin install atlas@atlas --yes`. If the install succeeds, tell me whether
+/atlas:setup is available in this session; if it isn't, tell me to start a new session
+and run /atlas:setup — that's the first-run wizard, which checks this machine, asks me a
+few questions, and verifies the setup with a real tracker read. Don't run the wizard
+yourself; I want to answer its questions.
+```
+
 ## Configuration
 
 `/atlas:setup` — the first-run wizard — configures everything below interactively and
