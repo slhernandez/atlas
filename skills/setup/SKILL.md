@@ -10,8 +10,12 @@ defaults; the operator decides. You never write to the operator's Claude Code se
 permissions — configuration lives in `~/.claude/atlas.json` and the journal, nothing else.
 
 If `~/.claude/atlas.json` already exists, this is a re-run: show the current config and the
-preflight report card, offer to change any value, and **never re-seed over an existing
-journal** (offer to add only missing template files, never overwrite).
+preflight report card, offer to change any value, and **never overwrite operator content**
+in an existing journal (HOUSE_RULES.md, plans, dossiers, anything without the `_template`
+name). The `_template.md` / `_ledger-template.md` files are plugin-owned: on a re-run, add
+any that are missing and **offer to refresh** the ones that differ from the plugin's current
+templates, showing the diff first — that is how a journal seeded before a template change
+(e.g. the dossier template's ledger pointer) picks it up.
 
 ## Step 0 — Machine preflight
 
