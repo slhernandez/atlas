@@ -1,33 +1,32 @@
 # The two modes — and the rung below them
 
-Three altitudes, one skill: match the process to the size of the *uncertainty*, not the
+Three rungs, one discipline: match the process to the size of the *uncertainty*, not the
 size of the diff.
 
 ## Rung 1 — Research first: `/atlas:research`
 
-For bug tickets, small tasks, and any "how does this actually work?" A sparse ticket goes in;
+For bug reports, small tasks, and any "how does this actually work?" A sparse work item goes in;
 a research document comes out — where it lives, how it works today, the closest existing
 pattern, load-bearing claims verified at file:line, a scope assessment, open questions. Then
 one of two exits: the fix is now obvious and small, so do it in the same session with no
-ceremony; or the research shows structural work, so hand the document to the kit, whose
-Phase 0 starts from it. Why research comes first for bugs: the **wrong-root-cause trap** —
-fixing the symptom a ticket names is the commonest way AI-assisted bug work goes wrong, and
-research separates *what the ticket says* from *what the code does* before anyone edits.
+ceremony; or the research shows structural work, so hand the document to `/atlas:feature-workflow`,
+whose Phase 0 starts from it. Why research comes first for bugs: the **wrong-root-cause trap** —
+fixing the symptom a work item names is the commonest way AI-assisted bug work goes wrong,
+and research separates *what the item says* from *what the code does* before anyone edits.
 (Scale to the question: a one-file lookup needs no research run — just ask.)
 
 | Signal | Rung |
 |---|---|
 | Quick lookup, one file | plain session — just ask |
-| Bug ticket / small task | research first, then fix or escalate |
-| 3+ tasks, an open design question, shared code | single-session mode (the kit) |
+| Bug report / small task | research first, then fix or escalate |
+| 3+ tasks, an open design question, shared code | single-session mode |
 | Spec gate, multi-slice, weeks | multi-session mode |
 
-The cost of the wrong rung: the kit on an epic degrades and dies mid-feature with the state in
-its head; multi-session on a ticket is four windows for a 90-minute change; no research on a
+The cost of the wrong rung: single-session mode on an epic degrades and dies mid-feature with
+the state in its head; multi-session on a small item is four windows for a 90-minute change; no research on a
 bug is a confident fix to the wrong cause with tests that lock it in.
 
-
-Both are the same supervised three-role workflow — a **supervisor** that researches and
+The two modes above rung 1 are the same supervised three-role workflow — a **supervisor** that researches and
 reviews, a **planner** that verifies and writes the plan, an **implementor** that builds
 exactly what was signed off. They share the plan-file protocol (status handshake:
 `ready-for-supervisor-review → approved-with-amendments → signed-off → merged`), the human

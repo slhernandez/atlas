@@ -96,7 +96,8 @@ operator prefers env config.)
 
 Then print the quick start, exactly this shape:
 
-> **You're set.** Start your first run: `/atlas:feature-workflow <work item>`
+> **You're set.** For a bug or small task, start with `/atlas:research <work item>` —
+> research first, then fix in-session or escalate. For a feature: `/atlas:feature-workflow <work item>`.
 > It researches, asks you 2–3 scope questions, writes a plan for your approval (nothing is
 > built before you approve), builds in an isolated worktree, opens a PR, and reviews it —
 > then the merge is yours. Your corrections go in `<journal>/HOUSE_RULES.md`; every Atlas

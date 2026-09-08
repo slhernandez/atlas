@@ -6,8 +6,8 @@ A Claude Code plugin: three AI roles (supervisor, planner, implementor) run a ti
 research to open PR with fresh-context verification at every handoff — and a human
 signature on everything that matters. Merge is never automated.
 
-> Private during construction. Structure and docs land phase by phase; installability
-> arrives with the setup wizard in Phase 2.
+> Private during construction; installable now (`/atlas:setup` is the front door). Docs and
+> the companion site land before launch.
 
 ## Structure
 
@@ -47,6 +47,10 @@ and run /atlas:setup — that's the first-run wizard, which checks this machine,
 few questions, and verifies the setup with a real tracker read. Don't run the wizard
 yourself; I want to answer its questions.
 ```
+
+After setup, the ladder: `/atlas:research <item>` for bugs and small tasks (then fix
+in-session or escalate), `/atlas:feature-workflow <item>` for features, `/atlas:launch-supervisor`
+for multi-week work. `docs/two-modes.md` has the decision table.
 
 ## Configuration
 
