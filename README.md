@@ -2,9 +2,10 @@
 
 **The supervised software factory for AI-assisted engineering.**
 
-A Claude Code plugin: three AI roles (supervisor, planner, implementor) run a ticket from
-research to open PR with fresh-context verification at every handoff — and a human
-signature on everything that matters. Merge is never automated.
+A Claude Code plugin. A read-only research team scopes a work item before anyone edits;
+three AI roles (supervisor, planner, implementor) then run it from research to open PR with
+fresh-context verification at every handoff — and a human signature on everything that
+matters. Merge is never automated.
 
 > Private during construction; installable now (`/atlas:setup` is the front door). Docs and
 > the companion site land before launch.
@@ -63,8 +64,32 @@ overrides the journal path):
 ```
 
 `tracker` is `jira-mcp` | `github` | `manual`; `tracker_detail` is the Jira project key or
-the GitHub repo that holds issues (omit for `manual`). The wizard seeds the journal from
-`templates/`, with `HOUSE_RULES.md` at the journal root.
+the GitHub repo that holds issues (omit for `manual`).
+
+## The journal
+
+Everything Atlas produces lives outside your repos, in one place the wizard creates:
+
+```
+~/AtlasJournal/
+├── HOUSE_RULES.md   your standing rules — every skill obeys them, they outrank the plugin's
+│                    defaults, and they survive plugin updates (fold frictions in here)
+├── research/        research docs — what the code actually does, verified at file:line
+├── plans/           implementation plans (status handshake in frontmatter) + kickoff prompts
+├── reviews/         the supervisor's PR reviews
+├── dossiers/        multi-session feature dossiers + commit ledgers
+└── scorecards/      graded runs — the friction log is where improvements come from
+```
+
+Skills consult the journal before starting anything, so the system's inputs get richer with
+every run you complete. `_template.md` files are plugin-owned and refreshed by setup; your
+own documents are never overwritten.
+
+## Docs
+
+- `docs/two-modes.md` — the ladder (research → single-session → multi-session) and when to use which
+- `docs/permissions.md` — the doorman pattern and the recommended deny rail
+- `docs/patterns/` — generated-client dependency order for multi-repo work; domain-owned content
 
 ## Maintainers
 
