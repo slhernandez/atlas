@@ -3,6 +3,7 @@ date: YYYY-MM-DD
 work_item: TICKET-123 (or "none")
 repository: <repo name>
 as_of_commit: <hash of the commit the findings were verified against>
+branch: <branch name>
 status: current
 last_updated: YYYY-MM-DD
 ---
@@ -21,8 +22,17 @@ last_updated: YYYY-MM-DD
 ## What already exists
 <the closest existing pattern to model on; anything that partially does this already>
 
+## Code references
+<`path:line` - what's there, one per line — the index a planner navigates from>
+
 ## Scope assessment
-<what will change, blast radius (tests, migrations, other services/clients), size estimate>
+<what will change, blast radius (tests, migrations, other services/clients, generated code), size estimate, questions for the reporter>
+
+## Historical context (from the journal)
+<prior research, plans, decisions — with paths and dates; flag anything likely superseded>
+
+## Related research
+<other research docs on adjacent topics>
 
 ## Open questions
 <what the operator must decide before planning — these become the planner's binding constraints>

@@ -6,16 +6,19 @@ A Claude Code plugin: three AI roles (supervisor, planner, implementor) run a ti
 research to open PR with fresh-context verification at every handoff — and a human
 signature on everything that matters. Merge is never automated.
 
-> Private during construction. Structure and docs land phase by phase; installability
-> arrives with the setup wizard in Phase 2.
+> Private during construction; installable now (`/atlas:setup` is the front door). Docs and
+> the companion site land before launch.
 
 ## Structure
 
 ```
 .claude-plugin/     plugin + marketplace manifests
-skills/             setup (first-run wizard) · feature-workflow (single-session subagent
-                    mode, phases 0-7) · launch-supervisor (multi-session kickoff generator)
-agents/             workflow-planner · workflow-implementor (fresh-context roles)
+skills/             setup (first-run wizard) · research (rung one: scope before you build) ·
+                    feature-workflow (single-session subagent mode, phases 0-7) ·
+                    launch-supervisor (multi-session kickoff generator)
+agents/             workflow-planner · workflow-implementor (fresh-context roles) · the
+                    research team: codebase-locator · codebase-analyzer ·
+                    codebase-pattern-finder · journal-locator · journal-analyzer
 templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier
                     (the multi-session supervisor's durable memory) · ledger (plain-language
                     commit tables + QA/Product summary for integration-branch work)
@@ -44,6 +47,10 @@ and run /atlas:setup — that's the first-run wizard, which checks this machine,
 few questions, and verifies the setup with a real tracker read. Don't run the wizard
 yourself; I want to answer its questions.
 ```
+
+After setup, the ladder: `/atlas:research <item>` for bugs and small tasks (then fix
+in-session or escalate), `/atlas:feature-workflow <item>` for features, `/atlas:launch-supervisor`
+for multi-week work. `docs/two-modes.md` has the decision table.
 
 ## Configuration
 
