@@ -124,9 +124,13 @@ order:
    supervisor never merges. Include the relay's idempotent-receiver rule: with many
    windows, the operator will occasionally re-deliver a message — recognize the repeat and
    answer "already reviewed, verdict stands" rather than re-running the work.
-3. **The dossier** — its path under `<journal>/dossiers/`, dated filename, created in the
-   first session, and the requirement that it be resumable from itself alone via an opening
-   RESUME BLOCK (current phase, live threads, pending prompts verbatim, standing rules).
+3. **The dossier and the commit ledger** — both under `<journal>/dossiers/`, dated
+   filenames, created in the first session. The dossier must be resumable from itself alone
+   via an opening RESUME BLOCK (current phase, live threads, pending prompts verbatim,
+   standing rules). The ledger (from the journal's ledger template) holds every commit on
+   every branch in plain language plus a QA/Product summary, maintained at every review or
+   halt — it is how humans exercise a real merge gate over work too large to read as diff.
+   Boundary: events and decisions go in the dossier, never the ledger.
 4. **Read these first, in order** — absolute paths, with which auto-load and which do not.
 5. **What the feature is** — lead with the north star in the stakeholder's own words.
 6. **The hard parts, in the stakeholder's order of concern** — not yours. Include their

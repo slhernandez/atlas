@@ -15,6 +15,10 @@ last_updated: YYYY-MM-DD
 - **Standing rules for this feature:**
 - **Next action:**
 
+## Commit ledger
+<path to `dossiers/YYYY-MM-DD-<item>-ledger.md` — the plain-language commit tables and the
+QA/Product summary live THERE; events, decisions, and state live HERE>
+
 ## Decision log
 | Date | Decision | Why | Boundary (for exceptions) |
 |---|---|---|---|

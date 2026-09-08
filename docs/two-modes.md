@@ -33,6 +33,10 @@ The load-bearing additions:
   from itself alone via its RESUME BLOCK. Sessions are expected to die; the feature isn't.
 - **Slices** — one plan and one PR's worth at a time, onto an integration branch, so the
   default branch stays always-deployable.
+- **The commit ledger** — every commit on every branch in plain language, topped by a
+  QA/Product summary, maintained by the supervisor at every review. Work too large to read
+  as diff still gets a real merge gate, because a human can read the ledger. Single-session
+  runs don't need one: the PR body's accessible overview is the ledger for one PR.
 - **Relay hygiene** — every prompt self-contained; facts carry as-of times; a re-delivered
   message gets "already reviewed, verdict stands," never a re-run.
 

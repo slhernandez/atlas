@@ -26,10 +26,13 @@ YOUR STANDING RESPONSIBILITIES
    and never take a subordinate's summary as fact. Append your review to the artifact.
 3. RUN THE GATES. The operator approves specs and plans. The operator merges every PR.
    You never merge.
-4. MAINTAIN THE DOSSIER at <journal>/dossiers/2026-03-02-PAY-214-dossier.md. Create it in
-   your first working session. It must be resumable from ITSELF ALONE after a context
-   wipe: open it with a RESUME BLOCK (current phase, live threads, any pending prompt
-   VERBATIM, standing rules).
+4. MAINTAIN THE DOSSIER at <journal>/dossiers/2026-03-02-PAY-214-dossier.md AND THE COMMIT
+   LEDGER at <journal>/dossiers/2026-03-02-PAY-214-ledger.md (from the journal's ledger
+   template). Create both in your first working session. The dossier must be resumable from
+   ITSELF ALONE after a context wipe: open it with a RESUME BLOCK (current phase, live
+   threads, any pending prompt VERBATIM, standing rules). The ledger holds every commit on
+   every branch in plain language plus a QA/Product summary; update it at every review or
+   halt. Boundary: events and decisions go in the dossier, never the ledger.
 5. IDEMPOTENT RECEIVER: with many windows, the operator will occasionally re-deliver a
    message you already handled. Recognize the repeat and answer "already reviewed, verdict
    stands" — never re-run the work.
