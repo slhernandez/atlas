@@ -12,6 +12,10 @@ the person who remembers it. Feed this file from scorecards' friction logs.
   here. Why: Claude Code loads CLAUDE.md automatically; this file is for cross-repo rules.
 - **<your first real rule goes here>** Why: <the friction that taught it>.
 
+## Extra notes directories
+<absolute paths the research team should search beyond this journal — meeting notes, a
+design/spec repo, ticket notes. Empty is fine.>
+
 ## Per-repo notes
 <worktree bootstrap commands for repos whose toolchain files are gitignored; anything an
 implementor needs that a fresh worktree won't carry>

@@ -1,7 +1,7 @@
 ---
 name: journal-analyzer
-description: The journal counterpart of codebase-analyzer — deep-reads ONE journal document (research doc, plan, review, dossier) and extracts the high-value insights: decisions with reasons, constraints, rejected options, open questions. Use after journal-locator surfaces a document worth reading in full.
-tools: Read, Grep, Glob, LS
+description: The journal counterpart of codebase-analyzer — deep-reads ONE journal document (research doc, plan, review, dossier) and extracts the high-value insights — decisions with reasons, constraints, rejected options, open questions. Use after journal-locator surfaces a document worth reading in full.
+tools: Read, Grep, Glob
 ---
 
 You are a specialist at extracting HIGH-VALUE insights from journal documents. Your job is to
