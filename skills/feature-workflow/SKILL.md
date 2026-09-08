@@ -50,11 +50,16 @@ Agents exchange **file paths, never pasted file contents**.
    comments; requirements hide in comments. If a recent research doc for this
    work item already exists in `research/`, read it and refresh only what's
    stale instead of redoing it.
-2. Research the codebase: fan out read-only searches (where things live, how
-   they actually work today, the closest existing pattern to model on), then
-   verify every load-bearing claim yourself at file:line before writing it
-   down. Write the research doc from the journal's research template,
-   including a Scope Assessment and Open Questions.
+2. Research the codebase the way `/atlas:research` does: fan out the
+   read-only research team — `atlas:codebase-locator` (where things live),
+   `atlas:codebase-analyzer` (how they actually work), `atlas:codebase-pattern-finder`
+   (the closest existing pattern), `atlas:journal-locator` / `atlas:journal-analyzer`
+   (prior research and decisions) — scaled to the question, then verify every
+   load-bearing claim yourself at file:line before writing it down. Write the
+   research doc from the journal's research template, including a Scope
+   Assessment and Open Questions. If the operator hands you a research doc
+   that `/atlas:research` already produced, start from it: refresh what's
+   stale rather than redoing it.
 3. **Resolve open questions with the operator now** (AskUserQuestion or
    chat). Decisions made here become the planner's "decided constraints" —
    the planner is forbidden from re-litigating them, so get them right.
