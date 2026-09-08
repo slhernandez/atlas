@@ -17,7 +17,8 @@ skills/             setup (first-run wizard) · feature-workflow (single-session
                     mode, phases 0-7) · launch-supervisor (multi-session kickoff generator)
 agents/             workflow-planner · workflow-implementor (fresh-context roles)
 templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier
-                    (the multi-session supervisor's durable memory)
+                    (the multi-session supervisor's durable memory) · ledger (plain-language
+                    commit tables + QA/Product summary for integration-branch work)
 scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
 docs/               two-modes guide · permissions · patterns/
 ```

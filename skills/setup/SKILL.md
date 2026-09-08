@@ -39,7 +39,8 @@ Create the structure and seed it from the plugin's templates:
 <journal>/plans/                (templates/plan.md → plans/_template.md)
 <journal>/research/             (templates/research.md → research/_template.md)
 <journal>/reviews/              (templates/review.md → reviews/_template.md)
-<journal>/dossiers/             (templates/dossier.md → dossiers/_template.md)
+<journal>/dossiers/             (templates/dossier.md → dossiers/_template.md,
+                                 templates/ledger.md → dossiers/_ledger-template.md)
 <journal>/scorecards/           (templates/scorecard.md → scorecards/_template.md)
 ```
 
