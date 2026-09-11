@@ -55,7 +55,13 @@ Agents exchange **file paths, never pasted file contents**.
    `atlas:codebase-analyzer` (how they actually work), `atlas:codebase-pattern-finder`
    (the closest existing pattern), `atlas:journal-locator` / `atlas:journal-analyzer`
    (prior research and decisions) — scaled to the question, then verify the
-   load-bearing claims yourself at file:line before writing them down. Write the
+   load-bearing claims yourself at file:line before writing them down. **Before
+   declaring any data unreachable, missing, or restricted**, read the app's
+   authorization configuration and search the whole repository for call sites
+   that use the data. A working call site proves reachability; a verified
+   absence (no endpoint, no consumer, and the authorization config agrees) is
+   also a valid conclusion. What is never valid is inferring authorization from
+   a URL path segment — a plan gate has lost a feature to exactly that. Write the
    research doc from the journal's research template, including a Scope
    Assessment and Open Questions.
 3. **Resolve open questions with the operator now** (AskUserQuestion or
@@ -139,6 +145,14 @@ verify** ("PR #N is merged", "CI is green"). State facts with their as-of
 time, or instruct the agent to verify before writing them into any PR body or
 commit. A stale assertion becomes a false claim in a permanent artifact.
 
+**After spawn, hand the implementor evidence pointers, never conclusions to
+transcribe.** The spawn prompt stays as enumerated above; this rule governs
+what you send later — plan-file amendments and review-fix messages. If you want
+a fact in the PR body, give the implementor the file or command that proves it
+and let it write what it verified. The implementor's verify-before-writing is
+the backstop, not the plan — a supervisor-dictated "fixed" claim has been false
+before, and only the implementor's refusal kept it out of the PR.
+
 Run in the background. If it stops with
 `## Questions for Supervisor (implementation)` in the plan file, answer in
 the plan file and SendMessage it to continue.
@@ -216,6 +230,10 @@ survive manual smoke testing and any review-fix rounds):
   operator to post — never post them yourself.
 - If a finding reveals a plan-level gap, amend the plan file first, then
   task the implementor — the plan stays the source of truth for the branch.
+- **Evidence or hypothesis.** Any causal claim you write into a code comment,
+  PR body, CI file, or run report ("X causes Y") either cites its evidence
+  (run id, doc, file:line) or is phrased as a hypothesis to test. A wrong cause
+  written into a shared CI comment is trusted by the next reader.
 - A message you have already processed may be re-delivered; recognize the
   repeat and answer "already handled, verdict stands" rather than re-running
   the work.

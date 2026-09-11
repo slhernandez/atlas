@@ -108,6 +108,12 @@ Closes <work-item-id> (<work item URL>)
 
 No attribution footer in the PR body.
 
+**Evidence or hypothesis.** Any causal claim you write into a code comment, the
+PR body, or a CI file ("X causes Y", "this fixes Z") either cites its evidence
+(file:line, run id, command output) or is phrased as a hypothesis to test. Never
+transcribe a cause or a "fixed" claim handed to you by the supervisor without
+verifying it yourself first; if it does not verify, say so instead of writing it.
+
 ## Final report
 
 End with: the PR URL (or compare URL), a commit→task table, verification
