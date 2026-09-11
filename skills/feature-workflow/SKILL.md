@@ -57,9 +57,11 @@ Agents exchange **file paths, never pasted file contents**.
    (prior research and decisions) — scaled to the question, then verify the
    load-bearing claims yourself at file:line before writing them down. **Before
    declaring any data unreachable, missing, or restricted**, read the app's
-   authorization configuration and find a working call site that already uses
-   the data; never infer authorization from a URL path segment — a plan gate has
-   lost a feature to exactly that inference. Write the
+   authorization configuration and search the whole repository for call sites
+   that use the data. A working call site proves reachability; a verified
+   absence (no endpoint, no consumer, and the authorization config agrees) is
+   also a valid conclusion. What is never valid is inferring authorization from
+   a URL path segment — a plan gate has lost a feature to exactly that. Write the
    research doc from the journal's research template, including a Scope
    Assessment and Open Questions.
 3. **Resolve open questions with the operator now** (AskUserQuestion or
@@ -143,12 +145,13 @@ verify** ("PR #N is merged", "CI is green"). State facts with their as-of
 time, or instruct the agent to verify before writing them into any PR body or
 commit. A stale assertion becomes a false claim in a permanent artifact.
 
-**Hand the implementor evidence pointers, never conclusions to transcribe.**
-If you want a fact in the PR body, give the implementor the file or command
-that proves it and let it write what it verified. The implementor's
-verify-before-writing is the backstop, not the plan — a supervisor-dictated
-"fixed" claim has been false before, and only the implementor's refusal kept
-it out of the PR.
+**After spawn, hand the implementor evidence pointers, never conclusions to
+transcribe.** The spawn prompt stays as enumerated above; this rule governs
+what you send later — plan-file amendments and review-fix messages. If you want
+a fact in the PR body, give the implementor the file or command that proves it
+and let it write what it verified. The implementor's verify-before-writing is
+the backstop, not the plan — a supervisor-dictated "fixed" claim has been false
+before, and only the implementor's refusal kept it out of the PR.
 
 Run in the background. If it stops with
 `## Questions for Supervisor (implementation)` in the plan file, answer in
