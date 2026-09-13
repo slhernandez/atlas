@@ -52,7 +52,7 @@ Grade (A: protocol + outcome clean · B: shipped, corrections needed · C: human
 required · F: aborted), plus the honest questions: *would a plain session have done this
 better or cheaper?* and *what does this run say about the system?*
 
-**Redundancy check — what did the kit prescribe that the model would have done anyway?**
+**Redundancy check — what did the workflow prescribe that the model would have done anyway?**
 Name the agent, skill step, or rule. Three runs agreeing marks a retirement candidate. Only
 components that compensate for model weakness qualify; the human handles — gates, independent
 review, contracts, receipts, permission rails, HOUSE_RULES — stay regardless of model.

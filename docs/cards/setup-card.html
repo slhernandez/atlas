@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/atlas:setup · Atlas Card</title>
+<style>
+  :root {
+    --ground: #f6f4ef; --card: #fffefb; --ink: #28232e; --muted: #6f6879;
+    --accent: #5b4b8a; --accent-soft: #ece8f5; --gold: #7a5a1c; --line: #e4dfd4; --code-bg: #f1eee7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+      --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+    --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; margin: 0; padding: 2.5rem 1rem 4rem; }
+  a { color: var(--accent); }
+  .card { max-width: 700px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 1px 2px rgba(20,15,35,.06), 0 12px 32px -18px rgba(20,15,35,.25); overflow: hidden; }
+  .card-frame { border: 1px solid var(--line); border-radius: 7px; margin: 6px; }
+  header.hero { padding: 2rem 2.25rem 1.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 120% 90% at 50% -30%, var(--accent-soft), transparent 70%); }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 .6rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .glyph { font-size: 2rem; line-height: 1; }
+  h1 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: clamp(1.5rem, 5vw, 2rem); margin: .35rem 0 .15rem; letter-spacing: -.01em; text-wrap: balance; }
+  h1 .slash { color: var(--accent); }
+  .persona { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; color: var(--gold); margin: 0 0 .5rem; font-size: 1rem; }
+  .flavor { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--muted); margin: 0; max-width: 34em; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--line); }
+  .stat { padding: .85rem 1.1rem; border-right: 1px solid var(--line); min-width: 0; }
+  .stat:last-child { border-right: none; }
+  .stat dt { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 .15rem; }
+  .stat dd { margin: 0; font-size: .88rem; font-weight: 600; overflow-wrap: break-word; }
+  section { padding: 1.5rem 2.25rem; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .8rem; font-weight: 700; }
+  p { margin: 0 0 .75rem; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  ul.plain, ol.plain { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+  ul.plain li, ol.plain li { margin-bottom: .4rem; }
+  ul.plain li:last-child, ol.plain li:last-child { margin-bottom: 0; }
+  code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--code-bg); padding: .1rem .35rem; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; overflow-x: auto; margin: .6rem 0; }
+  pre code { background: none; padding: 0; font-size: .88em; }
+  .note { font-size: .88rem; color: var(--muted); margin-top: .7rem; }
+  footer.lineage { padding: 1.1rem 2.25rem; background: var(--code-bg); font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .78rem; color: var(--muted); overflow-x: auto; white-space: nowrap; }
+  footer.lineage b, footer.lineage a { color: var(--accent); font-weight: 700; }
+  .deck-card { margin-top: 3rem; scroll-margin-top: 1.5rem; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .deck-hero { text-align: center; margin-bottom: 2rem; }
+  .deck-hero h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 .3rem; }
+  .deck-hero .eyebrow { justify-content: center; display: block; }
+  .nav-h { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 2rem 0 .8rem; font-weight: 700; }
+  .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .7rem; }
+  .nav-grid a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: .7rem .9rem; text-decoration: none; color: var(--ink); background: var(--card); transition: border-color 120ms ease; }
+  .nav-grid a:hover, .nav-grid a:focus-visible { border-color: var(--accent); outline: none; }
+  .g-top { display: flex; align-items: baseline; gap: .5rem; }
+  .g-glyph { font-size: 1.15rem; }
+  .g-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; font-weight: 700; color: var(--accent); }
+  .g-num { font-size: .68rem; color: var(--gold); letter-spacing: .08em; margin-left: auto; }
+  .g-desc { font-size: .8rem; color: var(--muted); display: block; margin-top: .2rem; line-height: 1.4; }
+  .backtop { text-align: center; font-size: .78rem; margin: .8rem 0 0; }
+  .links { text-align: center; font-size: .88rem; color: var(--muted); margin: 1.2rem 0 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 560px) { header.hero, section { padding-left: 1.25rem; padding-right: 1.25rem; } footer.lineage { padding-left: 1.25rem; } }
+</style>
+</head>
+<body>
+<main>
+  <article class="card"><div class="card-frame">
+    <header class="hero">
+      <p class="eyebrow"><span>Atlas · Skill Card 01</span><span class="glyph">🧰</span></p>
+      <h1><span class="slash">/</span>atlas:setup</h1>
+      
+      <p class="flavor">Asks instead of assuming, proves the setup with a real read, and writes nothing to your settings.</p>
+    </header>
+    <dl class="stats"><div class="stat"><dt>Invoke</dt><dd><code>/atlas:setup</code></dd></div><div class="stat"><dt>Writes</dt><dd><code>~/.claude/atlas.json</code> and the journal</dd></div><div class="stat"><dt>Never touches</dt><dd>Your Claude Code <code>settings.json</code> or permissions</dd></div><div class="stat"><dt>Re-run</dt><dd>Shows current config, offers changes, refreshes plugin-owned templates</dd></div></dl>
+    <section><h2>What it does</h2><p>The first-run wizard. It checks the machine and prints a report card, one line per check. It proposes a journal location and seeds it from the plugin's templates. It detects your work-item tracker and <strong>asks</strong> rather than decides. Then it proves the whole thing by fetching a real work item and reading its title back to you. Only after that proof does it write the config file.</p><p>Detection is a default, never a decision. Everything the wizard finds is presented for you to confirm or change, and the one thing it will not do is edit your Claude Code settings. The deny rail it recommends is printed for you to paste by hand.</p></section><section><h2>How to run it</h2><p>Inside a git repository, in any Claude Code session:</p><pre><code>/plugin marketplace add slhernandez/atlas
+/plugin install atlas@atlas
+/atlas:setup</code></pre><p>The marketplace and the plugin are both named <code>atlas</code>, so the install string is exactly <code>atlas@atlas</code>. After the install, <code>/atlas:setup</code> is available in the same session, no restart needed. Or paste the one-paste prompt from the README and let Claude run the first two lines for you; the wizard's questions stay yours to answer.</p></section><section><h2>The six steps</h2><ol class="plain"><li><strong>Step 0, preflight.</strong> git present, inside a repository, identity set, <code>origin</code> reachable, <code>gh</code> authenticated, and a note on permission posture. Two of these block; the rest warn with a one-line fix.</li><li><strong>Step 1, journal.</strong> Proposes <code>~/AtlasJournal</code>, accepts an override, seeds <code>HOUSE_RULES.md</code> plus the plan, research, review, dossier, ledger, and scorecard templates. Suggests <code>git init</code> without doing it.</li><li><strong>Step 2, tracker.</strong> Jira through MCP tools, GitHub Issues through <code>gh</code>, or manual paste. What it detected is the default; you choose.</li><li><strong>Step 3, the one detail.</strong> A Jira project key, or the GitHub issues repository, offering <code>origin</code> as the default.</li><li><strong>Step 4, verify with a real read.</strong> Name any work item and it fetches the title through the chosen tracker. On a fresh repository with no items, it offers to open a small smoke-test item, read it back, and close it, saying first that this writes to your tracker. Manual mode skips this step; there is nothing to verify.</li><li><strong>Step 5, write config and hand over.</strong> Only now does it write <code>~/.claude/atlas.json</code>, then it prints the quick start: research for a bug or small task, the feature workflow for a feature, and where your corrections go.</li></ol></section><section><h2>Ground rules</h2><ul class="plain"><li>A wizard that ends with "config written" has verified nothing. Whenever a tracker is configured, this one ends with a proven read.</li><li>Config is written last, after the proof, and only what you confirmed.</li><li>Re-running never overwrites your content. Templates you haven't renamed can be refreshed, with the diff shown first.</li><li>Your corrections go in <code>HOUSE_RULES.md</code>. Every skill obeys it, it outranks the plugin's defaults, and it survives updates.</li></ul></section>
+    <footer class="lineage">first run: preflight → journal → tracker → proven read → config · then /atlas:research or /atlas:feature-workflow · <a href="../deck.html"><b>deck index</b></a></footer>
+  </div></article>
+</main>
+</body>
+</html>

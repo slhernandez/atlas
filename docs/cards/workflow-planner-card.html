@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>workflow-planner · Atlas Card</title>
+<style>
+  :root {
+    --ground: #f6f4ef; --card: #fffefb; --ink: #28232e; --muted: #6f6879;
+    --accent: #5b4b8a; --accent-soft: #ece8f5; --gold: #7a5a1c; --line: #e4dfd4; --code-bg: #f1eee7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+      --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+    --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; margin: 0; padding: 2.5rem 1rem 4rem; }
+  a { color: var(--accent); }
+  .card { max-width: 700px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 1px 2px rgba(20,15,35,.06), 0 12px 32px -18px rgba(20,15,35,.25); overflow: hidden; }
+  .card-frame { border: 1px solid var(--line); border-radius: 7px; margin: 6px; }
+  header.hero { padding: 2rem 2.25rem 1.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 120% 90% at 50% -30%, var(--accent-soft), transparent 70%); }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 .6rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .glyph { font-size: 2rem; line-height: 1; }
+  h1 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: clamp(1.5rem, 5vw, 2rem); margin: .35rem 0 .15rem; letter-spacing: -.01em; text-wrap: balance; }
+  h1 .slash { color: var(--accent); }
+  .persona { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; color: var(--gold); margin: 0 0 .5rem; font-size: 1rem; }
+  .flavor { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--muted); margin: 0; max-width: 34em; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--line); }
+  .stat { padding: .85rem 1.1rem; border-right: 1px solid var(--line); min-width: 0; }
+  .stat:last-child { border-right: none; }
+  .stat dt { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 .15rem; }
+  .stat dd { margin: 0; font-size: .88rem; font-weight: 600; overflow-wrap: break-word; }
+  section { padding: 1.5rem 2.25rem; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .8rem; font-weight: 700; }
+  p { margin: 0 0 .75rem; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  ul.plain, ol.plain { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+  ul.plain li, ol.plain li { margin-bottom: .4rem; }
+  ul.plain li:last-child, ol.plain li:last-child { margin-bottom: 0; }
+  code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--code-bg); padding: .1rem .35rem; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; overflow-x: auto; margin: .6rem 0; }
+  pre code { background: none; padding: 0; font-size: .88em; }
+  .note { font-size: .88rem; color: var(--muted); margin-top: .7rem; }
+  footer.lineage { padding: 1.1rem 2.25rem; background: var(--code-bg); font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .78rem; color: var(--muted); overflow-x: auto; white-space: nowrap; }
+  footer.lineage b, footer.lineage a { color: var(--accent); font-weight: 700; }
+  .deck-card { margin-top: 3rem; scroll-margin-top: 1.5rem; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .deck-hero { text-align: center; margin-bottom: 2rem; }
+  .deck-hero h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 .3rem; }
+  .deck-hero .eyebrow { justify-content: center; display: block; }
+  .nav-h { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 2rem 0 .8rem; font-weight: 700; }
+  .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .7rem; }
+  .nav-grid a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: .7rem .9rem; text-decoration: none; color: var(--ink); background: var(--card); transition: border-color 120ms ease; }
+  .nav-grid a:hover, .nav-grid a:focus-visible { border-color: var(--accent); outline: none; }
+  .g-top { display: flex; align-items: baseline; gap: .5rem; }
+  .g-glyph { font-size: 1.15rem; }
+  .g-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; font-weight: 700; color: var(--accent); }
+  .g-num { font-size: .68rem; color: var(--gold); letter-spacing: .08em; margin-left: auto; }
+  .g-desc { font-size: .8rem; color: var(--muted); display: block; margin-top: .2rem; line-height: 1.4; }
+  .backtop { text-align: center; font-size: .78rem; margin: .8rem 0 0; }
+  .links { text-align: center; font-size: .88rem; color: var(--muted); margin: 1.2rem 0 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 560px) { header.hero, section { padding-left: 1.25rem; padding-right: 1.25rem; } footer.lineage { padding-left: 1.25rem; } }
+</style>
+</head>
+<body>
+<main>
+  <article class="card"><div class="card-frame">
+    <header class="hero">
+      <p class="eyebrow"><span>Atlas · Agent Card 05</span><span class="glyph">📐</span></p>
+      <h1>workflow-planner</h1>
+      <p class="persona">The Surveyor</p>
+      <p class="flavor">Measures the ground before anyone builds on it, and says so when the map was wrong.</p>
+    </header>
+    <dl class="stats"><div class="stat"><dt>Summoned by</dt><dd><code>/atlas:feature-workflow</code>, Phase 1</dd></div><div class="stat"><dt>Writes</dt><dd>The plan file, and nothing else</dd></div><div class="stat"><dt>Verifies</dt><dd>The research's key claims at their cited lines, in a table</dd></div><div class="stat"><dt>Never</dt><dd>Implements, branches, or edits source</dd></div></dl>
+    <section><h2>What it does</h2><p>A fresh-context planner that receives the supervisor's research document as ground truth and then <strong>spot-checks its key claims</strong> at their cited lines before planning around it. Anything the research missed is its most valuable contribution: a second initializer nobody mentioned, a test that will stop compiling, a tracked project file that needs regenerating. It designs around those and calls them out.</p><p>The plan it writes is for a reader with no context at all: the implementor. File paths, exact line references, code sketches for the non-obvious parts, and a per-task acceptance note. Decided constraints from the operator are not re-litigated; a disagreement becomes a numbered question, never a silent deviation.</p></section><section><h2>Ground rules</h2><ul class="plain"><li>Verify before you plan. The verification table at the bottom of the plan is evidence, not decoration.</li><li>Think MVP: small, ordered, hand-off-able tasks.</li><li>When the design needs a structural conversion, the first task is a pure mechanical change, and a mechanical prep task is always its own commit. Its only purpose is a diff a reviewer can read in isolation.</li><li>Always include a test task, a verification task with the repo's own commands, and an explicit out-of-scope list.</li><li>A test that exists to lock a guard gets a mutation check: neuter the guard, confirm exactly that test fails, restore.</li><li>Manual smoke testing is the operator's step. Never plan for the implementor to run the app against real data.</li><li>After sign-off, the job is done. It ends its turn and expects nothing further unless the supervisor asks for a read-only post-implementation check.</li></ul></section><section><h2>Hands back</h2><p>A plan with a status handshake in its frontmatter (<code>ready-for-supervisor-review</code> → <code>approved-with-amendments</code> → <code>signed-off</code>, and <code>merged</code> when the supervisor closes the run out), questions for the supervisor marked blocking or not, an overview with its reasoning, the task breakdown, the test plan, the out-of-scope list, and the verification table.</p></section>
+    <footer class="lineage">summoned at Phase 1 of /atlas:feature-workflow · reviewed, amended, and signed off before the operator ever sees the plan · <a href="../deck.html"><b>deck index</b></a></footer>
+  </div></article>
+</main>
+</body>
+</html>
