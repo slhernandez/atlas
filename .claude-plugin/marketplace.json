@@ -1,6 +1,9 @@
 {
   "name": "atlas",
-  "owner": { "name": "Steve Hernandez" },
+  "description": "Atlas: the supervised software factory for AI-assisted engineering. One plugin, installed from this marketplace.",
+  "owner": {
+    "name": "Steve Hernandez"
+  },
   "plugins": [
     {
       "name": "atlas",
