@@ -19,7 +19,9 @@ templates, showing the diff first — that is how a journal seeded before a temp
 
 ## Step 0 — Machine preflight
 
-Check, then print a report card (✓ / ⚠, one line each, each ⚠ with its one-line fix):
+Check, then print a report card **literally as one line per check**, each line beginning
+with ✓ or ⚠ (each ⚠ followed by its one-line fix). Not a summary sentence and not a bullet
+paragraph: the operator judges the card against the machine line by line.
 
 | Check | How | On failure |
 |---|---|---|
@@ -28,7 +30,7 @@ Check, then print a report card (✓ / ⚠, one line each, each ⚠ with its one
 | git identity | `git config user.name` + `user.email` | ⚠ offer to set them now (ask for the values; this is git config, not Claude settings) |
 | remote reachable | `GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND='ssh -oBatchMode=yes -oConnectTimeout=5' git ls-remote -q --heads origin` (portable; converts a credential hang into the ⚠) | ⚠ "reads from `origin` failed — check your remote/credentials before a run needs to push" |
 | `gh` present + authed | `gh auth status` | ⚠ "PRs will degrade to push + a compare-URL you open by hand; install/auth `gh` to restore one-step PRs" |
-| permission posture | none (informational) | note: "your first run will ask for permission often; approvals accumulate — Atlas never edits your settings itself." Then offer to print the recommended deny-rail inline (nine lines, from the plugin's `docs/permissions.md`) |
+| permission posture | none (informational) | note: "your first run will ask for permission often; approvals accumulate — Atlas never edits your settings itself." Then offer to print the recommended deny-rail inline (eight entries, from the plugin's `docs/permissions.md`) |
 
 Proceed past any ⚠. Block only on the two BLOCKs.
 
@@ -78,6 +80,11 @@ echo its title back. **Do not skip this step**: a wizard that ends with "config 
 has verified nothing; one that ends with a proven read has caught the stale OAuth or the
 unauthenticated CLI while the operator is still at the keyboard. Manual mode: skip with a
 note (there is nothing to verify).
+
+If the tracker has no items yet (a fresh repository), offer two options and recommend the
+first: open a small "Atlas setup smoke test" item, read its title back through the tracker,
+then close it; or accept the repository-level read as a weaker verification. Say plainly that
+the first option writes to their tracker before doing it.
 
 If the read fails: show the error, offer to switch tracker (manual always works), and only
 write config the operator confirms.

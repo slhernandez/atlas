@@ -18,6 +18,7 @@ grade: <A / B / C / F>
 | Duration (launch → PR-open → merge) | |
 | Artifacts (research / plan / review) | |
 | Outcome | |
+| Permission escalations (as observed by the supervisor; "auto mode: none surfaced" is a valid answer) | |
 
 ## 1 · Process fidelity
 Phases in order; status handshake transitioned correctly; **hard gate 1** — zero implementor

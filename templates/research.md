@@ -4,7 +4,7 @@ work_item: TICKET-123 (or "none")
 repository: <repo name>
 as_of_commit: <hash of the commit the findings were verified against>
 branch: <branch name>
-status: current
+status: current   # pending-skeptic while a skeptic pass is still running
 last_updated: YYYY-MM-DD
 ---
 
