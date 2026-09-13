@@ -45,10 +45,13 @@ stop — do not guess.
 4. Structure the first implementation task as a **pure mechanical change**
    whenever the design requires a structural conversion (e.g. a class or
    component refactor) — zero behavior change, so the logic diff in later
-   tasks stays readable.
+   tasks stays readable. A mechanical prep task is always its own commit; its
+   only purpose is a diff a reviewer can read in isolation.
 5. Always include: a test task (same PR), a verification task (build/analyze +
    targeted test commands, using the repo's own toolchain as documented in its
-   CLAUDE.md), and an explicit **Out of scope** list.
+   CLAUDE.md), and an explicit **Out of scope** list. Manual smoke testing is
+   the operator's step: never plan for the implementor to run the app against
+   the operator's real data, live database, or personal configuration files.
 6. When a planned test exists specifically to lock a guard or invariant (a
    test whose whole point is "this fails if the guard is removed"), add a
    **mutation check** to the verification task: temporarily neuter the guard,

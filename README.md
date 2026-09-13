@@ -29,7 +29,8 @@ docs/               two-modes guide · permissions · patterns/
 
 ## Install
 
-Three commands in any Claude Code session, run from inside a git repository:
+Three commands in any Claude Code session, run from inside a git repository. The marketplace
+and the plugin are both named `atlas`, so the install string is exactly `atlas@atlas`:
 
 ```
 /plugin marketplace add slhernandez/atlas
@@ -42,10 +43,10 @@ you (every command still asks your permission; the wizard's questions stay yours
 
 ```
 Install the Atlas plugin for me: run `claude plugin marketplace add slhernandez/atlas`,
-then `claude plugin install atlas@atlas --yes`. If the install succeeds, tell me whether
-/atlas:setup is available in this session; if it isn't, tell me to start a new session
-and run /atlas:setup — that's the first-run wizard, which checks this machine, asks me a
-few questions, and verifies the setup with a real tracker read. Don't run the wizard
+then `claude plugin install atlas@atlas --yes`. When the install succeeds, tell me that
+/atlas:setup is ready — it is available in this same session, no restart needed. That's the
+first-run wizard, which checks this machine, asks me a few questions, and verifies the setup
+with a real tracker read. Don't run the wizard
 yourself; I want to answer its questions.
 ```
 

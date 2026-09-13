@@ -45,7 +45,10 @@ extra notes directories).
    **Skeptic pass (substantial runs only):** for work-item scoping or multi-component research,
    spawn ONE independent agent whose sole job is to refute the load-bearing claims and scope
    conclusions ("try to disprove: <claim>, with file:line evidence"); fold surviving
-   objections into Open Questions. Skip it for small single-component runs.
+   objections into Open Questions. While the skeptic is still running, the document's
+   frontmatter `status` is `pending-skeptic`; flip it to `current` only after its objections
+   are appended (or it reports none). Deliver the answer meanwhile, but say the document is
+   not final until then. Skip the pass for small single-component runs.
 5. **Write the research document** from the journal's research template to
    `<journal>/research/YYYY-MM-DD-<work-item>-<desc>.md` (omit the work item when there is
    none). Frontmatter carries the real `date`, `as_of_commit`, and `branch` — never

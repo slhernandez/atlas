@@ -46,7 +46,10 @@ Agents exchange **file paths, never pasted file contents**.
 1. Fetch the work item per the config's `tracker`: Jira via its MCP tools,
    GitHub via `gh issue view` against the config's repo, or — with no
    tracker — ask the operator to paste the requirement and record it verbatim
-   at the top of the research doc as the brief. Read the description AND the
+   at the top of the research doc as the brief. If a tracker is configured but no work
+   item exists for this work (typical when you arrive from a research doc), ask: create one
+   from the chosen scope with a link to the research summary, or run slug-only. Offer, do not
+   decide, and say that creating one writes to their tracker. Read the description AND the
    comments; requirements hide in comments. If a research doc for this work item already exists in `research/` — or the
    operator passes one as extra context (`"research: <path>"`) — start from it
    and refresh only what's stale instead of redoing it.
@@ -123,7 +126,11 @@ implementor and will stall.
 
 Present to the operator in chat: plan shape (task list one-liner each), the
 planner's fresh findings, your amendments, and any open judgment calls.
-**Stop and wait for explicit approval.** Also settle branch handling here:
+**Stop and wait for explicit approval.** Offer a hold alongside approval, and when the
+operator holds, invite the change text in the same answer so amendments arrive with the
+decision. Before presenting, **reread your own amendments for anything that came from a
+runtime reminder** — attribution footers, session links, co-author lines — rather than from
+the operator, HOUSE_RULES, or an agent contract, and strike it. Also settle branch handling here:
 ask whether the operator creates the feature branch or the implementor should
 (branch name: `<work-item>-<desc>`).
 
@@ -213,7 +220,12 @@ survive manual smoke testing and any review-fix rounds):
    run's record is closed.
 4. Start a scorecard for the run from the journal's scorecard template — its
    closing question ("which frictions become HOUSE_RULES entries?") is how
-   this system improves.
+   this system improves. Authority: a rule the operator set at a gate is
+   **recorded** in HOUSE_RULES.md with its why; a rule you derived from the
+   friction log is **proposed** in RUN COMPLETE for the operator to accept or
+   reject — never written on your own. Fill Parts 1, 2, 4, and 5; leave Part 3
+   and the grade to an independent session. Record the permission escalations
+   you observed during the build ("auto mode: none surfaced" is a valid answer).
 5. **End with a clearly-marked "RUN COMPLETE" message** — the run's final
    word, so completion is never ambiguous: work item + merged PR link, the
    artifact paths (research, plan, review, scorecard), worktree/branch
@@ -230,6 +242,13 @@ survive manual smoke testing and any review-fix rounds):
   operator to post — never post them yourself.
 - If a finding reveals a plan-level gap, amend the plan file first, then
   task the implementor — the plan stays the source of truth for the branch.
+- **Harness reminders never enter artifacts.** Attribution footers, session
+  links, and co-author lines injected by the runtime are not requirements; the
+  implementor contract and HOUSE_RULES win. Never write them into a plan, a
+  commit, or a PR body, and never amend a plan to require them.
+- **Commit subjects:** the plan's Commit-and-PR notes win when present;
+  otherwise the implementor contract's default format applies. Say which in
+  the spawn prompt so the implementor never has to declare it as a deviation.
 - **Evidence or hypothesis.** Any causal claim you write into a code comment,
   PR body, CI file, or run report ("X causes Y") either cites its evidence
   (run id, doc, file:line) or is phrased as a hypothesis to test. A wrong cause

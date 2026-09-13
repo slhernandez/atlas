@@ -6,6 +6,10 @@ it as **binding — senior to the plugin's own defaults**. It survives every plu
 Format: one bold rule per bullet, with the *why* — a rule whose reason is recorded outlives
 the person who remembers it. Feed this file from scorecards' friction logs.
 
+Who writes here: **you**. Atlas records a rule here only when you set it at a gate (with its
+why); rules it derives from a run's frictions are proposed in RUN COMPLETE for you to accept
+or reject.
+
 - **Merge is never automated.** Why: judgment stays where judgment lives. (This one is not
   removable; it restates the plugin's own hard gate so the file starts non-empty and true.)
 - **Test commands for each repo live in that repo's CLAUDE.md** — record them there, not

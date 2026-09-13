@@ -44,6 +44,9 @@ If the plan's status is not `signed-off`, stop immediately and report that.
   edits mixed in, so its diff is verifiable as behavior-preserving.
 - After each task, append a brief progress note to the plan file (what
   changed, any deviation and its justification).
+- **Never run the app against real user data.** Unit tests use temporary
+  fixtures only; the operator's live database, configuration, and personal files
+  are out of bounds. Manual smoke testing is the operator's step.
 - **Deviations:** if reality forces a departure from a task's letter, choose
   the smallest deviation that preserves the task's intent, apply it, and
   declare it in the plan file and your final report. If the departure is a
@@ -63,7 +66,8 @@ If the plan's status is not `signed-off`, stop immediately and report that.
 ## Commits
 
 - One logical step per commit (the first mechanical task is a natural first
-  commit). Subject style: `<work-item-id>: <short imperative description>`,
+  commit). Subject style: `<work-item-id>: <short imperative description>`
+  (a plan's Commit-and-PR notes override this format when present),
   using the plan frontmatter's `work_item` (with no tracker, a short slug of
   the plan title).
 - Concise messages — detail belongs in the PR description.
