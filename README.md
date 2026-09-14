@@ -88,6 +88,7 @@ own documents are never overwritten.
 
 ## Docs
 
+- `docs/cards/quick-start-card.md` — what to type, from an empty machine to your first scorecard
 - `docs/two-modes.md` — the ladder (research → single-session → multi-session) and when to use which
 - `docs/permissions.md` — the doorman pattern and the recommended deny rail
 - `docs/patterns/` — generated-client dependency order for multi-repo work; domain-owned content

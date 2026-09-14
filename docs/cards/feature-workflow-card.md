@@ -51,4 +51,4 @@ Every catch comes from fresh context with a verification mandate. The planner re
 - Merge is never automated, and `gh pr merge` belongs on your deny rail so a prompt can't do it either.
 
 ---
-*rung two: research → plan → gate → build → review → gate → merge · everything between gates is unattended · [Deck index](../deck.html) · [README](../../README.md)*
+*rung two: research → plan → gate → build → review → gate → merge · the build runs unattended · [Deck index](../deck.html) · [README](../../README.md)*
