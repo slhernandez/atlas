@@ -14,7 +14,7 @@
 
 The first-run wizard. It checks the machine and prints a report card, one line per check. It proposes a journal location and seeds it from the plugin's templates. It detects your work-item tracker and **asks** rather than decides. When a tracker is configured, it proves the whole thing by fetching a real work item and reading its title back to you, and only after that proof does it write the config file. Manual mode has no tracker to prove, so it skips the read and says so.
 
-Detection is a default, never a decision. Everything the wizard finds is presented for you to confirm or change, and the one thing it will not do is edit your Claude Code settings. The deny rail it recommends is printed for you to paste by hand.
+Detection is a default, never a decision. Everything the wizard finds is presented for you to confirm or change, and the one thing it will not do is edit your Claude Code settings. The deny rail it recommends is offered as a printout for you to paste by hand.
 
 ## How to run it
 

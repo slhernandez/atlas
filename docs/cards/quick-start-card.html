@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick Start · Atlas Card</title>
+<style>
+  :root {
+    --ground: #f6f4ef; --card: #fffefb; --ink: #28232e; --muted: #6f6879;
+    --accent: #5b4b8a; --accent-soft: #ece8f5; --gold: #7a5a1c; --line: #e4dfd4; --code-bg: #f1eee7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+      --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+    --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; margin: 0; padding: 2.5rem 1rem 4rem; }
+  a { color: var(--accent); }
+  .card { max-width: 700px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 1px 2px rgba(20,15,35,.06), 0 12px 32px -18px rgba(20,15,35,.25); overflow: hidden; }
+  .card-frame { border: 1px solid var(--line); border-radius: 7px; margin: 6px; }
+  header.hero { padding: 2rem 2.25rem 1.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 120% 90% at 50% -30%, var(--accent-soft), transparent 70%); }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 .6rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .glyph { font-size: 2rem; line-height: 1; }
+  h1 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: clamp(1.5rem, 5vw, 2rem); margin: .35rem 0 .15rem; letter-spacing: -.01em; text-wrap: balance; }
+  h1 .slash { color: var(--accent); }
+  .persona { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; color: var(--gold); margin: 0 0 .5rem; font-size: 1rem; }
+  .flavor { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--muted); margin: 0; max-width: 34em; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--line); }
+  .stat { padding: .85rem 1.1rem; border-right: 1px solid var(--line); min-width: 0; }
+  .stat:last-child { border-right: none; }
+  .stat dt { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 .15rem; }
+  .stat dd { margin: 0; font-size: .88rem; font-weight: 600; overflow-wrap: break-word; }
+  section { padding: 1.5rem 2.25rem; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .8rem; font-weight: 700; }
+  p { margin: 0 0 .75rem; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  ul.plain, ol.plain { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+  ul.plain li, ol.plain li { margin-bottom: .4rem; }
+  ul.plain li:last-child, ol.plain li:last-child { margin-bottom: 0; }
+  code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--code-bg); padding: .1rem .35rem; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; overflow-x: auto; margin: .6rem 0; }
+  pre code { background: none; padding: 0; font-size: .88em; }
+  .note { font-size: .88rem; color: var(--muted); margin-top: .7rem; }
+  footer.lineage { padding: 1.1rem 2.25rem; background: var(--code-bg); font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .78rem; color: var(--muted); overflow-x: auto; white-space: nowrap; }
+  footer.lineage b, footer.lineage a { color: var(--accent); font-weight: 700; }
+  .deck-card { margin-top: 3rem; scroll-margin-top: 1.5rem; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .deck-hero { text-align: center; margin-bottom: 2rem; }
+  .deck-hero h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 .3rem; }
+  .deck-hero .eyebrow { justify-content: center; display: block; }
+  .nav-h { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 2rem 0 .8rem; font-weight: 700; }
+  .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .7rem; }
+  .nav-grid a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: .7rem .9rem; text-decoration: none; color: var(--ink); background: var(--card); transition: border-color 120ms ease; }
+  .nav-grid a:hover, .nav-grid a:focus-visible { border-color: var(--accent); outline: none; }
+  .g-top { display: flex; align-items: baseline; gap: .5rem; }
+  .g-glyph { font-size: 1.15rem; }
+  .g-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; font-weight: 700; color: var(--accent); }
+  .g-num { font-size: .68rem; color: var(--gold); letter-spacing: .08em; margin-left: auto; }
+  .g-desc { font-size: .8rem; color: var(--muted); display: block; margin-top: .2rem; line-height: 1.4; }
+  .backtop { text-align: center; font-size: .78rem; margin: .8rem 0 0; }
+  .links { text-align: center; font-size: .88rem; color: var(--muted); margin: 1.2rem 0 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 560px) { header.hero, section { padding-left: 1.25rem; padding-right: 1.25rem; } footer.lineage { padding-left: 1.25rem; } }
+</style>
+</head>
+<body>
+<main>
+  <article class="card"><div class="card-frame">
+    <header class="hero">
+      <p class="eyebrow"><span>Atlas · Guide Card 00</span><span class="glyph">🧭</span></p>
+      <h1>Quick Start</h1>
+      
+      <p class="flavor">From an empty machine to your first scorecard, in one sitting. The README tells you what Atlas is; this card tells you what to type.</p>
+    </header>
+    <dl class="stats"><div class="stat"><dt>Needs</dt><dd>Claude Code and git, run inside a repository</dd></div><div class="stat"><dt>Optional</dt><dd>A reachable <code>origin</code> and an authenticated <code>gh</code> for one-step PRs; a tracker (Jira or GitHub Issues)</dd></div><div class="stat"><dt>Writes</dt><dd><code>~/.claude/atlas.json</code> and <code>~/AtlasJournal/</code></dd></div><div class="stat"><dt>Never touches</dt><dd>Your Claude Code settings. The deny rail is yours to paste</dd></div></dl>
+    <section><h2>Before you start</h2><p>Open Claude Code inside a git repository. The wizard's preflight runs a short checklist and blocks on two items: git must be present and you must be inside a repository. Everything else warns with a one-line fix: a missing git identity, an unreachable <code>origin</code>, an unauthenticated <code>gh</code>.</p><p>No tracker is fine. The <strong>manual tracker option</strong> has zero dependencies: each run starts by pasting the requirement. Pick it if you are unsure; you can re-run the wizard later and switch.</p></section><section><h2>1 · Install</h2><pre><code>/plugin marketplace add slhernandez/atlas
+/plugin install atlas@atlas
+/atlas:setup</code></pre><p>The marketplace and the plugin are both named <code>atlas</code>, so the install string is exactly <code>atlas@atlas</code>. After the install, <code>/atlas:setup</code> is available in the same session; no restart. If you would rather not type the first two lines, the README has a one-paste prompt that has Claude run them and stop before the wizard.</p></section><section><h2>2 · Answer the wizard</h2><p>It asks where the journal should live (<code>~/AtlasJournal</code> is the default), which tracker to use (what it detected is the default), and the one detail that tracker needs: a Jira project key, or the GitHub issues repository with <code>origin</code> offered as the default. With a tracker configured, it then asks you to name one real work item so it can prove the read. Detection is a default, never a decision.</p><p>When the wizard ends with <strong>a real work item's title read back to you</strong>, the setup is proven. If the read fails, it shows the error and offers to switch tracker; the manual option always works. With no tracker there is nothing to prove, and it says so.</p></section><section><h2>3 · Paste the deny rail</h2><p>The wizard offers to print it and never applies it; that is yours. Add this to your Claude Code <code>settings.json</code>, then keep it:</p><pre><code>{
+  &quot;permissions&quot;: {
+    &quot;deny&quot;: [
+      &quot;Bash(git push --force:*)&quot;, &quot;Bash(git push -f:*)&quot;,
+      &quot;Bash(git reset --hard:*)&quot;, &quot;Bash(git clean:*)&quot;,
+      &quot;Bash(git worktree remove --force:*)&quot;,
+      &quot;Bash(gh pr merge:*)&quot;, &quot;Bash(gh repo delete:*)&quot;,
+      &quot;Bash(rm -rf:*)&quot;
+    ]
+  }
+}</code></pre><p><code>gh pr merge</code> on the rail is the mechanical form of the core promise: merge is never automated, even if a prompt goes wrong. These are prefix rules and a floor, not a proof; review still does the real work. The full pattern is in <a href="https://github.com/slhernandez/atlas/blob/main/docs/permissions.md">permissions.md</a>.</p></section><section><h2>4 · First run: research something real</h2><p>Pick a bug or small task you actually have, then:</p><pre><code>/atlas:research &lt;work item or question&gt;</code></pre><p>It writes a verified research document to the journal, then offers to fix in-session or escalate to the feature workflow with the document in hand. Read the document before you accept either. Expect permission prompts on a first run. What you approve is the raw material for your allow list, which you build yourself; Atlas never edits your settings. A prompt for something obviously safe is an allow-list gap worth noting.</p></section><section><h2>5 · Second run: a feature with a plan gate</h2><p>When a change would have three or more real tasks, or an open design question:</p><pre><code>/atlas:feature-workflow &lt;work item&gt;
+/atlas:feature-workflow &lt;work item&gt; &quot;research: &lt;path&gt;&quot;</code></pre><p>The second form carries a research document from step 4 into the run, so nothing is re-derived. You are needed at five points, and two of them are hard stops: approving the plan, and merging. Nothing is built before you approve, and the merge is never automated. Between them, the build runs unattended in a worktree under <code>~/.atlas-worktrees/</code>. The review ends with a <strong>READY FOR YOU</strong> block naming exactly what is yours to check; after you merge, the close-out runs and the run ends with <strong>RUN COMPLETE</strong>.</p></section><section><h2>After the run</h2><ul class="plain"><li><strong>The journal filled in.</strong> <code>research/</code>, <code>plans/</code>, <code>reviews/</code>, and a <code>scorecards/</code> entry with Parts 1, 2, 4, and 5 written. Part 3 and the grade are for a fresh session that did not run the work.</li><li><strong>Your corrections go in <code>HOUSE_RULES.md</code>.</strong> Every skill obeys it, it outranks the plugin's defaults, and it survives updates. A rule you set at a gate is recorded there; a rule the run derives from its own frictions is only proposed.</li><li><strong>Which rung next.</strong> Bug or small task: research. Feature: the feature workflow. Multi-week work across sessions: <code>/atlas:launch-supervisor</code>. One-line fixes: a plain session. <a href="https://github.com/slhernandez/atlas/blob/main/docs/two-modes.md">two-modes.md</a> has the decision table.</li></ul></section><section><h2>If something goes wrong</h2><ul class="plain"><li><strong>Install fails on a manifest error.</strong> Run <code>/plugin marketplace update atlas</code> and install again; you may have a stale marketplace copy.</li><li><strong>The proof read fails.</strong> Stale tracker auth is the usual cause. The wizard shows the error and offers to switch; fix the auth and re-run <code>/atlas:setup</code> later.</li><li><strong>No <code>gh</code>.</strong> The implementor pushes the branch and hands you a compare URL to open the PR by hand. Everything else works.</li><li><strong>A run stops with a worktree it will not remove.</strong> Something unpushed is in it. It is surfaced, never force-deleted; look before you clean up.</li></ul></section>
+    <footer class="lineage">start here: install → wizard → deny rail → first research run → first feature run · then the Deck, one card per skill and role · <a href="../deck.html"><b>deck index</b></a></footer>
+  </div></article>
+</main>
+</body>
+</html>
