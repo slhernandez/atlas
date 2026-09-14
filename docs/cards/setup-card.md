@@ -40,7 +40,7 @@ The marketplace and the plugin are both named `atlas`, so the install string is 
 ## Ground rules
 
 - A wizard that ends with "config written" has verified nothing. Whenever a tracker is configured, this one ends with a proven read.
-- Config is written last, after the proof, and only what you confirmed.
+- Config is written last, after the proof or the manual-mode skip, and only what you confirmed.
 - Re-running never overwrites your content. Templates you haven't renamed can be refreshed, with the diff shown first.
 - Your corrections go in `HOUSE_RULES.md`. Every skill obeys it, it outranks the plugin's defaults, and it survives updates.
 
