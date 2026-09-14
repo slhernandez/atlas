@@ -32,7 +32,7 @@ exactly what was signed off. They share the plan-file protocol (status handshake
 `ready-for-supervisor-review → approved-with-amendments → signed-off → merged`), the human
 gates, and the review standards. The difference is the bus.
 
-## Single-session mode — `/atlas:feature-workflow`
+## Single-session mode, "kit mode" — `/atlas:feature-workflow`
 
 One session runs the whole work item; the session IS the supervisor and spawns the planner
 and implementor as fresh-context subagents. For ticket-sized work: one plan, one PR.
@@ -45,7 +45,7 @@ Reach for it when the plan would have 3+ real tasks, there's an open design ques
 the change touches shared code with many call sites. Skip it when you already know the
 diff — a plain session is faster, and the workflow would be ceremony.
 
-## Multi-session mode — `/atlas:launch-supervisor`
+## Multi-session mode, "manual mode" — `/atlas:launch-supervisor`
 
 The same roles as separate Claude Code windows, for features too big for one session —
 multi-week, multi-slice, possibly multi-repo. You are the message bus: you carry

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --paper: #f6f4ee;
+    --paper-2: #fdfcf8;
+    --grid: rgba(36, 86, 166, .10);
+    --grid-strong: rgba(36, 86, 166, .22);
+    --ink: #1c2733;
+    --muted: #5c6b7a;
+    --draft: #2456a6;          /* drafting blue */
+    --draft-soft: #e7edf8;
+    --gold: #7a5a1c;           /* the gate color; passes 4.5:1 on paper and on gold-soft */
+    --gold-soft: #f5edd9;
+    --line: #cfd6de;
+    --good: #3e6b4f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0e1c30;        /* cyanotype */
+      --paper-2: #132540;
+      --grid: rgba(168, 198, 232, .08);
+      --grid-strong: rgba(168, 198, 232, .18);
+      --ink: #e9f0f8;
+      --muted: #9db2c8;
+      --draft: #7fa8dd;
+      --draft-soft: #1b3253;
+      --gold: #d2a851;
+      --gold-soft: #33290f;
+      --line: #2b4265;
+      --good: #8fbf9f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0e1c30; --paper-2: #132540;
+    --grid: rgba(168, 198, 232, .08); --grid-strong: rgba(168, 198, 232, .18);
+    --ink: #e9f0f8; --muted: #9db2c8; --draft: #7fa8dd; --draft-soft: #1b3253;
+    --gold: #d2a851; --gold-soft: #33290f; --line: #2b4265; --good: #8fbf9f;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Archivo", -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      linear-gradient(var(--grid-strong) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-strong) 1px, transparent 1px),
+      var(--paper);
+    background-size: 24px 24px, 24px 24px, 120px 120px, 120px 120px;
+  }
+  .sheet { max-width: 1060px; margin: 0 auto; padding: 0 1.25rem; }
+  code, .mono { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+  a { color: var(--draft); }
+
+  /* ── figure labels & section furniture ── */
+  .fig {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .68rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--draft); font-weight: 600; margin: 0 0 .8rem;
+  }
+  .fig b { color: var(--gold); font-weight: 600; }
+  section { padding: 4.5rem 0 3.5rem; border-bottom: 1px dashed var(--line); }
+  h2 {
+    font-weight: 800; font-stretch: 110%;
+    font-size: clamp(1.6rem, 3.6vw, 2.3rem);
+    letter-spacing: -.01em; margin: 0 0 1rem; text-wrap: balance; max-width: 24ch;
+  }
+  p { max-width: 62ch; margin: 0 0 1rem; }
+  .dim { color: var(--muted); }
+
+  /* ── hero ── */
+  header.hero { padding: 5.5rem 0 4rem; border-bottom: 1px solid var(--line); position: relative; }
+  .reg { position: absolute; width: 18px; height: 18px; border: 1.5px solid var(--draft); opacity: .5; }
+  .reg::after { content: ""; position: absolute; inset: 6px; background: var(--draft); border-radius: 50%; opacity: .6; }
+  .reg.tl { top: 18px; left: 0; } .reg.tr { top: 18px; right: 0; }
+  .proto {
+    display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: .68rem;
+    letter-spacing: .14em; text-transform: uppercase; font-weight: 600;
+    border: 1px solid var(--gold); color: var(--gold); background: var(--gold-soft);
+    border-radius: 3px; padding: .3rem .6rem; margin-bottom: 1.6rem;
+  }
+  .proto a { color: inherit; text-decoration: none; }
+  .proto a:hover, .proto a:focus-visible { text-decoration: underline; outline: none; }
+  h1 {
+    font-weight: 900; font-stretch: 120%;
+    font-size: clamp(3.2rem, 11vw, 7rem);
+    line-height: .95; letter-spacing: .02em; margin: 0 0 1.2rem;
+    text-transform: uppercase;
+  }
+  h1 .tm { color: var(--draft); }
+  .tagline { font-size: clamp(1.05rem, 2.2vw, 1.35rem); max-width: 34ch; font-weight: 500; }
+  .subline { color: var(--muted); max-width: 52ch; }
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1px; background: var(--line); border: 1px solid var(--line);
+    margin-top: 2.5rem;
+  }
+  .stats > div { background: var(--paper-2); padding: 1rem 1.1rem; }
+  .stats .n { font-family: "IBM Plex Mono", monospace; font-size: 1.35rem; font-weight: 600; display: block; font-variant-numeric: tabular-nums; }
+  .stats .l { font-size: .78rem; color: var(--muted); letter-spacing: .05em; text-transform: uppercase; }
+
+  /* ── cast cards ── */
+  .cast { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .cast .c {
+    background: var(--paper-2); border: 1px solid var(--line); border-top: 3px solid var(--draft);
+    padding: 1.1rem 1.2rem;
+  }
+  .cast .c.human { border-top-color: var(--gold); }
+  .cast .role { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: .85rem; color: var(--draft); display: block; margin-bottom: .4rem; }
+  .cast .c.human .role { color: var(--gold); }
+  .cast p { font-size: .92rem; margin: 0; color: var(--muted); }
+  .cast p b { color: var(--ink); }
+
+  /* ── gates rail ── */
+  .rail { display: flex; flex-wrap: wrap; gap: .6rem; align-items: stretch; margin-top: 2rem; }
+  .gate {
+    flex: 1 1 150px; background: var(--gold-soft); border: 1px solid var(--gold);
+    border-left: 4px solid var(--gold); padding: .8rem .9rem; min-width: 150px;
+  }
+  .gate .k { font-family: "IBM Plex Mono", monospace; font-size: .68rem; letter-spacing: .12em; color: var(--gold); font-weight: 600; display: block; text-transform: uppercase; }
+  .gate .t { font-weight: 700; font-size: .95rem; display: block; margin: .2rem 0; }
+  .gate .d { font-size: .8rem; color: var(--muted); }
+
+  /* ── modes ── */
+  .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .mode { background: var(--paper-2); border: 1px solid var(--line); padding: 1.4rem 1.5rem; }
+  .mode h3 { margin: 0 0 .2rem; font-size: 1.15rem; font-weight: 800; }
+  .mode .for { font-family: "IBM Plex Mono", monospace; font-size: .72rem; color: var(--draft); letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: .8rem; }
+  .mode ul { margin: 0; padding-left: 1.1rem; font-size: .92rem; }
+  .mode li { margin-bottom: .45rem; }
+  .mode li:last-child { margin-bottom: 0; }
+
+  /* ── doorman ── */
+  .layers { margin-top: 2rem; border: 1px solid var(--line); background: var(--paper-2); }
+  .layer { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; padding: 1rem 1.2rem; border-bottom: 1px dashed var(--line); }
+  .layer:last-child { border-bottom: none; }
+  .layer .n { font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: .8rem; color: var(--draft); }
+  .layer p { margin: 0; font-size: .92rem; }
+  @media (max-width: 560px) { .layer { grid-template-columns: 1fr; gap: .2rem; } }
+
+  /* ── receipts / quality ── */
+  .quote {
+    border-left: 3px solid var(--draft); background: var(--draft-soft);
+    padding: 1rem 1.3rem; margin: 1.6rem 0; max-width: 58ch;
+    font-size: 1.02rem; font-weight: 500;
+  }
+  .quote .who { display: block; font-family: "IBM Plex Mono", monospace; font-size: .72rem; color: var(--muted); margin-top: .5rem; letter-spacing: .08em; }
+
+  /* ── install ── */
+  .term {
+    background: #10233c; color: #dbe7f5; border: 1px solid var(--line);
+    font-family: "IBM Plex Mono", monospace; font-size: .9rem;
+    padding: 1.2rem 1.4rem; margin-top: 1.8rem; overflow-x: auto; line-height: 1.9;
+  }
+  :root[data-theme="dark"] .term { background: #081426; }
+  .term .ps1 { color: #7fa8dd; user-select: none; }
+  .term .cmt { color: #8ea3ba; }
+
+  /* ── title block ── */
+  .titleblock {
+    margin: 3.5rem 0 2rem; border: 1.5px solid var(--ink); background: var(--paper-2);
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-family: "IBM Plex Mono", monospace; font-size: .75rem;
+  }
+  .titleblock > div { padding: .55rem .8rem; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+  .titleblock > div:nth-child(4n) { border-right: none; }
+  .titleblock > div:nth-last-child(-n+4) { border-bottom: none; }
+  .titleblock .lbl { display: block; font-size: .6rem; letter-spacing: .14em; color: var(--muted); text-transform: uppercase; }
+  .titleblock b { font-weight: 600; }
+  @media (max-width: 640px) { .titleblock { grid-template-columns: 1fr 1fr; } .titleblock > div:nth-child(2n) { border-right: none; } .titleblock > div { border-right: 1px solid var(--ink); } }
+  footer { padding: 0 0 3rem; }
+  footer .fine { font-size: .78rem; color: var(--muted); font-family: "IBM Plex Mono", monospace; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header class="hero">
+  <span class="reg tl"></span><span class="reg tr"></span>
+  <nav class="proto sitenav" aria-label="Site"><a href="how-it-works.html">How it works</a> · <a href="deck.html">The Deck</a> · <a href="https://github.com/slhernandez/atlas#readme">README</a> · <a href="https://github.com/slhernandez/atlas">GitHub</a></nav>
+  <h1>Atlas<span class="tm">.</span></h1>
+  <p class="tagline">The supervised software factory. Three AI roles do the work. You hold the gates.</p>
+  <p class="subline">An opinionated methodology for AI-assisted engineering, packaged as a Claude Code
+    plugin: fresh-context verification at every handoff, a plan file as the source of truth, and a
+    human signature on everything that matters.</p>
+  <div class="stats">
+    <div><span class="n">3</span><span class="l">rungs: research, kit, manual</span></div>
+    <div><span class="n">2</span><span class="l">hard gates per run, both yours</span></div>
+    <div><span class="n">1</span><span class="l">file that outranks the plugin: your house rules</span></div>
+    <div><span class="n">0</span><span class="l">automated merges, by design</span></div>
+  </div>
+</header>
+
+<section>
+  <p class="fig"><b>FIG. 1</b> — The premise</p>
+  <h2>The lone-genius era had a good run.</h2>
+  <p>AI can already write most of your code. The open question is whether anyone is <em>supervising</em> it —
+    or whether one chat window is researching, planning, building, and grading its own homework in a single
+    breathless conversation that forgets its constraints by Tuesday.</p>
+  <p>Atlas is the other answer. It runs software work the way factories run production: distinct stations,
+    verified handoffs, quality control by someone who didn't build the part — and a human at every decision
+    that deserves one. You stop being the typist. You become the operator.</p>
+</section>
+
+<section>
+  <p class="fig"><b>FIG. 2</b> — The cast</p>
+  <h2>Three roles that check each other. One of you.</h2>
+  <div class="cast">
+    <div class="c">
+      <span class="role">supervisor</span>
+      <p>The main session. Researches the ticket, <b>writes every prompt the other roles see</b>, reviews
+      every artifact against the live code, filters all feedback. Never merges.</p>
+    </div>
+    <div class="c">
+      <span class="role">planner</span>
+      <p>Fresh context. <b>Re-verifies the supervisor's research</b> before writing the plan.
+      When it refutes a claim with evidence, that's the design working — not failing.</p>
+    </div>
+    <div class="c">
+      <span class="role">implementor</span>
+      <p>Builds exactly what was signed off, commit by commit, in an isolated worktree.
+      <b>It never sees the research</b> — so it has nothing to redesign from.</p>
+    </div>
+    <div class="c human">
+      <span class="role">you</span>
+      <p>Answer the scope questions. Approve the plan. Smoke-test what agents can't see.
+      <b>Merge — or don't.</b> Judgment stays where judgment lives.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="fig"><b>FIG. 3</b> — The touchpoints</p>
+  <h2>Unattended between touchpoints. Never past a hard gate.</h2>
+  <p>Five touchpoints per run of the feature workflow; two of them are hard gates that no configuration removes. Everything between them runs at machine speed inside the rails you set; nothing crosses a hard gate without your signature. (Rung one, research, has none: it only writes a document.)</p>
+  <div class="rail">
+    <div class="gate"><span class="k">Touchpoint 01</span><span class="t">Scope</span><span class="d">Your answers become constraints no role may re-litigate.</span></div>
+    <div class="gate"><span class="k">Touchpoint 02 · hard gate</span><span class="t">Plan</span><span class="d">No code exists before you approve the blueprint.</span></div>
+    <div class="gate"><span class="k">Touchpoint 03</span><span class="t">Smoke test</span><span class="d">Human eyes on what agents can't render.</span></div>
+    <div class="gate"><span class="k">Touchpoint 04</span><span class="t">Feedback triage</span><span class="d">Reviewer comments reach the builder only through the supervisor.</span></div>
+    <div class="gate"><span class="k">Touchpoint 05 · hard gate</span><span class="t">Merge</span><span class="d">Yours. Always. Not configurable.</span></div>
+  </div>
+</section>
+
+<section>
+  <p class="fig"><b>FIG. 4</b> — The ladder</p>
+  <h2>One discipline, three rungs. Match the process to the uncertainty, not the diff.</h2>
+  <div class="modes">
+    <div class="mode">
+      <h3>Research first</h3>
+      <span class="for">for bugs and small tasks · one command</span>
+      <ul>
+        <li>Where it lives, how it actually works today, the closest pattern — every claim verified at file:line</li>
+        <li>Then fix in-session, or hand the document to kit mode</li>
+        <li>One command: <code>/atlas:research "why does the history view skip days?"</code></li>
+      </ul>
+    </div>
+    <div class="mode">
+      <h3>Kit mode</h3>
+      <span class="for">single-session mode · for work-item-sized changes</span>
+      <ul>
+        <li>The session is the supervisor; planner and implementor spawn as fresh-context subagents</li>
+        <li>Work item to open PR in 60–90 minutes, unattended between gates</li>
+        <li>One command: <code>/atlas:feature-workflow TICKET-123</code> — or hand it the research document</li>
+      </ul>
+    </div>
+    <div class="mode">
+      <h3>Manual mode</h3>
+      <span class="for">multi-window mode · for feature-sized work</span>
+      <ul>
+        <li>Each role gets its own window; you relay the artifacts — the bus is also the gatekeeper</li>
+        <li>A <b>dossier</b> file makes the whole feature resumable from disk alone, weeks in</li>
+        <li>Slices land on an integration branch, one plan and one PR at a time</li>
+        <li>One command to boot the supervisor window: <code>/atlas:launch-supervisor EPIC-7</code></li>
+      </ul>
+    </div>
+  </div>
+  <p class="dim" style="margin-top:1.4rem">Sessions are expected to die. Plans, research, reviews, and
+    decisions live in durable files in your journal — the conversation is disposable RAM.</p>
+</section>
+
+<section>
+  <p class="fig"><b>FIG. 5</b> — The doorman</p>
+  <h2>Autonomy is a padded room, not an open door.</h2>
+  <p>Claude Code gives you three permission layers. Atlas edits none of them: the setup wizard prints the recommended deny rail and you paste it once. The rail is a floor, not a proof; a flag typed after its arguments evades a prefix rule, so judgment and review still do the real work.</p>
+  <div class="layers">
+    <div class="layer">
+      <span class="n">DENY RAIL</span>
+      <p>The banned list you paste once. Force-push, history rewrites, recursive deletes, <code>gh pr merge</code>:
+      refused before they run, no discussion. The merge entry makes "never automated" true even when a prompt goes wrong.</p>
+    </div>
+    <div class="layer">
+      <span class="n">ALLOW LIST</span>
+      <p>The regulars. Reads, searches, builds, tests — silent, so agents sprint at full speed
+      without paging you a hundred times an hour.</p>
+    </div>
+    <div class="layer">
+      <span class="n">JUDGMENT</span>
+      <p>Strangers get evaluated. Anything with a blast radius — cloud writes, config changes —
+      pauses and calls the owner. That's you.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="fig"><b>FIG. 6</b> — Quality control</p>
+  <h2>The factory grades its own runs. Then it tries to break them.</h2>
+  <p>Every run ends with a scorecard on the same form: protocol fidelity, role quality, outcome quality, a friction log, a verdict. The run fills in what it can see about itself. The outcome part and the grade are left to a session that ran none of the work; today you launch that session yourself and point it at the file and the PR. Its check isn't a lint pass: the grader <b>reverts your fix in a scratch worktree and watches the new tests fail.</b>
+    Tests that don't scream when the fix is gone are decoration, and they get flagged.</p>
+  <div class="quote">
+    "Zero refutations on a research-heavy run is a yellow flag, not a green one."
+    <span class="who">— the scorecard, on what healthy disagreement looks like</span>
+  </div>
+  <p>Every friction gets logged, and every log entry becomes an edit — to a prompt, a rule, a template.
+    The factory that built your last feature is not the factory that builds your next one.</p>
+</section>
+
+<section>
+  <p class="fig"><b>FIG. 7</b> — The flywheel</p>
+  <h2>It arrives good. It becomes yours.</h2>
+  <p>Setup creates a journal — a durable home outside your repos where every plan, research doc,
+    review, and scorecard accumulates. Skills consult it before starting anything, so the system's
+    inputs get richer with every run you complete.</p>
+  <p>And your corrections outlive every update: <code>HOUSE_RULES.md</code> is a file the plugin seeds once and never
+    overwrites, and every skill obeys, senior to its own defaults. Fold in a rule once, and every future
+    run — through every version bump — carries it.</p>
+</section>
+
+<section style="border-bottom:none">
+  <p class="fig"><b>FIG. 8</b> — Installation</p>
+  <h2>Three commands. Then give it a work item.</h2>
+  <div class="term">
+    <span class="cmt"># in any Claude Code session, inside a git repository</span><br>
+    <span class="ps1">❯</span> /plugin marketplace add slhernandez/atlas<br>
+    <span class="ps1">❯</span> /plugin install atlas@atlas<br>
+    <span class="ps1">❯</span> /atlas:setup
+  </div>
+  <p class="dim" style="margin-top:1rem">The marketplace and the plugin are both named <code>atlas</code>, so the install string is exactly <code>atlas@atlas</code>. After the install, <code>/atlas:setup</code> is available in the same session; no restart. The wizard checks your machine, asks about your tracker, and proves the setup with a real read before it writes anything. It never touches your Claude Code settings.</p>
+  <p class="dim"><b>Or paste this into Claude Code</b> and let it run the first two lines for you:</p>
+  <div class="term" style="white-space:normal;font-size:.82em;line-height:1.5">Install the Atlas plugin for me: run <code>claude plugin marketplace add slhernandez/atlas</code>, then <code>claude plugin install atlas@atlas --yes</code>. When the install succeeds, tell me that /atlas:setup is ready — it is available in this same session, no restart needed. That's the first-run wizard, which checks this machine, asks me a few questions, and verifies the setup with a real tracker read. Don't run the wizard yourself; I want to answer its questions.</div>
+  <p class="dim" style="margin-top:1rem">Then: <a href="how-it-works.html">how it works</a> · <a href="deck.html">the Deck</a>, one card per skill and role · <a href="https://github.com/slhernandez/atlas#readme">the README</a>.</p>
+</section>
+
+<footer>
+  <div class="titleblock">
+    <div><span class="lbl">Drawing</span><b>ATLAS — SUPERVISED SOFTWARE FACTORY</b></div>
+    <div><span class="lbl">Sheet</span><b>1 of 1</b></div>
+    <div><span class="lbl">Rev</span><b>0.1.0-dev</b></div>
+    <div><span class="lbl">Scale</span><b>ambition : 1</b></div>
+    <div><span class="lbl">Drawn by</span><b>the operator &amp; the machine</b></div>
+    <div><span class="lbl">Checked by</span><b>an independent session, and a fresh machine</b></div>
+    <div><span class="lbl">Material</span><b>markdown, discipline</b></div>
+    <div><span class="lbl">Tolerances</span><b>gates: ±0</b></div>
+  </div>
+  <p class="fine">Atlas is a Claude Code plugin, MIT licensed. Validated end to end on a machine that had never seen it: install, wizard, research, and a supervised feature run to a merged pull request. No merges were automated in the making of this page.</p>
+</footer>
+
+</div>
+</body>
+</html>

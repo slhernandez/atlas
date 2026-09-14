@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Atlas Works</title>
+<style>
+  :root { --ground:#f6f4ef; --card:#fffefb; --band:#f9f7f2; --ink:#28232e; --muted:#6f6879; --accent:#5b4b8a; --accent-soft:#ece8f5; --gold:#7a5a1c; --gold-soft:#f4ecd8; --line:#e4dfd4; --code-bg:#f1eee7; --good:#3e6b4f; --good-soft:#e6efe8; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ground:#16141f; --card:#201d2c; --band:#1b1826; --ink:#ece9f2; --muted:#a29cb4; --accent:#a897d8; --accent-soft:#2c2840; --gold:#d2a851; --gold-soft:#3a3120; --line:#37324c; --code-bg:#2a2739; --good:#8fbf9f; --good-soft:#233028; } }
+  :root[data-theme="dark"] { --ground:#16141f; --card:#201d2c; --band:#1b1826; --ink:#ece9f2; --muted:#a29cb4; --accent:#a897d8; --accent-soft:#2c2840; --gold:#d2a851; --gold-soft:#3a3120; --line:#37324c; --code-bg:#2a2739; --good:#8fbf9f; --good-soft:#233028; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ground); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.55; padding:2.5rem 1rem 4rem; }
+  a { color: var(--accent); }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  .serif, h1, h2, h3 { font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif; text-wrap:balance; }
+  header.top { text-align:center; margin-bottom:2.5rem; }
+  .eyebrow { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin:0 0 .6rem; }
+  h1 { font-size:clamp(1.9rem,5vw,2.6rem); margin:0 0 .4rem; letter-spacing:-.01em; }
+  .lede { font-style:italic; color:var(--muted); font-size:1.08rem; margin:0 auto; max-width:60ch; }
+  nav.toc { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:.6rem; margin:1.8rem 0 0; }
+  nav.toc a { display:block; border:1px solid var(--line); border-radius:8px; padding:.6rem .8rem; background:var(--card); text-decoration:none; color:var(--ink); font-size:.86rem; }
+  nav.toc a b { display:block; color:var(--accent); font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem; letter-spacing:.06em; margin-bottom:.15rem; }
+  nav.toc a:hover, nav.toc a:focus-visible { border-color:var(--accent); outline:none; }
+  section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:1.8rem 2.2rem; margin-top:2rem; scroll-margin-top:1.5rem; }
+  section .num { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin:0 0 .3rem; }
+  h2 { font-size:1.6rem; margin:0 0 .3rem; }
+  h3 { font-size:1.05rem; margin:1.4rem 0 .5rem; color:var(--accent); }
+  .sub { color:var(--muted); font-style:italic; margin:0 0 1rem; font-family:"Iowan Old Style",Palatino,Georgia,serif; }
+  p { margin:0 0 .8rem; max-width:70ch; }
+  ul, ol { margin:0 0 .8rem; padding-left:1.2rem; max-width:70ch; } li { margin-bottom:.4rem; }
+  code { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.85em; background:var(--code-bg); padding:.1rem .35rem; border-radius:4px; }
+  pre { background:var(--code-bg); border:1px solid var(--line); border-radius:8px; padding:.8rem 1rem; overflow-x:auto; } pre code { background:none; padding:0; }
+  table { border-collapse:collapse; width:100%; font-size:.92rem; margin:.6rem 0 1rem; }
+  th, td { text-align:left; padding:.5rem .7rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+  .cast { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:.8rem; margin:.6rem 0 1rem; }
+  .cast div { border:1px solid var(--line); border-radius:8px; padding:.9rem 1rem; background:var(--band); }
+  .cast .role { font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; display:block; margin-bottom:.4rem; }
+  .cast .human { border-color:var(--gold); background:var(--gold-soft); } .cast .human .role { color:var(--gold); }
+  .cast p { font-size:.86rem; margin:0; }
+  .layers div { border-left:3px solid var(--accent); background:var(--band); padding:.7rem .9rem; margin-bottom:.6rem; }
+  .layers div:first-child { border-left-color:#8a4b4b; } .layers div:last-child { border-left-color:var(--gold); }
+  .layers b { font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; display:block; margin-bottom:.2rem; }
+  .layers p { margin:0; font-size:.9rem; }
+  blockquote { margin:1rem 0; padding:.8rem 1.1rem; border-left:3px solid var(--gold); background:var(--band); font-family:"Iowan Old Style",Palatino,Georgia,serif; font-style:italic; }
+  blockquote span { display:block; font-style:normal; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-top:.4rem; font-family:-apple-system,sans-serif; }
+  .backtop { text-align:right; font-size:.78rem; margin:.8rem 0 0; }
+  figure { margin:1.2rem 0 0; }
+  .dgm-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:var(--band); padding:1rem; }
+  svg.dgm { display:block; width:100%; min-width:760px; height:auto; }
+  figcaption { font-size:.84rem; color:var(--muted); margin-top:.6rem; max-width:68ch; }
+  .legend { display:flex; flex-wrap:wrap; gap:.4rem .9rem; font-size:.78rem; color:var(--muted); margin:1rem 0 0; }
+  .legend span { display:inline-flex; align-items:center; gap:.4rem; }
+  .legend .sw { width:26px; height:0; border-top:2px solid var(--muted); display:inline-block; }
+  .legend .sw.relay { border-top:2px dashed var(--gold); }
+  .legend .sw.box { width:14px; height:14px; border:1px solid var(--gold); background:var(--gold-soft); border-radius:3px; }
+  .dgm .band-fill { fill:var(--card); stroke:var(--line); stroke-width:1; }
+  .dgm .node { fill:var(--card); stroke:var(--line); stroke-width:1; }
+  .dgm .gate { fill:var(--gold-soft); stroke:var(--gold); stroke-width:1.2; }
+  .dgm .gate-rail { fill:var(--gold); stroke:none; }
+  .dgm .aside { fill:none; stroke:var(--accent); stroke-width:1; stroke-dasharray:4 3; }
+  .dgm .hex { fill:var(--accent-soft); stroke:var(--accent); stroke-width:1.2; }
+  .dgm .n-title { fill:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; font-size:13px; font-weight:700; }
+  .dgm .n-sub { fill:var(--muted); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; font-size:11px; }
+  .dgm .n-mono { fill:var(--muted); font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:10.5px; }
+  .dgm .lane-h { fill:var(--accent); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; font-size:11px; font-weight:700; letter-spacing:.12em; }
+  .dgm .e-label { fill:var(--muted); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; font-size:10.5px; }
+  .dgm .edge { fill:none; stroke:var(--muted); stroke-width:1.4; }
+  .dgm .edge-relay { fill:none; stroke:var(--gold); stroke-width:1.4; stroke-dasharray:5 4; }
+  .dgm .head { fill:var(--muted); } .dgm .head-gold { fill:var(--gold); }
+  .dgm a { cursor:pointer; } .dgm a .n-title, .dgm a .lane-h { text-decoration:underline; text-decoration-style:dotted; text-underline-offset:3px; }
+  .dgm .hex-sub { fill:var(--ink); }
+  .dgm a:hover .node, .dgm a:hover .hex, .dgm a:hover .aside, .dgm a:focus-visible .node, .dgm a:focus-visible .hex, .dgm a:focus-visible .aside { stroke:var(--accent); stroke-width:2; }
+  .dgm a:hover .n-title, .dgm a:focus-visible .n-title { fill:var(--accent); } .dgm a:focus { outline:none; }
+  html { scroll-behavior:smooth; } @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  @media (max-width:560px) { section { padding:1.2rem 1.1rem; } }
+</style>
+</head>
+<body>
+<main class="wrap" id="top">
+  <header class="top">
+    <p class="eyebrow">Atlas · How it works</p>
+    <h1>The factory, on one page</h1>
+    <p class="lede">A supervised software factory: three AI roles do the work, you hold the gates, and every durable fact lives in a file. This is the manual. The <a href="deck.html">Deck</a> is the reference, one card per skill and role.</p>
+    <nav class="toc" aria-label="Sections">
+      <a href="#factory-map"><b>01</b>The factory map</a>
+      <a href="#ladder"><b>02</b>The ladder</a>
+      <a href="#cast"><b>03</b>The cast</a>
+      <a href="#gates"><b>04</b>The gates</a>
+      <a href="#doorman"><b>05</b>The doorman</a>
+      <a href="#memory"><b>06</b>Memory and compaction</a>
+      <a href="#quality"><b>07</b>The quality loop</a>
+      <a href="#box"><b>08</b>What's in the box</a>
+    </nav>
+  </header>
+
+  <section id="factory-map">
+    <p class="num">01</p>
+    <h2>The factory map</h2>
+    <p class="sub">One spine, two chassis, five places you act, two where nothing moves without you.</p>
+    <p>Every piece of work enters the same way and passes the same gates. Research is the usual first rung; a change you already understand can go straight to a mode, and a one-file lookup needs no run at all. What differs after that is the bus: in <strong>kit mode</strong> the roles run as fresh-context subagents inside one session; in <strong>manual mode</strong> each role has its own window and you carry the artifacts between them, one slice at a time. Nodes with a dotted underline jump to the section that explains them.</p>
+    <figure>
+      <div class="dgm-scroll">
+      <svg class="dgm" viewBox="0 0 1000 1172" aria-labelledby="fm-title fm-desc">
+        <title id="fm-title">The Factory Map</title>
+        <desc id="fm-desc">A work item usually flows through research first, then into one of two modes; a change you already understand can go straight to a mode. Kit mode runs research, plan and implementation as subagents inside a single session. Manual mode runs a spec phase, then one planner window and one implementor window per slice, with every handoff relayed by the human. Both modes converge on the same tail: supervisor review of the diff, a human smoke test, a human merge, and a close-out. Human gates are gold and appear five times per run.</desc>
+
+        <defs>
+          <marker id="ar" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0.5,1 L7,4 L0.5,7 Z" class="head"/>
+          </marker>
+          <marker id="arg" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+            <path d="M0.5,1 L7,4 L0.5,7 Z" class="head-gold"/>
+          </marker>
+        </defs>
+
+        <!-- input -->
+        <rect class="node" x="340" y="20" width="320" height="52" rx="8"/>
+        <text class="n-title" x="500" y="44" text-anchor="middle">A work item — an issue, a ticket, or a pasted brief</text>
+        <text class="n-sub" x="500" y="62" text-anchor="middle">read the description and the comments</text>
+        <path class="edge" d="M500,72 V92" marker-end="url(#ar)"/>
+        <!-- rung one -->
+        <a href="#ladder">
+          <rect class="node" x="340" y="96" width="320" height="56" rx="8"/>
+          <text class="n-title" x="500" y="120" text-anchor="middle">Rung one · research first</text>
+          <text class="n-sub" x="500" y="138" text-anchor="middle"><tspan class="n-mono">/atlas:research</tspan> · the usual first rung · a verified document</text>
+        </a>
+        <a href="#ladder">
+          <rect class="aside" x="752" y="96" width="228" height="56" rx="8"/>
+          <text class="n-title" x="866" y="120" text-anchor="middle">Small, obvious fix?</text>
+          <text class="n-sub" x="866" y="138" text-anchor="middle">do it in-session · done</text>
+        </a>
+        <path class="edge" d="M660,124 H746" marker-end="url(#ar)"/>
+        <path class="edge" d="M500,152 V176" marker-end="url(#ar)"/>
+        <path class="edge" d="M340,46 H300 V216 H314" marker-end="url(#ar)"/>
+        <text class="e-label" x="294" y="130" text-anchor="middle" transform="rotate(-90 294 130)">already scoped? skip the research</text>
+
+        <!-- mode decision -->
+        <a href="#ladder">
+          <polygon class="hex" points="320,216 366,180 634,180 680,216 634,252 366,252"/>
+          <text class="n-title" x="500" y="213" text-anchor="middle">Which rung?</text>
+          <text class="n-sub hex-sub" x="500" y="232" text-anchor="middle">one plan, one PR → kit · slices over weeks → manual</text>
+        </a>
+        <text class="e-label" x="316" y="262" text-anchor="middle">work-item-sized</text>
+        <text class="e-label" x="686" y="262" text-anchor="middle">feature-sized</text>
+
+        <!-- lanes -->
+        <rect class="band-fill" x="20" y="276" width="460" height="532" rx="12"/>
+        <rect class="band-fill" x="520" y="276" width="460" height="532" rx="12"/>
+        <path class="edge" d="M400,252 V266 H240 V336" marker-end="url(#ar)"/>
+        <path class="edge" d="M600,252 V266 H740 V336" marker-end="url(#ar)"/>
+        <a href="#ladder">
+          <text class="lane-h" x="40" y="304">KIT MODE · SINGLE SESSION</text>
+          <text class="n-sub" x="40" y="323">one session · the roles are subagents · <tspan class="n-mono">/atlas:feature-workflow</tspan></text>
+        </a>
+        <a href="#ladder">
+          <text class="lane-h" x="540" y="304">MANUAL MODE · MANY WINDOWS</text>
+          <text class="n-sub" x="540" y="323">many windows · you carry every prompt and result</text>
+        </a>
+
+        <!-- KIT lane nodes -->
+        <a href="#cast">
+          <rect class="node" x="40" y="342" width="400" height="56" rx="8"/>
+          <text class="n-title" x="240" y="366" text-anchor="middle">Phase 0 · Research</text>
+          <text class="n-sub" x="240" y="384" text-anchor="middle">the supervisor fans out the read-only research team, then verifies</text>
+        </a>
+        <path class="edge" d="M240,398 V416" marker-end="url(#ar)"/>
+        <rect class="gate" x="40" y="420" width="400" height="54" rx="8"/>
+        <rect class="gate-rail" x="41" y="428" width="4" height="38" rx="2"/>
+        <text class="n-title" x="240" y="443" text-anchor="middle">YOU · answer the scope questions</text>
+        <text class="n-sub" x="240" y="461" text-anchor="middle">binding constraints — the planner cannot relitigate them</text>
+        <path class="edge" d="M240,474 V492" marker-end="url(#ar)"/>
+        <a href="#cast">
+          <rect class="node" x="40" y="496" width="400" height="56" rx="8"/>
+          <text class="n-title" x="240" y="520" text-anchor="middle">Plan</text>
+          <text class="n-sub" x="240" y="538" text-anchor="middle">workflow-planner subagent · fresh context, verifies the research</text>
+        </a>
+        <path class="edge" d="M240,552 V570" marker-end="url(#ar)"/>
+        <rect class="gate" x="40" y="574" width="400" height="54" rx="8"/>
+        <rect class="gate-rail" x="41" y="582" width="4" height="38" rx="2"/>
+        <text class="n-title" x="240" y="597" text-anchor="middle">YOU · PLAN GATE (hard stop)</text>
+        <text class="n-sub" x="240" y="615" text-anchor="middle">nothing gets built before you approve the signed-off plan</text>
+        <path class="edge" d="M240,628 V646" marker-end="url(#ar)"/>
+        <a href="#doorman">
+          <rect class="node" x="40" y="650" width="400" height="56" rx="8"/>
+          <text class="n-title" x="240" y="674" text-anchor="middle">Implement</text>
+          <text class="n-sub" x="240" y="692" text-anchor="middle">workflow-implementor subagent · unattended, inside the deny rail</text>
+        </a>
+        <path class="edge" d="M240,706 V724" marker-end="url(#ar)"/>
+        <rect class="node" x="40" y="728" width="400" height="56" rx="8"/>
+        <text class="n-title" x="240" y="752" text-anchor="middle">PR opened</text>
+        <text class="n-sub" x="240" y="770" text-anchor="middle">one branch, built in an isolated worktree · commit per task</text>
+
+        <!-- MANUAL lane nodes -->
+        <rect class="node" x="540" y="342" width="400" height="56" rx="8"/>
+        <text class="n-title" x="740" y="366" text-anchor="middle">Spec (when needed)</text>
+        <text class="n-sub" x="740" y="384" text-anchor="middle">product decisions written down before anything is sliced</text>
+        <path class="edge-relay" d="M740,398 V416" marker-end="url(#arg)"/>
+        <rect class="gate" x="540" y="420" width="400" height="54" rx="8"/>
+        <rect class="gate-rail" x="541" y="428" width="4" height="38" rx="2"/>
+        <text class="n-title" x="740" y="443" text-anchor="middle">YOU · spec gate</text>
+        <text class="n-sub" x="740" y="461" text-anchor="middle">product decisions settled before anything is sliced</text>
+        <path class="edge-relay" d="M740,474 V492" marker-end="url(#arg)"/>
+        <a href="#cast">
+          <rect class="node" x="540" y="496" width="400" height="56" rx="8"/>
+          <text class="n-title" x="740" y="520" text-anchor="middle">Slice plan</text>
+          <text class="n-sub" x="740" y="538" text-anchor="middle">fresh planner window · one plan per slice</text>
+        </a>
+        <path class="edge-relay" d="M740,552 V570" marker-end="url(#arg)"/>
+        <rect class="gate" x="540" y="574" width="400" height="54" rx="8"/>
+        <rect class="gate-rail" x="541" y="582" width="4" height="38" rx="2"/>
+        <text class="n-title" x="740" y="597" text-anchor="middle">YOU · PLAN GATE (hard stop)</text>
+        <text class="n-sub" x="740" y="615" text-anchor="middle">same gate, same plan-file protocol</text>
+        <path class="edge-relay" d="M740,628 V646" marker-end="url(#arg)"/>
+        <a href="#doorman">
+          <rect class="node" x="540" y="650" width="400" height="56" rx="8"/>
+          <text class="n-title" x="740" y="674" text-anchor="middle">Implement slice</text>
+          <text class="n-sub" x="740" y="692" text-anchor="middle">fresh implementor window · one per slice</text>
+        </a>
+        <path class="edge-relay" d="M740,706 V724" marker-end="url(#arg)"/>
+        <rect class="node" x="540" y="728" width="400" height="56" rx="8"/>
+        <text class="n-title" x="740" y="752" text-anchor="middle">PR per slice</text>
+        <text class="n-sub" x="740" y="770" text-anchor="middle">onto the feature's integration branch</text>
+        <!-- slice loop -->
+        <path class="edge-relay" d="M940,756 H966 V524 H944" marker-end="url(#arg)"/>
+        <text class="e-label" x="954" y="640" text-anchor="middle" transform="rotate(-90 954 640)">next slice</text>
+
+        <!-- converge -->
+        <path class="edge" d="M240,784 V832 H500 V852" marker-end="url(#ar)"/>
+        <path class="edge-relay" d="M740,784 V832 H500"/>
+
+        <!-- shared tail -->
+        <a href="#quality">
+          <rect class="node" x="270" y="856" width="460" height="58" rx="8"/>
+          <text class="n-title" x="500" y="880" text-anchor="middle">Supervisor review · task by task</text>
+          <text class="n-sub" x="500" y="898" text-anchor="middle">reviews a diff it did not write · files a review doc, verdict in chat</text>
+        </a>
+        <a href="#gates">
+          <rect class="gate" x="752" y="850" width="228" height="66" rx="8"/><rect class="gate-rail" x="753" y="858" width="4" height="50" rx="2"/>
+          <text class="n-title" x="866" y="874" text-anchor="middle">YOU · feedback triage</text>
+          <text class="n-sub" x="866" y="892" text-anchor="middle">reviewer comments reach the builder</text>
+          <text class="n-sub" x="866" y="907" text-anchor="middle">only through the supervisor</text>
+        </a>
+        <path class="edge" d="M730,883 H746" marker-end="url(#ar)"/>
+        <path class="edge" d="M500,914 V932" marker-end="url(#ar)"/>
+        <rect class="gate" x="270" y="936" width="460" height="54" rx="8"/>
+        <rect class="gate-rail" x="271" y="944" width="4" height="38" rx="2"/>
+        <text class="n-title" x="500" y="959" text-anchor="middle">YOU · manual smoke test</text>
+        <text class="n-sub" x="500" y="977" text-anchor="middle">agents can't drive your app; the review names what to check</text>
+        <path class="edge" d="M500,990 V1008" marker-end="url(#ar)"/>
+        <rect class="gate" x="270" y="1012" width="460" height="54" rx="8"/>
+        <rect class="gate-rail" x="271" y="1020" width="4" height="38" rx="2"/>
+        <text class="n-title" x="500" y="1035" text-anchor="middle">YOU · MERGE (hard stop)</text>
+        <text class="n-sub" x="500" y="1053" text-anchor="middle">yours, always · not configurable</text>
+        <path class="edge" d="M500,1066 V1086" marker-end="url(#ar)"/>
+        <a href="#quality">
+          <rect class="node" x="270" y="1090" width="460" height="58" rx="8"/>
+          <text class="n-title" x="500" y="1114" text-anchor="middle">Close-out</text>
+          <text class="n-sub" x="500" y="1132" text-anchor="middle">worktree removed · plan stamped merged · scorecard started · RUN COMPLETE</text>
+        </a>
+      </svg>
+      </div>
+      <figcaption>Both modes run the same spine. Gold boxes are the five touchpoints where you act; the plan gate and the merge are the two hard stops. Manual mode swaps the scope questions for a spec gate, repeats the plan-build-PR stretch once per slice, and moves every handoff through you by hand (dashed).</figcaption>
+    </figure>
+    <div class="legend"><span><i class="sw"></i>subagent handoff, inside one session</span><span><i class="sw relay"></i>relay by hand, between windows</span><span><i class="sw box"></i>a touchpoint: you act here</span></div>
+    <p class="backtop"><a href="#top">↑ top</a></p>
+  </section>
+
+  <section id="ladder">
+    <p class="num">02</p>
+    <h2>The ladder</h2>
+    <p class="sub">Match the process to the size of the uncertainty, not the size of the diff.</p>
+    <p>The most-asked question after "what is this" is "when do I use which." Three rungs, one discipline.</p>
+    <h3>Rung one: research first</h3>
+    <p>For bugs and small tasks. <code>/atlas:research</code> takes a work item or a plain question and fans out a read-only team, scaled to the question: a one-file lookup gets no agents, a broad architectural question gets four or more in parallel. It verifies the load-bearing claims itself at file:line, runs a skeptic on substantial questions, and writes a document that stands alone. Two exits: the fix is now obvious and small, so do it in the same session; or the research shows structural work, so hand the document to the next rung and its Phase 0 starts from your findings instead of from scratch.</p>
+    <p>Why research comes before any fix: the wrong-root-cause trap. Fixing the symptom a bug report names is the most common way assisted bug work goes wrong. Research separates what the report says from what the code does before anyone edits anything.</p>
+    <h3>Rung two: kit mode (single-session)</h3>
+    <p>For work-item-sized features: one plan, one pull request. <code>/atlas:feature-workflow</code> runs the three roles inside one session, unattended between the touchpoints, from work item to an open pull request. Signals it's a kit ticket: three or more real tasks, an open design question, shared code with many call sites, or a bug whose root cause is still unknown after research.</p>
+    <h3>Rung three: manual mode (multi-window)</h3>
+    <p>For feature-sized work that needs a spec gate, spans several slices and weeks, or would not fit one session's context. The same roles run as separate windows and you are the bus. <code>/atlas:launch-supervisor</code> writes the kickoff prompt that boots the supervisor window. Manual mode adds two artifacts: a <strong>dossier</strong> whose opening block makes the whole feature resumable from disk after any window dies, and a <strong>commit ledger</strong> that turns weeks of commits into something a reviewer can read as prose.</p>
+    <h3>The cost of the wrong rung</h3>
+    <ul>
+      <li><strong>Kit mode on an epic.</strong> The supervisor's context degrades across weeks, then dies mid-feature with the state in its head.</li>
+      <li><strong>Manual mode on a ticket.</strong> Pure ceremony: four windows and a bus for a change one session handles in ninety minutes.</li>
+      <li><strong>No research on a bug.</strong> A confident fix to the wrong cause, shipped with tests that lock the wrong behavior in.</li>
+      <li><strong>No ladder at all.</strong> One chat window for everything: it grades its own homework, forgets Monday's constraint by Tuesday, and gates nothing.</li>
+    </ul>
+    <table>
+      <thead><tr><th>Signal</th><th>Rung</th></tr></thead>
+      <tbody>
+        <tr><td>Quick lookup, one file</td><td>plain session, just ask</td></tr>
+        <tr><td>Bug ticket, small task</td><td>research first, then fix or escalate</td></tr>
+        <tr><td>Three or more tasks, a design question, shared code</td><td>kit mode</td></tr>
+        <tr><td>Spec gate, multi-slice, weeks</td><td>manual mode</td></tr>
+      </tbody>
+    </table>
+    <p class="backtop"><a href="#top">↑ top</a></p>
+  </section>
+
+  <section id="cast">
+    <p class="num">03</p>
+    <h2>The cast</h2>
+    <p class="sub">Three roles that check each other. One of you.</p>
+    <div class="cast">
+      <div><span class="role">supervisor</span><p>Your session. Researches the work item, writes every prompt the other roles see, reviews every artifact against the live code, filters all feedback. Never merges.</p></div>
+      <div><span class="role">planner</span><p>Fresh context. Re-verifies the supervisor's research at the cited lines before writing the plan. When it refutes a claim with evidence, that's the design working, not failing.</p></div>
+      <div><span class="role">implementor</span><p>Fresh context. Builds exactly what was signed off, commit by commit, in an isolated worktree. It never sees the research, so it has nothing to redesign from.</p></div>
+      <div class="human"><span class="role">you</span><p>Answer the scope questions. Approve or hold the plan. Smoke-test what agents can't see. Merge, or don't. Judgment stays where judgment lives.</p></div>
+    </div>
+    <p>Behind them stands the read-only <strong>research team</strong> the supervisor fans out: a codebase locator (where things live), an analyzer (how they actually work), a pattern-finder (the closest existing implementation to model on), and two journal agents that surface and read prior research and decisions. They report; they never edit.</p>
+    <p>The point of the split: <strong>every catch comes from fresh context with a verification mandate.</strong> The planner re-verifies the supervisor's research. The supervisor reviews a plan and a diff it did not write. The implementor executes without the temptation to redesign. Inside a run, no role grades its own output. Around the run, the grade itself comes from a session that ran none of it.</p>
+    <p>The roles talk through one file. The plan carries a status handshake in its frontmatter (<code>ready-for-supervisor-review</code> → <code>approved-with-amendments</code> → <code>signed-off</code> → <code>merged</code>), the supervisor's review section, the planner's questions and responses, the implementor's progress notes and declared deviations. Agents exchange file paths, never pasted contents.</p>
+    <p class="backtop"><a href="#top">↑ top</a></p>
+  </section>
+
+  <section id="gates">
+    <p class="num">04</p>
+    <h2>The gates</h2>
+    <p class="sub">Unattended between gates. Never past one.</p>
+    <p>Five touchpoints per run of the feature workflow (rung one, research, has none; it only writes a document). Two are hard gates that no configuration can remove: <strong>plan approval</strong>, because nothing is built before it, and <strong>merge</strong>, because judgment stays with you. Everything between the gates runs at machine speed inside the rails described in the next section.</p>
+    <ol>
+      <li><strong>Scope.</strong> Your answers to the research questions become constraints no role may re-litigate.</li>
+      <li><strong>Plan, a hard stop.</strong> Read the signed-off plan. Approve it, or hold it and say what to change; the amendments are folded in and the plan comes back. Nothing is built until you approve. Branch handling is settled here too.</li>
+      <li><strong>Smoke test.</strong> Agents can't drive your app. The review names exactly what to check.</li>
+      <li><strong>Feedback triage.</strong> Reviewer comments, human or automated, reach the implementor only through the supervisor, as a scoped fix list, never as the whole review.</li>
+      <li><strong>Merge, a hard stop.</strong> Yours. Then the close-out: worktree removed without force, plan stamped merged, scorecard started, and a RUN COMPLETE message that leaves nothing implicit.</li>
+    </ol>
+    <blockquote>Autonomy is a padded room, not an open door.<span>what the gates are for</span></blockquote>
+    <p class="backtop"><a href="#top">↑ top</a></p>
+  </section>
+
+  <section id="doorman">
+    <p class="num">05</p>
+    <h2>The doorman</h2>
+    <p class="sub">Three layers between an agent and your shell.</p>
+    <div class="layers">
+      <div><b>Deny rail</b><p>The banned list, eight entries: force-push in both spellings, hard reset, <code>git clean</code>, forced worktree removal, <code>gh pr merge</code>, repository deletion, and <code>rm -rf</code>. Refused before they run, no discussion. The merge entry is the mechanical form of the core promise: merge is never automated, even if a prompt goes wrong.</p></div>
+      <div><b>Allow list</b><p>The regulars: reads, searches, your build and test commands. Silent, so agents run at full speed without paging you a hundred times an hour. Build yours from what you actually approve during the first few runs; approvals accumulate.</p></div>
+      <div><b>Judgment</b><p>Everything else prompts. Anything with a blast radius pauses and calls the owner. That's you, and that's the design, not a defect.</p></div>
+    </div>
+    <p>Atlas never edits your permission settings. The setup wizard offers to print the recommended deny rail; you paste it. Honest caveat: these are prefix rules, so a flag typed after its arguments evades them. The rail is a floor, not a proof. Judgment and review do the real work. The full text lives in <a href="https://github.com/slhernandez/atlas/blob/main/docs/permissions.md">docs/permissions.md</a>.</p>
+    <p class="backtop"><a href="#top">↑ top</a></p>
+  </section>
+
+  <section id="memory">
+    <p class="num">06</p>
+    <h2>Memory and compaction</h2>
+    <p class="sub">The session is expected to die. The work isn't.</p>
+    <p>A long session gets compacted, and eventually it ends. The design assumption is that nothing important lives in the conversation: the transcript is a workspace, and every durable fact has a file. That is what makes compaction a non-event instead of a loss.</p>
+    <h3>The durable layers</h3>
+    <table>
+      <thead><tr><th>Layer</th><th>What it holds</th><th>Written</th></tr></thead>
+      <tbody>
+        <tr><td><strong>The journal</strong> (<code>~/AtlasJournal</code> by default)</td><td>Every research document, plan, review, dossier, and scorecard, outside your repositories</td><td>as the work happens</td></tr>
+        <tr><td><strong><code>HOUSE_RULES.md</code></strong></td><td>Your standing rules with their reasons. Every skill reads it first and treats it as senior to the plugin's defaults; updates never touch it</td><td>by you, at gates; the run may propose, never write</td></tr>
+        <tr><td><strong>The plan file</strong> (kit mode) or <strong>the dossier</strong> (manual mode)</td><td>Per run: the status handshake, amendments, progress notes, deviations. The dossier opens with a RESUME BLOCK: current phase, live threads, pending prompts verbatim</td><td>at every handoff and halt</td></tr>
+        <tr><td><strong>Claude Code's own memory</strong></td><td>Short pointers the model saves on its own; a signpost to the journal, not a copy of it</td><td>when the model judges a fact durable</td></tr>
+      </tbody>
+    </table>
+    <h3>The wake sequence</h3>
+    <ol>
+      <li>Read <code>HOUSE_RULES.md</code>: the rules and their reasons.</li>
+      <li>Find the run's own file: the plan in kit mode, the dossier in manual mode. Both name the branch, the status, and the next action.</li>
+      <li>Read the journal's recent research and reviews on the same subject before trusting anything from memory.</li>
+    </ol>
+    <p>That combination restores the working state without the old transcript. A feature mid-flight resumes from its plan or dossier; a fresh session on a new task starts from the journal and the rules.</p>
+    <h3>Compaction hygiene</h3>
+    <ul>
+      <li>Compact at boundaries: after a work item closes and its files are current, not mid-task.</li>
+      <li>Know what is safe to lose: raw tool output and evaluations whose verdicts already live in files, and the mechanics of past work whose pattern is in git history.</li>
+      <li>Convert relative dates before writing them down. "Last week" is worthless to the session that reads it next month; a date is not.</li>
+    </ul>
+    <p class="backtop"><a href="#top">↑ top</a></p>
+  </section>
+
+  <section id="quality">
+    <p class="num">07</p>
+    <h2>The quality loop</h2>
+    <p class="sub">The factory grades its own runs. Then it tries to break them.</p>
+    <p>A workflow that only produces merged pull requests tells you nothing about whether it is any good. So every run ends with a scorecard on the same form. The run fills in what it can see about itself; Part 3 and the grade are left to a session that did not run the work, which today you launch yourself and point at the file and the PR (a grader skill is planned). Every friction the run produced becomes an edit: to a rule, a template, or an agent definition. Almost every rule in this plugin was bought with a friction.</p>
+    <h3>What the scorecard asks</h3>
+    <table>
+      <thead><tr><th>Part</th><th>What it checks</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Process fidelity</td><td>Phases in order; the status handshake transitioned correctly; hard gate one held (nothing built before approval); hard gate two held (close-out only after your merge confirmation); roles exchanged paths, not contents; per-task commits; every deviation declared.</td></tr>
+        <tr><td>2 · Role quality</td><td>The planner's verification table filled with real evidence and its refutations listed; the supervisor spot-checking claims itself and reviewing task by task; the implementor building only the plan, with any extra verification leaving no trace in commits.</td></tr>
+        <tr><td>3 · Outcome quality</td><td><strong>Graded by an independent session you launch.</strong> A fresh-context re-review of the diff; the findings the run's own review missed; alignment with the work item in both directions; and proof that guard-locking tests actually lock: revert the fix in a scratch worktree and watch the new tests fail. Tests that don't scream when the fix is gone are decoration.</td></tr>
+        <tr><td>4 · Friction log</td><td>Each friction paired with its correction and target file. This is the part that changes the plugin.</td></tr>
+        <tr><td>5 · Verdict</td><td>A grade, plus three honest questions: would a plain session have done this better or cheaper; what did the workflow prescribe that the model would have done anyway (three runs agreeing makes a component a retirement candidate, but gates, independent review, and rails never qualify); and what does the run say about the system itself.</td></tr>
+      </tbody>
+    </table>
+    <blockquote>Zero refutations on a research-heavy run is a yellow flag, not a green one.<span>the scorecard, on what healthy disagreement looks like</span></blockquote>
+    <h3>The flywheel</h3>
+    <p>Frictions go into the scorecard. Scorecard entries become house rules. Rules you set at a gate are recorded with their reasons; rules the run derives from its own frictions are proposed for you to accept or reject. Either way, the factory that built your last feature is not the one that builds your next. And the redundancy question lets it shrink as well as grow: hand-coded structure that the model no longer needs is retired on evidence, while the parts that exist for people stay.</p>
+    <p class="backtop"><a href="#top">↑ top</a></p>
+  </section>
+
+  <section id="box">
+    <p class="num">08</p>
+    <h2>What's in the box</h2>
+    <p class="sub">Four skills, seven agents, seven templates, one file that outranks them all.</p>
+    <table>
+      <thead><tr><th>Piece</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><code>/atlas:setup</code></td><td>The first-run wizard: preflight, journal, tracker, proven read, config. Never touches your settings.</td></tr>
+        <tr><td><code>/atlas:research</code></td><td>Rung one. A verified research document, then fix in-session or escalate.</td></tr>
+        <tr><td><code>/atlas:feature-workflow</code></td><td>Rung two. The three roles in one session, two hard gates, one PR.</td></tr>
+        <tr><td><code>/atlas:launch-supervisor</code></td><td>Rung three. Writes the prompt that boots a supervisor window for manual mode.</td></tr>
+        <tr><td>workflow-planner · workflow-implementor</td><td>The two role agents, described on their cards.</td></tr>
+        <tr><td>The research team</td><td>Codebase locator, analyzer, pattern-finder; journal locator and analyzer. Read-only.</td></tr>
+        <tr><td>Templates</td><td>Plan, research, review, dossier, ledger, scorecard, and the house-rules seed. Copied into your journal at setup. Plugin-owned templates can be refreshed later with the diff shown first; your own files are never overwritten.</td></tr>
+        <tr><td><code>HOUSE_RULES.md</code></td><td>Your standing rules. Senior to everything above. Survives every update.</td></tr>
+      </tbody>
+    </table>
+    <p>Install is three commands in any Claude Code session inside a git repository. The marketplace and the plugin are both named <code>atlas</code>:</p>
+    <pre><code>/plugin marketplace add slhernandez/atlas
+/plugin install atlas@atlas
+/atlas:setup</code></pre>
+    <p>Then the <a href="deck.html">Deck</a> for one card per skill and role, <a href="https://github.com/slhernandez/atlas/blob/main/docs/two-modes.md">two-modes.md</a> for the decision table, and <a href="https://github.com/slhernandez/atlas#readme">the README</a> for the journal layout and the one-paste install. Honest v0.1 boundaries: the fresh-machine validation ran on GitHub Issues, so the Jira tracker path follows the same steps but has had no live run yet; without <code>gh</code>, pull requests degrade to a push plus a compare URL you open by hand; and it is opinionated on purpose.</p>
+    <p class="backtop"><a href="#top">↑ top</a> · <a href="index.html">home</a></p>
+  </section>
+</main>
+</body>
+</html>
