@@ -7,8 +7,9 @@ three AI roles (supervisor, planner, implementor) then run it from research to o
 fresh-context verification at every handoff — and a human signature on everything that
 matters. Merge is never automated.
 
-> Private during construction; installable now (`/atlas:setup` is the front door). Docs and
-> the companion site land before launch.
+> **Site:** <https://slhernandez.github.io/atlas/> — the quick start, how it works, and the Deck.
+> Installable now (`/atlas:setup` is the front door). Version `0.1.0-dev`: the tagged `0.1.0`
+> lands with the launch talk; until then, expect small changes between installs.
 
 ## Structure
 
@@ -24,7 +25,8 @@ templates/          plan · research · review · scorecard · HOUSE_RULES seed 
                     (the multi-session supervisor's durable memory) · ledger (plain-language
                     commit tables + QA/Product summary for integration-branch work)
 scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
-docs/               two-modes guide · permissions · patterns/
+docs/               the companion site (index · how-it-works · the Deck · cards/) ·
+                    two-modes guide · permissions · patterns/
 ```
 
 ## Install
@@ -88,6 +90,8 @@ own documents are never overwritten.
 
 ## Docs
 
+The same pages, rendered: <https://slhernandez.github.io/atlas/>.
+
 - `docs/cards/quick-start-card.md` — what to type, from an empty machine to your first scorecard
 - `docs/two-modes.md` — the ladder (research → single-session → multi-session) and when to use which
 - `docs/permissions.md` — the doorman pattern and the recommended deny rail
@@ -98,5 +102,5 @@ own documents are never overwritten.
 `scripts/lint-isms.sh` guards this tree against origin-specific terms. It requires
 `ATLAS_ISMS_BLOCKLIST_FILE` to point at your private blocklist (never committed here);
 CI supplies it from the `ATLAS_ISMS_BLOCKLIST` repository secret. The check fails
-closed — including on fork PRs, which cannot see the secret; that is deliberate while
-the repo is private.
+closed — including on fork PRs, which cannot see the secret. That is deliberate: a
+maintainer runs the check locally against a fork PR before merging it.
