@@ -8,8 +8,8 @@ fresh-context verification at every handoff — and a human signature on everyth
 matters. Merge is never automated.
 
 > **Site:** <https://slhernandez.github.io/atlas/> — the quick start, how it works, and the Deck.
-> Installable now (`/atlas:setup` is the front door). Version `0.1.0-dev`: the tagged `0.1.0`
-> lands with the launch talk; until then, expect small changes between installs.
+> Installable now (`/atlas:setup` is the front door). Version `0.1.0`, the launch release
+> (2026-09-15). Install from the `v0.1.0` tag or from `main`; both carry the same files.
 
 ## Structure
 

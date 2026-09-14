@@ -1,7 +1,7 @@
 {
   "name": "atlas",
   "description": "The supervised software factory: supervisor/planner/implementor roles, human gates, and a durable journal for AI-assisted engineering.",
-  "version": "0.1.0-dev",
+  "version": "0.1.0",
   "author": {
     "name": "Steve Hernandez"
   }
