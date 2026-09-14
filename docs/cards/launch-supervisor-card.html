@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/atlas:launch-supervisor · Atlas Card</title>
+<style>
+  :root {
+    --ground: #f6f4ef; --card: #fffefb; --ink: #28232e; --muted: #6f6879;
+    --accent: #5b4b8a; --accent-soft: #ece8f5; --gold: #7a5a1c; --line: #e4dfd4; --code-bg: #f1eee7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+      --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+    --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; margin: 0; padding: 2.5rem 1rem 4rem; }
+  a { color: var(--accent); }
+  .card { max-width: 700px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 1px 2px rgba(20,15,35,.06), 0 12px 32px -18px rgba(20,15,35,.25); overflow: hidden; }
+  .card-frame { border: 1px solid var(--line); border-radius: 7px; margin: 6px; }
+  header.hero { padding: 2rem 2.25rem 1.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 120% 90% at 50% -30%, var(--accent-soft), transparent 70%); }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 .6rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .glyph { font-size: 2rem; line-height: 1; }
+  h1 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: clamp(1.5rem, 5vw, 2rem); margin: .35rem 0 .15rem; letter-spacing: -.01em; text-wrap: balance; }
+  h1 .slash { color: var(--accent); }
+  .persona { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; color: var(--gold); margin: 0 0 .5rem; font-size: 1rem; }
+  .flavor { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--muted); margin: 0; max-width: 34em; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--line); }
+  .stat { padding: .85rem 1.1rem; border-right: 1px solid var(--line); min-width: 0; }
+  .stat:last-child { border-right: none; }
+  .stat dt { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 .15rem; }
+  .stat dd { margin: 0; font-size: .88rem; font-weight: 600; overflow-wrap: break-word; }
+  section { padding: 1.5rem 2.25rem; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .8rem; font-weight: 700; }
+  p { margin: 0 0 .75rem; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  ul.plain, ol.plain { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+  ul.plain li, ol.plain li { margin-bottom: .4rem; }
+  ul.plain li:last-child, ol.plain li:last-child { margin-bottom: 0; }
+  code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--code-bg); padding: .1rem .35rem; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; overflow-x: auto; margin: .6rem 0; }
+  pre code { background: none; padding: 0; font-size: .88em; }
+  .note { font-size: .88rem; color: var(--muted); margin-top: .7rem; }
+  footer.lineage { padding: 1.1rem 2.25rem; background: var(--code-bg); font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .78rem; color: var(--muted); overflow-x: auto; white-space: nowrap; }
+  footer.lineage b, footer.lineage a { color: var(--accent); font-weight: 700; }
+  .deck-card { margin-top: 3rem; scroll-margin-top: 1.5rem; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .deck-hero { text-align: center; margin-bottom: 2rem; }
+  .deck-hero h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 .3rem; }
+  .deck-hero .eyebrow { justify-content: center; display: block; }
+  .nav-h { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 2rem 0 .8rem; font-weight: 700; }
+  .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .7rem; }
+  .nav-grid a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: .7rem .9rem; text-decoration: none; color: var(--ink); background: var(--card); transition: border-color 120ms ease; }
+  .nav-grid a:hover, .nav-grid a:focus-visible { border-color: var(--accent); outline: none; }
+  .g-top { display: flex; align-items: baseline; gap: .5rem; }
+  .g-glyph { font-size: 1.15rem; }
+  .g-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; font-weight: 700; color: var(--accent); }
+  .g-num { font-size: .68rem; color: var(--gold); letter-spacing: .08em; margin-left: auto; }
+  .g-desc { font-size: .8rem; color: var(--muted); display: block; margin-top: .2rem; line-height: 1.4; }
+  .backtop { text-align: center; font-size: .78rem; margin: .8rem 0 0; }
+  .links { text-align: center; font-size: .88rem; color: var(--muted); margin: 1.2rem 0 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 560px) { header.hero, section { padding-left: 1.25rem; padding-right: 1.25rem; } footer.lineage { padding-left: 1.25rem; } }
+</style>
+</head>
+<body>
+<main>
+  <article class="card"><div class="card-frame">
+    <header class="hero">
+      <p class="eyebrow"><span>Atlas · Skill Card 04</span><span class="glyph">🚌</span></p>
+      <h1><span class="slash">/</span>atlas:launch-supervisor</h1>
+      
+      <p class="flavor">Boots a supervisor for the biggest features. Researched, ruled, and ready before the window opens.</p>
+    </header>
+    <dl class="stats"><div class="stat"><dt>Invoke</dt><dd><code>/atlas:launch-supervisor &lt;epic&gt;</code></dd></div><div class="stat"><dt>Mode it serves</dt><dd>Manual multi-window relay: separate windows per role, you as the bus</dd></div><div class="stat"><dt>Output</dt><dd>One copy-paste kickoff prompt in <code>&lt;journal&gt;/plans/</code></dd></div><div class="stat"><dt>Not for</dt><dd>Work that fits one plan and one PR; that's <code>/atlas:feature-workflow</code></dd></div></dl>
+    <section><h2>What it does</h2><p>Rung three. For a feature too large for one session, the roles run as separate Claude Code windows and you relay the artifacts between them. This skill writes the <strong>kickoff prompt for the supervisor window</strong>: a self-contained brief with the feature's north star in the stakeholders' own words, verified starting facts cited at file:line, decisions settled before work begins with their boundaries written down, the phase sequence, and the standing rules that cost time last time.</p><p>The hard rule that earns the skill: <strong>research before writing</strong>. A prompt assembled from the work item alone is worth little; the new window would read the item anyway. The value is the verified facts, especially the ones that correct a likely assumption.</p></section><section><h2>How to run it</h2><pre><code>/atlas:launch-supervisor EPIC-7</code></pre><p>It gathers the brief and any richer sources in the journal, establishes facts in the code, puts before-work decisions to you as specific questions, chooses the phase shape honestly (execution relay, or independent proposal windows with a disqualifier test when the first phase is genuinely research), and picks the launch repository by where your accumulated memory lives. Then it writes the prompt to a file and tells you the path. You paste it into a new window.</p></section><section><h2>What the supervisor window inherits</h2><ul class="plain"><li><strong>The dossier</strong>, created in its first session, resumable from itself alone through an opening RESUME BLOCK: current phase, live threads, pending prompts verbatim, standing rules.</li><li><strong>The commit ledger</strong>: every commit on every branch in plain language plus a summary for QA and product, so humans can exercise a real merge gate over work too large to read as a diff. Events and decisions go in the dossier, never the ledger.</li><li><strong>The idempotent-receiver rule</strong>: with many windows, you will re-deliver a message now and then. The supervisor answers "already reviewed, verdict stands" instead of re-running the work.</li></ul></section><section><h2>Ground rules</h2><ul class="plain"><li>The supervisor authors every downstream prompt and verifies every artifact at file:line against origin, never a subordinate's summary.</li><li>You approve specs and plans; you merge every PR. The supervisor never merges.</li><li>Sessions are expected to die. The dossier, not the conversation, is the memory.</li><li>A worked example ships beside the skill at <code>references/example-kickoff.md</code>. Match its altitude, not its content.</li></ul></section>
+    <footer class="lineage">rung three: brief → verified facts → rulings → one prompt that boots a supervisor window · <a href="../deck.html"><b>deck index</b></a></footer>
+  </div></article>
+</main>
+</body>
+</html>

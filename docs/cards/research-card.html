@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/atlas:research · Atlas Card</title>
+<style>
+  :root {
+    --ground: #f6f4ef; --card: #fffefb; --ink: #28232e; --muted: #6f6879;
+    --accent: #5b4b8a; --accent-soft: #ece8f5; --gold: #7a5a1c; --line: #e4dfd4; --code-bg: #f1eee7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+      --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+    --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; margin: 0; padding: 2.5rem 1rem 4rem; }
+  a { color: var(--accent); }
+  .card { max-width: 700px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 1px 2px rgba(20,15,35,.06), 0 12px 32px -18px rgba(20,15,35,.25); overflow: hidden; }
+  .card-frame { border: 1px solid var(--line); border-radius: 7px; margin: 6px; }
+  header.hero { padding: 2rem 2.25rem 1.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 120% 90% at 50% -30%, var(--accent-soft), transparent 70%); }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 .6rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .glyph { font-size: 2rem; line-height: 1; }
+  h1 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: clamp(1.5rem, 5vw, 2rem); margin: .35rem 0 .15rem; letter-spacing: -.01em; text-wrap: balance; }
+  h1 .slash { color: var(--accent); }
+  .persona { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; color: var(--gold); margin: 0 0 .5rem; font-size: 1rem; }
+  .flavor { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--muted); margin: 0; max-width: 34em; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--line); }
+  .stat { padding: .85rem 1.1rem; border-right: 1px solid var(--line); min-width: 0; }
+  .stat:last-child { border-right: none; }
+  .stat dt { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 .15rem; }
+  .stat dd { margin: 0; font-size: .88rem; font-weight: 600; overflow-wrap: break-word; }
+  section { padding: 1.5rem 2.25rem; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .8rem; font-weight: 700; }
+  p { margin: 0 0 .75rem; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  ul.plain, ol.plain { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+  ul.plain li, ol.plain li { margin-bottom: .4rem; }
+  ul.plain li:last-child, ol.plain li:last-child { margin-bottom: 0; }
+  code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--code-bg); padding: .1rem .35rem; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; overflow-x: auto; margin: .6rem 0; }
+  pre code { background: none; padding: 0; font-size: .88em; }
+  .note { font-size: .88rem; color: var(--muted); margin-top: .7rem; }
+  footer.lineage { padding: 1.1rem 2.25rem; background: var(--code-bg); font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .78rem; color: var(--muted); overflow-x: auto; white-space: nowrap; }
+  footer.lineage b, footer.lineage a { color: var(--accent); font-weight: 700; }
+  .deck-card { margin-top: 3rem; scroll-margin-top: 1.5rem; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .deck-hero { text-align: center; margin-bottom: 2rem; }
+  .deck-hero h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 .3rem; }
+  .deck-hero .eyebrow { justify-content: center; display: block; }
+  .nav-h { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 2rem 0 .8rem; font-weight: 700; }
+  .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .7rem; }
+  .nav-grid a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: .7rem .9rem; text-decoration: none; color: var(--ink); background: var(--card); transition: border-color 120ms ease; }
+  .nav-grid a:hover, .nav-grid a:focus-visible { border-color: var(--accent); outline: none; }
+  .g-top { display: flex; align-items: baseline; gap: .5rem; }
+  .g-glyph { font-size: 1.15rem; }
+  .g-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; font-weight: 700; color: var(--accent); }
+  .g-num { font-size: .68rem; color: var(--gold); letter-spacing: .08em; margin-left: auto; }
+  .g-desc { font-size: .8rem; color: var(--muted); display: block; margin-top: .2rem; line-height: 1.4; }
+  .backtop { text-align: center; font-size: .78rem; margin: .8rem 0 0; }
+  .links { text-align: center; font-size: .88rem; color: var(--muted); margin: 1.2rem 0 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 560px) { header.hero, section { padding-left: 1.25rem; padding-right: 1.25rem; } footer.lineage { padding-left: 1.25rem; } }
+</style>
+</head>
+<body>
+<main>
+  <article class="card"><div class="card-frame">
+    <header class="hero">
+      <p class="eyebrow"><span>Atlas · Skill Card 02</span><span class="glyph">🔍</span></p>
+      <h1><span class="slash">/</span>atlas:research</h1>
+      
+      <p class="flavor">Research first. Then fix in-session, or escalate with the document in hand.</p>
+    </header>
+    <dl class="stats"><div class="stat"><dt>Invoke</dt><dd><code>/atlas:research &lt;work item or question&gt;</code></dd></div><div class="stat"><dt>Output</dt><dd>A research document in <code>&lt;journal&gt;/research/</code></dd></div><div class="stat"><dt>Team</dt><dd>Codebase locator, analyzer, pattern-finder; journal locator and analyzer</dd></div><div class="stat"><dt>Exit</dt><dd>Fix in-session, or hand the document to <code>/atlas:feature-workflow</code></dd></div></dl>
+    <section><h2>What it does</h2><p>The first rung of the ladder. Give it a work item or a plain question and it fans out read-only subagents, verifies their load-bearing claims itself at file:line, and writes a research document future runs will trust: where things live, how they actually work today, the closest existing pattern, prior decisions from the journal, a scope assessment, and open questions.</p><p>Why research comes before any fix: the wrong-root-cause trap. Fixing the symptom a bug report names is the most common way assisted bug work goes wrong. Research separates what the report says from what the code does before anyone edits anything.</p></section><section><h2>How to run it</h2><pre><code>/atlas:research #42
+/atlas:research &quot;why does the history view skip days?&quot;</code></pre><p>It reads the work item's description <strong>and</strong> comments, decomposes the question, and scales the team to it. A one-file lookup gets no agents at all. A broad architectural question gets four or more in parallel. Substantial runs also get a skeptic: one independent agent whose only job is to disprove the conclusions; surviving objections become open questions.</p></section><section><h2>Two exits</h2><ul class="plain"><li><strong>The fix is now obvious and small.</strong> Do it in the same session, no ceremony.</li><li><strong>The research shows structural work</strong> (three or more tasks, an open design question, shared code with many call sites). Hand the document to the feature workflow: <code>/atlas:feature-workflow #42 "research: &lt;path&gt;"</code>. Its Phase 0 starts from your document instead of from scratch.</li></ul></section><section><h2>Ground rules</h2><ul class="plain"><li>Live code outranks the journal. Journal findings are history, never the source of truth.</li><li>Every claim carries <code>file:line</code>. The document is persistent and will be trusted, so the load-bearing claims are re-read before they are written down.</li><li>While the skeptic is still running the document is marked <code>pending-skeptic</code>; it becomes <code>current</code> only after the objections land. The answer is delivered meanwhile, with that caveat said aloud.</li><li>The document must stand alone. A reader with none of this context should understand it.</li></ul></section>
+    <footer class="lineage">rung one of the ladder: question → verified document → fix in-session, or → /atlas:feature-workflow · <a href="../deck.html"><b>deck index</b></a></footer>
+  </div></article>
+</main>
+</body>
+</html>

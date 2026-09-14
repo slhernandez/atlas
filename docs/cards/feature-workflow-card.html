@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>/atlas:feature-workflow · Atlas Card</title>
+<style>
+  :root {
+    --ground: #f6f4ef; --card: #fffefb; --ink: #28232e; --muted: #6f6879;
+    --accent: #5b4b8a; --accent-soft: #ece8f5; --gold: #7a5a1c; --line: #e4dfd4; --code-bg: #f1eee7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+      --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #16141f; --card: #201d2c; --ink: #ece9f2; --muted: #a29cb4;
+    --accent: #a897d8; --accent-soft: #2c2840; --gold: #d2a851; --line: #37324c; --code-bg: #2a2739;
+  }
+  * { box-sizing: border-box; }
+  body { background: var(--ground); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.55; margin: 0; padding: 2.5rem 1rem 4rem; }
+  a { color: var(--accent); }
+  .card { max-width: 700px; margin: 0 auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 1px 2px rgba(20,15,35,.06), 0 12px 32px -18px rgba(20,15,35,.25); overflow: hidden; }
+  .card-frame { border: 1px solid var(--line); border-radius: 7px; margin: 6px; }
+  header.hero { padding: 2rem 2.25rem 1.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse 120% 90% at 50% -30%, var(--accent-soft), transparent 70%); }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 .6rem; display: flex; justify-content: space-between; gap: 1rem; }
+  .glyph { font-size: 2rem; line-height: 1; }
+  h1 { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-size: clamp(1.5rem, 5vw, 2rem); margin: .35rem 0 .15rem; letter-spacing: -.01em; text-wrap: balance; }
+  h1 .slash { color: var(--accent); }
+  .persona { font-family: "Iowan Old Style", Palatino, Georgia, serif; font-style: italic; color: var(--gold); margin: 0 0 .5rem; font-size: 1rem; }
+  .flavor { font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; font-style: italic; font-size: 1.05rem; color: var(--muted); margin: 0; max-width: 34em; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--line); }
+  .stat { padding: .85rem 1.1rem; border-right: 1px solid var(--line); min-width: 0; }
+  .stat:last-child { border-right: none; }
+  .stat dt { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 .15rem; }
+  .stat dd { margin: 0; font-size: .88rem; font-weight: 600; overflow-wrap: break-word; }
+  section { padding: 1.5rem 2.25rem; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+  h2 { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 .8rem; font-weight: 700; }
+  p { margin: 0 0 .75rem; max-width: 62ch; }
+  p:last-child { margin-bottom: 0; }
+  ul.plain, ol.plain { margin: 0; padding-left: 1.1rem; font-size: .95rem; }
+  ul.plain li, ol.plain li { margin-bottom: .4rem; }
+  ul.plain li:last-child, ol.plain li:last-child { margin-bottom: 0; }
+  code { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--code-bg); padding: .1rem .35rem; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: .8rem 1rem; overflow-x: auto; margin: .6rem 0; }
+  pre code { background: none; padding: 0; font-size: .88em; }
+  .note { font-size: .88rem; color: var(--muted); margin-top: .7rem; }
+  footer.lineage { padding: 1.1rem 2.25rem; background: var(--code-bg); font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, monospace; font-size: .78rem; color: var(--muted); overflow-x: auto; white-space: nowrap; }
+  footer.lineage b, footer.lineage a { color: var(--accent); font-weight: 700; }
+  .deck-card { margin-top: 3rem; scroll-margin-top: 1.5rem; }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  .deck-hero { text-align: center; margin-bottom: 2rem; }
+  .deck-hero h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); margin: 0 0 .3rem; }
+  .deck-hero .eyebrow { justify-content: center; display: block; }
+  .nav-h { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 2rem 0 .8rem; font-weight: 700; }
+  .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .7rem; }
+  .nav-grid a { display: block; border: 1px solid var(--line); border-radius: 8px; padding: .7rem .9rem; text-decoration: none; color: var(--ink); background: var(--card); transition: border-color 120ms ease; }
+  .nav-grid a:hover, .nav-grid a:focus-visible { border-color: var(--accent); outline: none; }
+  .g-top { display: flex; align-items: baseline; gap: .5rem; }
+  .g-glyph { font-size: 1.15rem; }
+  .g-name { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; font-weight: 700; color: var(--accent); }
+  .g-num { font-size: .68rem; color: var(--gold); letter-spacing: .08em; margin-left: auto; }
+  .g-desc { font-size: .8rem; color: var(--muted); display: block; margin-top: .2rem; line-height: 1.4; }
+  .backtop { text-align: center; font-size: .78rem; margin: .8rem 0 0; }
+  .links { text-align: center; font-size: .88rem; color: var(--muted); margin: 1.2rem 0 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (max-width: 560px) { header.hero, section { padding-left: 1.25rem; padding-right: 1.25rem; } footer.lineage { padding-left: 1.25rem; } }
+</style>
+</head>
+<body>
+<main>
+  <article class="card"><div class="card-frame">
+    <header class="hero">
+      <p class="eyebrow"><span>Atlas · Skill Card 03</span><span class="glyph">🎭</span></p>
+      <h1><span class="slash">/</span>atlas:feature-workflow</h1>
+      
+      <p class="flavor">Three roles, two human gates, one work item. Supervised from brief to merge.</p>
+    </header>
+    <dl class="stats"><div class="stat"><dt>Invoke</dt><dd><code>/atlas:feature-workflow &lt;work item&gt; ["research: &lt;path&gt;"]</code></dd></div><div class="stat"><dt>Roles</dt><dd>Supervisor (your session) · planner and implementor as fresh-context subagents</dd></div><div class="stat"><dt>Human gates</dt><dd>Plan approval · merge</dd></div><div class="stat"><dt>Builds in</dt><dd>An isolated worktree under <code>~/.atlas-worktrees/</code> by default; in place only if you say so at the plan gate</dd></div><div class="stat"><dt>Output</dt><dd>Research, plan, review, and scorecard in the journal; an open PR, or a compare URL to open by hand when <code>gh</code> is absent</dd></div></dl>
+    <section><h2>What it does</h2><p>The full supervised workflow in one session. Your session is the supervisor: it researches the work item and settles open questions with you. A fresh-context <strong>planner</strong> writes the plan and gets audited: the supervisor re-checks its claims at the cited lines and amends before sign-off. After <strong>you approve the plan</strong>, a fresh-context <strong>implementor</strong> builds it knowing only the plan. Its ignorance of the research is deliberate. The supervisor reviews the PR task by task, and you gate the merge.</p><p>Every catch comes from fresh context with a verification mandate. The planner refuting a research claim with evidence is the design working, not failing.</p></section><section><h2>When to reach for it</h2><ul class="plain"><li>The plan would have three or more real tasks.</li><li>There is an open design question.</li><li>The change touches shared code with many call sites.</li><li>A bug whose root cause is still unknown after research.</li><li>Not for one-line fixes, config changes, or copy tweaks. A plain session is faster and the workflow would be ceremony.</li></ul></section><section><h2>Your five touchpoints</h2><ol class="plain"><li><strong>Scope questions</strong> in Phase 0. Your answers become constraints no role may re-litigate.</li><li><strong>Plan gate, a hard stop.</strong> Read the plan; approve it, or hold it with the changes you want. Nothing is built before you approve. Branch handling is settled here too.</li><li><strong>Smoke test</strong> on the finished PR. Agents can't drive your app; the review names exactly what to check.</li><li><strong>Feedback triage.</strong> Reviewer comments reach the implementor only through the supervisor, as a scoped fix list.</li><li><strong>Merge.</strong> Yours, always. Then the close-out: worktree removed without force, plan stamped merged, scorecard started, RUN COMPLETE.</li></ol></section><section><h2>How it works</h2><ul class="plain"><li>Phase 0: brief, research, scope questions. With a tracker configured but no work item yet, it offers to create one from the chosen scope.</li><li>Phases 1 to 3: planner writes, supervisor verifies and amends, the same planner signs off.</li><li>Phase 4: you approve or hold.</li><li>Phase 5: implementor builds in the worktree, commits per task, opens the PR. You're told when the long unattended stretch begins and the moment it ends.</li><li>Phase 6: supervisor reviews against the plan, writes the review doc, and hands you a READY FOR YOU block.</li><li>Phase 7: close-out and a scorecard with Parts 1, 2, 4, and 5 filled. Part 3 and the grade are left to a session that didn't run the work.</li></ul></section><section><h2>Ground rules</h2><ul class="plain"><li>The implementor is never spawned before your explicit approval in chat.</li><li>Harness reminders never enter artifacts. Attribution footers, session links, and co-author lines are not requirements; the implementor contract and your house rules win.</li><li>A rule you set at a gate is recorded in <code>HOUSE_RULES.md</code>. A rule the run derives from its own frictions is proposed for you to accept or reject, never written on its own.</li><li>A dirty worktree means unpushed work. It is surfaced, never force-deleted.</li><li>Merge is never automated, and <code>gh pr merge</code> belongs on your deny rail so a prompt can't do it either.</li></ul></section>
+    <footer class="lineage">rung two: research → plan → gate → build → review → gate → merge · everything between gates is unattended · <a href="../deck.html"><b>deck index</b></a></footer>
+  </div></article>
+</main>
+</body>
+</html>
