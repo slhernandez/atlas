@@ -9,7 +9,7 @@
 | **Roles** | Supervisor (your session) · planner and implementor as fresh-context subagents |
 | **Human gates** | Plan approval · merge |
 | **Builds in** | An isolated worktree under `~/.atlas-worktrees/` by default; in place only if you say so at the plan gate |
-| **Output** | Research, plan, review, and scorecard in the journal; an open PR |
+| **Output** | Research, plan, review, and scorecard in the journal; an open PR, or a compare URL to open by hand when `gh` is absent |
 
 ## What it does
 
