@@ -314,7 +314,7 @@
 <section>
   <p class="fig"><b>FIG. 6</b> — Quality control</p>
   <h2>The factory grades its own runs. Then it tries to break them.</h2>
-  <p>Every feature run ends with a scorecard on the same form: protocol fidelity, role quality, outcome quality, a friction log, a verdict. Research runs carry their quality check inside the document, as a skeptic pass. The run fills in what it can see about itself. The outcome part and the grade are left to a session that ran none of the work; today you launch that session yourself and point it at the file and the PR. Its check isn't a lint pass: the grader <b>reverts your fix in a scratch worktree and watches the new tests fail.</b>
+  <p>Every <code>/atlas:feature-workflow</code> run ends with a scorecard on the same form: protocol fidelity, role quality, outcome quality, a friction log, a verdict. Research runs carry their quality check inside the document, as a skeptic pass; the multi-session supervisor reads scorecards today and does not yet write one. The run fills in what it can see about itself. The outcome part and the grade are left to a session that ran none of the work; today you launch that session yourself and point it at the file and the PR. Its check isn't a lint pass: the grader <b>reverts your fix in a scratch worktree and watches the new tests fail.</b>
     Tests that don't scream when the fix is gone are decoration, and they get flagged.</p>
   <div class="quote">
     "Zero refutations on a research-heavy run is a yellow flag, not a green one."
