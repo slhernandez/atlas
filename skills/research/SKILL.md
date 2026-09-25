@@ -56,6 +56,15 @@ extra notes directories).
    the load-bearing file:line list goes under *Code references*. Include the Scope Assessment when researching a work item: what will change,
    blast radius (tests, migrations, other services or clients, generated code), a rough size,
    and the questions to ask the reporter before starting.
+   **Shadow claim check (optional, never gating).** If `TYPESAFE_API_KEY` is set in the
+   environment, run `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/claim-check.py" <document> --judge jev`
+   after the document is written and give the report path (it lands in `<journal>/claim-check/`).
+   If the key is unset, skip silently. The script sends each cited excerpt to a third-party
+   classifier and never edits the document; its verdicts are being *evaluated*, not trusted —
+   a `would-pass` row is not verification, and your own re-read of load-bearing claims still
+   happens. Run `--self-test` once after install; `--judge dry` parses and excerpts without
+   any network call. Repositories other than the current one are named via
+   `CLAIM_CHECK_REPOS="name=path,name=path"`.
 6. **Present findings:** the direct answer first, then the key file references, then the
    document path — and the exit: if the fix is now obvious and small, do it in this session;
    if the research shows structural work (3+ tasks, an open design question, shared code with

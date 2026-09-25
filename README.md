@@ -24,7 +24,8 @@ agents/             workflow-planner · workflow-implementor (fresh-context role
 templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier
                     (the multi-session supervisor's durable memory) · ledger (plain-language
                     commit tables + QA/Product summary for integration-branch work)
-scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
+scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate · claim-check.py
+                    (shadow claim-vs-excerpt check for research docs; opt-in, never gating)
 docs/               the companion site (index · how-it-works · the Deck · cards/) ·
                     two-modes guide · permissions · patterns/
 ```
