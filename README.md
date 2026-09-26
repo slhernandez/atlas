@@ -18,7 +18,7 @@ matters. Merge is never automated.
 skills/             setup (first-run wizard) · research (rung one: scope before you build) ·
                     feature-workflow (single-session subagent mode, phases 0-7) ·
                     launch-supervisor (multi-session kickoff generator)
-agents/             workflow-planner · workflow-implementor (fresh-context roles) · the
+agents/             workflow-planner · workflow-implementor (fresh-context roles) · skeptic · the
                     research team: codebase-locator · codebase-analyzer ·
                     codebase-pattern-finder · journal-locator · journal-analyzer
 templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier
