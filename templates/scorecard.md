@@ -15,6 +15,7 @@ grade: <A / B / C / F>
 | | |
 |---|---|
 | Work item / size | |
+| Models / effort (supervisor · planner · implementor) | |
 | Duration (launch → PR-open → merge) | |
 | Artifacts (research / plan / review) | |
 | Outcome | |
