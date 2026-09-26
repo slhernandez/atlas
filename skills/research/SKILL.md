@@ -44,8 +44,13 @@ extra notes directories).
    work item) — the document is persistent and will be trusted.
    **Skeptic pass (substantial runs only):** for work-item scoping or multi-component research,
    spawn ONE independent agent whose sole job is to refute the load-bearing claims and scope
-   conclusions ("try to disprove: <claim>, with file:line evidence"); fold surviving
-   objections into Open Questions. While the skeptic is still running, the document's
+   conclusions. Brief it to assume each cited excerpt says what the document claims and to
+   attack from outside the excerpt, because that is where research actually fails: a second
+   definition of the same name, a caller that bypasses the path, a config value or feature
+   flag that overrides the code, the import that decides what an annotation means, code that
+   is unreachable, a test asserting the opposite ("try to disprove: <claim> — from other
+   files, callers, config, and tests, with file:line evidence"); fold surviving objections
+   into Open Questions. While the skeptic is still running, the document's
    frontmatter `status` is `pending-skeptic`; flip it to `current` only after its objections
    are appended (or it reports none). Deliver the answer meanwhile, but say the document is
    not final until then. Skip the pass for small single-component runs.
@@ -53,7 +58,10 @@ extra notes directories).
    `<journal>/research/YYYY-MM-DD-<work-item>-<desc>.md` (omit the work item when there is
    none). Frontmatter carries the real `date`, `as_of_commit`, and `branch` — never
    placeholders. Journal findings go under *Historical context* and *Related research*;
-   the load-bearing file:line list goes under *Code references*. Include the Scope Assessment when researching a work item: what will change,
+   the load-bearing file:line list goes under *Code references* — and before writing that
+   list, open each cited range one last time and confirm the identifier or text the bullet
+   names is on those lines; fix or drop any that is not. Line numbers drift between a
+   subagent's read and the write, and this list is the index a planner navigates from. Include the Scope Assessment when researching a work item: what will change,
    blast radius (tests, migrations, other services or clients, generated code), a rough size,
    and the questions to ask the reporter before starting.
 6. **Present findings:** the direct answer first, then the key file references, then the
