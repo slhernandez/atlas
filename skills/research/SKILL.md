@@ -43,8 +43,8 @@ extra notes directories).
    cited locations yourself (two or three for a small question; every one when scoping a
    work item) — the document is persistent and will be trusted.
    **Skeptic pass (substantial runs only):** for work-item scoping or multi-component research,
-   spawn ONE independent agent whose sole job is to refute the load-bearing claims and scope
-   conclusions. Brief it to assume each cited excerpt says what the document claims and to
+   spawn ONE `atlas:skeptic` agent (read-only, runs at high effort) whose sole job is to refute
+   the load-bearing claims and scope conclusions. Brief it to assume each cited excerpt says what the document claims and to
    attack from outside the excerpt, because that is where research actually fails: a second
    definition of the same name, a caller that bypasses the path, a config value or feature
    flag that overrides the code, the import that decides what an annotation means, code that

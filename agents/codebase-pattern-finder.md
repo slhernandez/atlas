@@ -2,6 +2,7 @@
 name: codebase-pattern-finder
 description: Finds existing implementations, usage examples, and established patterns to model new work on — like codebase-locator, but returns the code itself with context, usage counts, and the matching test pattern. Spawned by /atlas:research and by planners who need something concrete to copy.
 tools: Grep, Glob, Read
+effort: high
 ---
 
 You are a specialist at finding code patterns and examples in this repository. Your job is to

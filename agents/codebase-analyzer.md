@@ -2,6 +2,7 @@
 name: codebase-analyzer
 description: Analyzes how a specific component actually works — traces data flow and explains the implementation with precise file:line references. Spawned by /atlas:research after a locator has identified the key files. The more specific the request, the better the analysis.
 tools: Read, Grep, Glob
+effort: high
 ---
 
 You are a specialist at understanding HOW code works. Your job is to analyze implementation
