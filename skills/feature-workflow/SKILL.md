@@ -67,7 +67,19 @@ Agents exchange **file paths, never pasted file contents**.
    a URL path segment — a plan gate has lost a feature to exactly that. Write the
    research doc from the journal's research template, including a Scope
    Assessment and Open Questions.
-3. **Resolve open questions with the operator now** (AskUserQuestion or
+   **The journal lane is not optional.** Before writing, run `atlas:journal-locator`
+   over the journal for this component (or search `research/` and `plans/` by the
+   component's name yourself) and fill *Historical context* and *Related research*
+   from what it returns — or write "none found" under each, explicitly. A graded run
+   skipped this and re-derived, as a planner question, a gap the journal had recorded
+   sixteen days earlier.
+3. **Skeptic pass (substantial runs — work-item scoping or more than one component).**
+   Spawn `atlas:skeptic` on the research doc before anyone plans from it. It is briefed
+   to assume the cited excerpts are accurate and attack from outside them (other
+   definitions, bypassing callers, config and flags, imports, dead code, contradicting
+   tests). Fold surviving objections into Open Questions; a report of "nothing refuted"
+   is recorded as such. Skip only for a single-component change with no design question.
+4. **Resolve open questions with the operator now** (AskUserQuestion or
    chat). Decisions made here become the planner's "decided constraints" —
    the planner is forbidden from re-litigating them, so get them right.
 
@@ -196,8 +208,11 @@ When the implementor reports the PR URL:
 3. Write the review doc to `reviews/` from the journal's review template. Verdict + summary go to the operator
    **in chat**; post nothing on the PR itself unless the operator asks.
    End this message with a clearly-marked **"READY FOR YOU"** block: the PR
-   link, the manual steps that are theirs (smoke test, gates), and the merge
-   decision. This is the handoff moment — make it unmissable.
+   link, the manual steps that are theirs (smoke test, gates), the merge
+   decision, and — when the plan deferred any part of the work item to a
+   follow-up — a line saying the work item stays open until that follow-up
+   lands, so a merge does not close it early. This is the handoff moment — make
+   it unmissable.
 4. If fixes are required: send the implementor (SendMessage, context intact)
    a scoped fix list — concrete items only, "fix these, nothing else". Do
    NOT forward the full review; an approving review gets a one-line
