@@ -82,6 +82,14 @@ Agents exchange **file paths, never pasted file contents**.
 4. **Resolve open questions with the operator now** (AskUserQuestion or
    chat). Decisions made here become the planner's "decided constraints" —
    the planner is forbidden from re-litigating them, so get them right.
+   **For anything a user will see or touch, ask how it behaves, not only what
+   and where.** A capability request ("book at quarter past") says nothing
+   about the interaction. Ask whether there is a reference behaviour or
+   product, and whether the change is a flat list, progressive disclosure, or
+   something else; then state the assumed UX in one sentence under Decisions
+   before the planner is spawned. A graded run's Phase 0 asked which screens,
+   what step and which roles — never the shape — and the plan came back as a
+   96-row flat list that was rejected at the gate.
 
 ## Phase 1 — Spawn the planner
 
