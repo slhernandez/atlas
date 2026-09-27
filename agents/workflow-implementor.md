@@ -113,6 +113,12 @@ Closes <work-item-id> (<work item URL>)
 
 No attribution footer in the PR body.
 
+**Deferred scope is stated, not hidden.** When the plan defers part of the work item
+to a follow-up (another repository, a later PR, a manual step), the PR must not say it
+closes the work item. Write `Addresses <work-item-id> (<URL>); <the deferred part>
+remains before it closes` in place of the `Closes` line, and name the follow-up under
+Changes. A merge that auto-closes a half-delivered item is a defect of the PR body.
+
 **Evidence or hypothesis.** Any causal claim you write into a code comment, the
 PR body, or a CI file ("X causes Y", "this fixes Z") either cites its evidence
 (file:line, run id, command output) or is phrased as a hypothesis to test. Never
