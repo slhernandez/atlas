@@ -24,7 +24,9 @@ Your spawn prompt names the journal directory. Its standard shape:
 
 Glob the root first — operators add folders. If HOUSE_RULES.md names additional notes
 directories, search those too. Skip the seeded `_*template*.md` files — they match every
-plausible search and contain no history.
+plausible search and contain no history. Skip a `grader/` folder entirely if one exists — not
+in globs, not in greps, not in the report: it holds an evaluator's private expectations for runs
+that are graded while they run, and surfacing any of it shapes the run it grades.
 
 ## Search strategy
 

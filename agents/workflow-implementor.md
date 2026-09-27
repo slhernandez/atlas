@@ -82,6 +82,14 @@ the targeted test commands for new or changed tests). Do not run the full
 test suite unless the plan says to. Report results honestly, including
 pre-existing failures you did not cause.
 
+Then re-read every task's **acceptance bullets** against the code you wrote —
+the acceptance, not the steps. When a step's wording and its acceptance
+disagree, the acceptance wins: apply the smallest change that satisfies it and
+declare the conflict as a deviation in the plan file. A graded run's
+implementor followed a loop instruction to the letter while the task's
+acceptance said a row is hidden only when all of its times are past; the
+contradiction shipped to review.
+
 ## Pull request
 
 Push the branch and open a PR against the base branch named in your spawn
