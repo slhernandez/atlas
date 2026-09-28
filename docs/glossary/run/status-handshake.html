@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="terminal" data-root="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is the status handshake? | Atlas Glossary</title>
+<meta name="description" content="The status field in the plan file&#x27;s frontmatter. It records who holds the plan and what they may do with it.">
+<script>try{var t=localStorage.getItem("atlas-glossary-theme");if(/^(terminal|light-green|light|blueprint)$/.test(t))document.documentElement.dataset.theme=t;}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Silkscreen&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../glossary.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="frame">
+<header class="bar">
+  <button class="menu" type="button" aria-expanded="false" aria-controls="toc" aria-label="Table of contents">☰</button>
+  <a class="mark" href="../index.html">ATLAS</a>
+  <a class="title" href="../index.html">Atlas Glossary</a>
+  <div class="themes" role="group" aria-label="Theme"><button type="button" data-set-theme="terminal" aria-pressed="false">Terminal</button><button type="button" data-set-theme="light-green" aria-pressed="false">Light green</button><button type="button" data-set-theme="light" aria-pressed="false">Light</button><button type="button" data-set-theme="blueprint" aria-pressed="false">Blueprint</button></div>
+  <button class="search-btn" type="button" aria-haspopup="dialog"><span>Search</span> <kbd>⌘K</kbd></button>
+  <a class="cta" href="https://github.com/slhernandez/atlas#install">Install Atlas <span aria-hidden="true">↗</span></a>
+</header>
+<div class="cols">
+<nav id="toc" class="toc" aria-label="Table of contents">
+<div class="toc-h">Table of contents</div>
+<details open><summary>Home</summary><ul><li><a href="../index.html"><span class="t">README</span></a></li><li><a href="../home/quick-start.html"><span class="t">Quick Start</span><span class="chip">install</span></a></li></ul></details>
+<details open><summary>The Ladder</summary><ul><li><a href="../ladder/the-ladder.html"><span class="t">The Ladder</span><span class="chip">3 rungs</span></a></li><li><a href="../ladder/plain-session.html"><span class="t">Plain Session</span><span class="chip">rung 0</span></a></li><li><a href="../ladder/research-rung.html"><span class="t">Research First</span></a></li><li><a href="../ladder/kit-mode.html"><span class="t">Kit Mode</span></a></li><li><a href="../ladder/manual-mode.html"><span class="t">Manual Mode</span></a></li><li><a href="../ladder/wrong-root-cause-trap.html"><span class="t">Wrong-Root-Cause Trap</span></a></li><li><a href="../ladder/wrong-rung.html"><span class="t">The Cost of the Wrong Rung</span></a></li></ul></details>
+<details open><summary>The Cast</summary><ul><li><a href="../cast/supervisor.html"><span class="t">Supervisor</span></a></li><li><a href="../cast/planner.html"><span class="t">Planner</span></a></li><li><a href="../cast/implementor.html"><span class="t">Implementor</span></a></li><li><a href="../cast/operator.html"><span class="t">Operator</span></a></li><li><a href="../cast/fresh-context.html"><span class="t">Fresh Context</span></a></li><li><a href="../cast/research-team.html"><span class="t">Research Team</span></a></li><li><a href="../cast/codebase-locator.html"><span class="t">Codebase Locator</span></a></li><li><a href="../cast/codebase-analyzer.html"><span class="t">Codebase Analyzer</span></a></li><li><a href="../cast/codebase-pattern-finder.html"><span class="t">Pattern Finder</span></a></li><li><a href="../cast/journal-locator.html"><span class="t">Journal Locator</span></a></li><li><a href="../cast/journal-analyzer.html"><span class="t">Journal Analyzer</span></a></li><li><a href="../cast/skeptic.html"><span class="t">Skeptic</span><span class="chip">skeptic</span></a></li></ul></details>
+<details open><summary>The Run</summary><ul><li><a href="../run/work-item.html"><span class="t">Work Item</span></a></li><li><a href="../run/phases.html"><span class="t">Phases</span><span class="chip">0–7</span></a></li><li><a href="../run/research-document.html"><span class="t">Research Document</span><span class="chip">research/</span></a></li><li><a href="../run/journal-lane.html"><span class="t">Journal Lane</span></a></li><li><a href="../run/scope-questions.html"><span class="t">Scope Questions</span><span class="chip">touchpoint 1</span></a></li><li><a href="../run/decided-constraints.html"><span class="t">Decided Constraints</span></a></li><li><a href="../run/plan-file.html"><span class="t">Plan File</span><span class="chip">plans/</span></a></li><li><a href="../run/status-handshake.html" aria-current="page"><span class="t">Status Handshake</span><span class="chip">frontmatter</span></a></li><li><a href="../run/verification-table.html"><span class="t">Verification Table</span></a></li><li><a href="../run/refutation.html"><span class="t">Refutation</span></a></li><li><a href="../run/mechanical-task.html"><span class="t">Mechanical Task</span></a></li><li><a href="../run/deviation.html"><span class="t">Deviation</span></a></li><li><a href="../run/worktree.html"><span class="t">Worktree</span></a></li><li><a href="../run/pr-review.html"><span class="t">Supervisor Review</span></a></li><li><a href="../run/ready-for-you.html"><span class="t">READY FOR YOU</span></a></li><li><a href="../run/close-out.html"><span class="t">Close-out</span><span class="chip">RUN COMPLETE</span></a></li></ul></details>
+<details open><summary>The Gates</summary><ul><li><a href="../gates/touchpoint.html"><span class="t">Touchpoint</span><span class="chip">5 per run</span></a></li><li><a href="../gates/hard-gate.html"><span class="t">Hard Gate</span><span class="chip">2 per run</span></a></li><li><a href="../gates/plan-gate.html"><span class="t">Plan Gate</span><span class="chip">touchpoint 2</span></a></li><li><a href="../gates/smoke-test.html"><span class="t">Smoke Test</span><span class="chip">touchpoint 3</span></a></li><li><a href="../gates/feedback-triage.html"><span class="t">Feedback Triage</span><span class="chip">touchpoint 4</span></a></li><li><a href="../gates/merge-gate.html"><span class="t">Merge Gate</span><span class="chip">touchpoint 5</span></a></li></ul></details>
+<details open><summary>The Doorman</summary><ul><li><a href="../rails/doorman.html"><span class="t">Doorman</span><span class="chip">3 layers</span></a></li><li><a href="../rails/deny-rail.html"><span class="t">Deny Rail</span></a></li><li><a href="../rails/allow-list.html"><span class="t">Allow List</span></a></li><li><a href="../rails/judgment.html"><span class="t">Judgment</span></a></li></ul></details>
+<details open><summary>Memory</summary><ul><li><a href="../memory/journal.html"><span class="t">Journal</span></a></li><li><a href="../memory/house-rules.html"><span class="t">House Rules</span></a></li><li><a href="../memory/templates.html"><span class="t">Templates</span><span class="chip">7</span></a></li><li><a href="../memory/dossier.html"><span class="t">Dossier</span><span class="chip">dossiers/</span></a></li><li><a href="../memory/resume-block.html"><span class="t">RESUME BLOCK</span></a></li><li><a href="../memory/commit-ledger.html"><span class="t">Commit Ledger</span><span class="chip">ledger</span></a></li><li><a href="../memory/slice.html"><span class="t">Slice</span></a></li><li><a href="../memory/relay.html"><span class="t">Relay</span></a></li><li><a href="../memory/idempotent-receiver.html"><span class="t">Idempotent Receiver</span></a></li><li><a href="../memory/compaction.html"><span class="t">Compaction</span></a></li><li><a href="../memory/wake-sequence.html"><span class="t">Wake Sequence</span><span class="chip">3 reads</span></a></li></ul></details>
+<details open><summary>Quality</summary><ul><li><a href="../quality/scorecard.html"><span class="t">Scorecard</span><span class="chip">scorecards/</span></a></li><li><a href="../quality/independent-grader.html"><span class="t">Independent Grader</span><span class="chip">Part 3</span></a></li><li><a href="../quality/mutation-check.html"><span class="t">Mutation Check</span></a></li><li><a href="../quality/friction-log.html"><span class="t">Friction Log</span><span class="chip">Part 4</span></a></li><li><a href="../quality/flywheel.html"><span class="t">Flywheel</span></a></li><li><a href="../quality/redundancy-check.html"><span class="t">Redundancy Check</span><span class="chip">3 runs</span></a></li></ul></details>
+<details open><summary>Commands &amp; Files</summary><ul><li><a href="../tools/atlas-setup.html"><span class="t">/atlas:setup</span></a></li><li><a href="../tools/kickoff-prompt.html"><span class="t">Kickoff Prompt</span></a></li><li><a href="../tools/config.html"><span class="t">atlas.json</span></a></li><li><a href="../tools/launcher.html"><span class="t">Launcher</span></a></li><li><a href="../tools/install.html"><span class="t">Install</span><span class="chip">atlas@atlas</span></a></li><li><a href="../tools/lint-isms.html"><span class="t">Scrub Gate</span><span class="chip">lint-isms.sh</span></a></li></ul></details>
+<details open><summary>Patterns</summary><ul><li><a href="../patterns/generated-client-dependency.html"><span class="t">Generated-Client Dependency</span></a></li><li><a href="../patterns/domain-owned-content.html"><span class="t">Domain-Owned Content</span></a></li><li><a href="../patterns/shell-hygiene.html"><span class="t">Shell Hygiene</span></a></li></ul></details>
+<details open><summary>About</summary><ul><li><a href="../about/colophon.html"><span class="t">Colophon</span><span class="chip">0.1.0</span></a></li></ul></details>
+<p class="classic"><a href="../../index.html">← The classic Atlas site</a></p>
+</nav>
+<main id="main" tabindex="-1">
+  <div class="crumbs"><span class="crumb">/run/status-handshake</span>
+    <a class="report" href="https://github.com/slhernandez/atlas/issues/new" aria-label="Something seem wrong? Open an issue on GitHub" title="Something seem wrong? Open an issue on GitHub.">?</a></div>
+  <article>
+  <h1>What is the status handshake?</h1><p class="chip big">frontmatter</p>
+  <p>The <code>status</code> field in the <a class="x" href="../run/plan-file.html">plan file</a>'s frontmatter. It records who holds the plan and what they may do with it.</p>
+<figure class="fig"><pre>  ready-for-supervisor-review ──▶  approved-with-amendments ──▶  signed-off         ──▶  merged
+  the planner wrote it             the supervisor amended it     the planner agreed      close-out</pre></figure>
+<p>The <a class="x" href="../cast/implementor.html">implementor</a> refuses to start on anything but <code>signed-off</code>. The <a class="x" href="../gates/plan-gate.html">plan gate</a> sits between <code>signed-off</code> and the build. <code>merged</code> is stamped by the <a class="x" href="../cast/supervisor.html">supervisor</a> at <a class="x" href="../run/close-out.html">close-out</a>. The <a class="x" href="../quality/scorecard.html">scorecard</a>'s first part checks that every transition happened in order.</p>
+  </article>
+  <aside class="plug">
+    <p class="plug-h">Supervising AI on a real codebase?</p>
+    <p>Atlas is a Claude Code plugin: three roles, two hard gates, and a journal that remembers. MIT licensed.</p>
+    <a class="cta" href="https://github.com/slhernandez/atlas#install">Install Atlas <span aria-hidden="true">↗</span></a>
+  </aside>
+  <nav class="pager" aria-label="Previous and next"><a class="prev" rel="prev" href="../run/plan-file.html"><span class="dir">← Previous</span><span class="pt">Plan File</span></a><a class="next" rel="next" href="../run/verification-table.html"><span class="dir">Next →</span><span class="pt">Verification Table</span></a></nav>
+</main>
+</div>
+</div>
+<dialog class="search" aria-label="Search the glossary">
+  <form method="dialog"><input type="search" placeholder="Search the glossary…" aria-label="Search" autocomplete="off"></form>
+  <ul class="results"></ul>
+  <p class="hint"><kbd>↑</kbd><kbd>↓</kbd> choose · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+</dialog>
+<script src="../glossary.js"></script>
+</body>
+</html>
