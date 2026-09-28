@@ -25,7 +25,7 @@ templates/          plan · research · review · scorecard · HOUSE_RULES seed 
                     (the multi-session supervisor's durable memory) · ledger (plain-language
                     commit tables + QA/Product summary for integration-branch work)
 scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
-docs/               the companion site (index · how-it-works · the Deck · cards/) ·
+docs/               the companion site (index · how-it-works · the Deck · cards/ · glossary/) ·
                     two-modes guide · permissions · patterns/
 ```
 
@@ -91,6 +91,8 @@ own documents are never overwritten.
 ## Docs
 
 The same pages, rendered: <https://slhernandez.github.io/atlas/>.
+
+- [The Atlas Glossary](https://slhernandez.github.io/atlas/glossary/) — every concept on its own inter-linked page, in four themes; the second edition of these docs
 
 - `docs/cards/quick-start-card.md` — what to type, from an empty machine to your first scorecard
 - `docs/two-modes.md` — the ladder (research → single-session → multi-session) and when to use which
