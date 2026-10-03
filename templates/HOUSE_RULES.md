@@ -16,6 +16,12 @@ or reject.
   here. Why: Claude Code loads CLAUDE.md automatically; this file is for cross-repo rules.
 - **<your first real rule goes here>** Why: <the friction that taught it>.
 
+## Explainer register
+Explainer register: STE-80
+<STE-80 or plain-language. Every message that asks you to decide opens with a short explainer
+in this register, labelled, so you can compare the two on your own runs. A missing line means
+STE-80. Details: the plugin's references/explainer.md.>
+
 ## Extra notes directories
 <absolute paths the research team should search beyond this journal — meeting notes, a
 design/spec repo, ticket notes. Empty is fine.>

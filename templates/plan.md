@@ -22,7 +22,7 @@ last_updated: YYYY-MM-DD
 <defend the non-obvious design choices>
 
 ## Design
-<state machines / data flow where applicable>
+<state machines / data flow where applicable. Required when the change crosses components or layers: one ASCII diagram of the data flow or state change. A single-component change writes "N/A — single component".>
 
 ## Task breakdown
 

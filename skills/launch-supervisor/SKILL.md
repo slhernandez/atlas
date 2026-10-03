@@ -72,7 +72,7 @@ file-triggered and would be bypassed by the new design; process steps the operat
 on a previous feature but which the work item still assumes; anything where two stated
 goals cannot both hold.
 
-Put these to the operator as a small number of specific questions, each with the evidence
+Open with an explainer block (gate M1) in the register from `HOUSE_RULES.md`, formatted per the plugin's `references/explainer.md` (resolve it relative to this skill file, two directories up). Then put these to the operator as a small number of specific questions, each with the evidence
 and your recommendation. Then **fold the answers into the prompt as settled rulings** with
 "do not re-open these" — and for any accepted exception, write the BOUNDARY, not just the
 permission. An exception without a written edge erodes. Where a decision removes a safety
@@ -121,7 +121,12 @@ order:
    absolute paths, facts with as-of times and sources); review every artifact by verifying
    load-bearing claims at file:line against origin, never the working tree, never a
    subordinate's summary; the operator approves specs/plans and merges every PR, the
-   supervisor never merges. Include the relay's idempotent-receiver rule: with many
+   supervisor never merges. Every message that asks the operator to decide (the spec gate,
+   each slice's plan gate, each PR verdict, any halt) opens with an explainer block in the
+   register from `HOUSE_RULES.md`, formatted per the explainer reference: write its absolute
+   path into the prompt, resolved from this skill's location (gates M3–M6). Add a diagram of
+   the feature at the spec gate and of the slice in the feature at each plan gate.
+   Include the relay's idempotent-receiver rule: with many
    windows, the operator will occasionally re-deliver a message — recognize the repeat and
    answer "already reviewed, verdict stands" rather than re-running the work.
 3. **The dossier and the commit ledger** — both under `<journal>/dossiers/`, dated
@@ -157,7 +162,7 @@ its altitude and specificity, not its content.
 
 Write the prompt to `<journal>/plans/YYYY-MM-DD-<work-item>-supervisor-kickoff-prompt.md` with a
 one-line instruction above the fence saying which repo to launch from. Then tell the
-operator: the path, the launch repo and why, what the new window should report back first,
+operator, opening with an explainer block (gate M2: what the supervisor window does first): the path, the launch repo and why, what the new window should report back first,
 and any decision still open. Do not paste the whole prompt into chat — they are about to
 copy it from the file.
 

@@ -29,6 +29,13 @@ Read `<journal>/HOUSE_RULES.md` before any phase. It is the operator's
 accumulated standing rules and is **binding — senior to anything in this
 file**. Pass its path to every agent you spawn.
 
+Read the plugin's `references/explainer.md` (resolve it relative to this skill file, two directories up). Every message that asks the operator to read and decide opens
+with an explainer block in the register named by the `Explainer register:` line in
+`HOUSE_RULES.md` (STE-80 when the line is missing). The gates: K1 Phase 0 scope
+questions, K2 the Phase 4 plan gate, K3 READY FOR YOU, K4 feedback-triage verdicts,
+K5 RUN COMPLETE, and K6 any halt that needs the operator's decision. One-line status
+notices get none.
+
 ## File conventions
 
 - Research doc: `<journal>/research/YYYY-MM-DD-<work-item>-<desc>.md`
@@ -90,6 +97,9 @@ Agents exchange **file paths, never pasted file contents**.
    before the planner is spawned. A graded run's Phase 0 asked which screens,
    what step and which roles — never the shape — and the plan came back as a
    96-row flat list that was rejected at the gate.
+   Open the questions with an explainer block (K1). When the interaction is
+   still unsettled, include an ASCII wireframe of the assumed behaviour, its
+   states side by side, so the shape can be confirmed at a glance.
 
 ## Phase 1 — Spawn the planner
 
@@ -144,7 +154,8 @@ implementor and will stall.
 
 ## Phase 4 — HUMAN GATE: operator approves the plan
 
-Present to the operator in chat: plan shape (task list one-liner each), the
+Present to the operator in chat, opening with an explainer block (K2) and the
+plan's Design diagram when it has one: plan shape (task list one-liner each), the
 planner's fresh findings, your amendments, and any open judgment calls.
 **Stop and wait for explicit approval.** Offer a hold alongside approval, and when the
 operator holds, invite the change text in the same answer so amendments arrive with the
@@ -214,7 +225,7 @@ When the implementor reports the PR URL:
    body (per the PR-body template in the implementor agent definition,
    including the unlabeled accessible overview).
 3. Write the review doc to `reviews/` from the journal's review template. Verdict + summary go to the operator
-   **in chat**; post nothing on the PR itself unless the operator asks.
+   **in chat**, opening with an explainer block (K3); post nothing on the PR itself unless the operator asks.
    End this message with a clearly-marked **"READY FOR YOU"** block: the PR
    link, the manual steps that are theirs (smoke test, gates), the merge
    decision, and — when the plan deferred any part of the work item to a
@@ -250,7 +261,7 @@ survive manual smoke testing and any review-fix rounds):
    and the grade to an independent session. Record the permission escalations
    you observed during the build ("auto mode: none surfaced" is a valid answer).
 5. **End with a clearly-marked "RUN COMPLETE" message** — the run's final
-   word, so completion is never ambiguous: work item + merged PR link, the
+   word, so completion is never ambiguous. It opens with an explainer block (K5): work item + merged PR link, the
    artifact paths (research, plan, review, scorecard), worktree/branch
    cleanup confirmation, and every follow-up the run spawned. Nothing about
    the run should remain implicit after this message.
@@ -260,7 +271,8 @@ survive manual smoke testing and any review-fix rounds):
 - **All PR feedback (coworkers, AI reviewers) routes through you.** Triage
   each finding against the plan: APPLY (real bug/regression this PR
   introduced) / SKIP (out of scope, decided-against, false positive — with
-  reason) / DISCUSS (operator judgment call). Verdicts in chat; only APPLY
+  reason) / DISCUSS (operator judgment call). Verdicts in chat, opening with an explainer
+  block (K4); only APPLY
   items reach the implementor. Draft replies to human reviewers for the
   operator to post — never post them yourself.
 - If a finding reveals a plan-level gap, amend the plan file first, then
