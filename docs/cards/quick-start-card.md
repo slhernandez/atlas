@@ -71,12 +71,13 @@ When a change would have three or more real tasks, or an open design question:
 /atlas:feature-workflow <work item> "research: <path>"
 ```
 
-The second form carries a research document from step 4 into the run, so nothing is re-derived. You are needed at five points, and two of them are hard stops: approving the plan, and merging. Nothing is built before you approve, and the merge is never automated. Between them, the build runs unattended in a worktree under `~/.atlas-worktrees/`. The review ends with a **READY FOR YOU** block naming exactly what is yours to check; after you merge, the close-out runs and the run ends with **RUN COMPLETE**.
+The second form carries a research document from step 4 into the run, so nothing is re-derived. You are needed at five points, and two of them are hard stops: approving the plan, and merging. Nothing is built before you approve, and the merge is never automated. Between them, the build runs unattended in a worktree under `~/.atlas-worktrees/`. The review ends with a **READY FOR YOU** block naming exactly what is yours to check; after you merge, the close-out runs and the run ends with **RUN COMPLETE**. Every message that asks you to decide opens with a short labelled **explainer**: what is happening, what you decide, and the recommendation.
 
 ## After the run
 
 - **The journal filled in.** `research/`, `plans/`, `reviews/`, and a `scorecards/` entry with Parts 1, 2, 4, and 5 written. Part 3 and the grade are for a fresh session that did not run the work.
 - **Your corrections go in `HOUSE_RULES.md`.** Every skill obeys it, it outranks the plugin's defaults, and it survives updates. A rule you set at a gate is recorded there; a rule the run derives from its own frictions is only proposed.
+- **Pick the explainer register there too.** The line `Explainer register: STE-80` sets how every explainer is written: STE-80, close to the Simplified Technical English of maintenance manuals, or `plain-language`. Try both; the scorecard has a row for your verdict.
 - **Which rung next.** Bug or small task: research. Feature: the feature workflow. Multi-week work across sessions: `/atlas:launch-supervisor`. One-line fixes: a plain session. [two-modes.md](https://github.com/slhernandez/atlas/blob/main/docs/two-modes.md) has the decision table.
 
 ## If something goes wrong

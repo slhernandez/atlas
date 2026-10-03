@@ -33,6 +33,8 @@ Every catch comes from fresh context with a verification mandate. The planner re
 4. **Feedback triage.** Reviewer comments reach the implementor only through the supervisor, as a scoped fix list.
 5. **Merge.** Yours, always. Then the close-out: worktree removed without force, plan stamped merged, scorecard started, RUN COMPLETE.
 
+Each of these messages opens with a short labelled **explainer**: the situation, what you decide, and the recommendation, before any detail. Scope questions add an ASCII wireframe when a screen's behaviour is still unsettled, and the plan gate shows the plan's data-flow diagram.
+
 ## How it works
 
 - Phase 0: brief, research, scope questions. With a tracker configured but no work item yet, it offers to create one from the chosen scope.

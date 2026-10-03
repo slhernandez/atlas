@@ -318,6 +318,7 @@
     <h2>The gates</h2>
     <p class="sub">Unattended between gates. Never past one.</p>
     <p>Five touchpoints per run of the feature workflow (rung one, research, has none; it only writes a document). Two are hard gates that no configuration can remove: <strong>plan approval</strong>, because nothing is built before it, and <strong>merge</strong>, because judgment stays with you. Everything between the gates runs at machine speed inside the rails described in the next section.</p>
+    <p>Every touchpoint message opens with a short labelled <strong>explainer</strong>: the situation, what you decide, and the recommendation, before any detail. Its register, STE-80 (close to the Simplified Technical English of maintenance manuals) or plain-language, is one line in <code>HOUSE_RULES.md</code>. The plan gate shows the plan's data-flow diagram, and scope questions add an ASCII wireframe when a screen's behaviour is unsettled.</p>
     <ol>
       <li><strong>Scope.</strong> Your answers to the research questions become constraints no role may re-litigate.</li>
       <li><strong>Plan, a hard stop.</strong> Read the signed-off plan. Approve it, or hold it and say what to change; the amendments are folded in and the plan comes back. Nothing is built until you approve. Branch handling is settled here too.</li>
@@ -352,7 +353,7 @@
       <thead><tr><th>Layer</th><th>What it holds</th><th>Written</th></tr></thead>
       <tbody>
         <tr><td><strong>The journal</strong> (<code>~/AtlasJournal</code> by default)</td><td>Every research document, plan, review, dossier, and scorecard, outside your repositories</td><td>as the work happens</td></tr>
-        <tr><td><strong><code>HOUSE_RULES.md</code></strong></td><td>Your standing rules with their reasons. Every skill reads it first and treats it as senior to the plugin's defaults; updates never touch it</td><td>by you, at gates; the run may propose, never write</td></tr>
+        <tr><td><strong><code>HOUSE_RULES.md</code></strong></td><td>Your standing rules with their reasons, and the register every explainer is written in. Every skill reads it first and treats it as senior to the plugin's defaults; updates never touch it</td><td>by you, at gates; the run may propose, never write</td></tr>
         <tr><td><strong>The plan file</strong> (kit mode) or <strong>the dossier</strong> (manual mode)</td><td>Per run: the status handshake, amendments, progress notes, deviations. The dossier opens with a RESUME BLOCK: current phase, live threads, pending prompts verbatim</td><td>at every handoff and halt</td></tr>
         <tr><td><strong>Claude Code's own memory</strong></td><td>Short pointers the model saves on its own; a signpost to the journal, not a copy of it</td><td>when the model judges a fact durable</td></tr>
       </tbody>
@@ -377,7 +378,7 @@
     <p class="num">07</p>
     <h2>The quality loop</h2>
     <p class="sub">The factory grades its own runs. Then it tries to break them.</p>
-    <p>A workflow that only produces merged pull requests tells you nothing about whether it is any good. So every feature-workflow run ends with a scorecard on the same form. Research runs carry a skeptic pass inside the document instead; the multi-session supervisor reads scorecards today and does not yet write one. The run fills in what it can see about itself; Part 3 and the grade are left to a session that did not run the work, which today you launch yourself and point at the file and the PR (a grader skill is planned). Every friction the run produced becomes an edit: to a rule, a template, or an agent definition. Almost every rule in this plugin was bought with a friction.</p>
+    <p>A workflow that only produces merged pull requests tells you nothing about whether it is any good. So every run ends with a scorecard on the same form. The run fills in what it can see about itself; Part 3 and the grade are left to a session that did not run the work, which today you launch yourself and point at the file and the PR (a grader skill is planned). Every friction the run produced becomes an edit: to a rule, a template, or an agent definition. Almost every rule in this plugin was bought with a friction.</p>
     <h3>What the scorecard asks</h3>
     <table>
       <thead><tr><th>Part</th><th>What it checks</th></tr></thead>
@@ -398,7 +399,7 @@
   <section id="box">
     <p class="num">08</p>
     <h2>What's in the box</h2>
-    <p class="sub">Four skills, seven agents, seven templates, one file that outranks them all.</p>
+    <p class="sub">Four skills, eight agents, seven templates, one file that outranks them all.</p>
     <table>
       <thead><tr><th>Piece</th><th>What it is</th></tr></thead>
       <tbody>
@@ -407,7 +408,7 @@
         <tr><td><code>/atlas:feature-workflow</code></td><td>Rung two. The three roles in one session, two hard gates, one PR.</td></tr>
         <tr><td><code>/atlas:launch-supervisor</code></td><td>Rung three. Writes the prompt that boots a supervisor window for manual mode.</td></tr>
         <tr><td>workflow-planner · workflow-implementor</td><td>The two role agents, described on their cards.</td></tr>
-        <tr><td>The research team</td><td>Codebase locator, analyzer, pattern-finder; journal locator and analyzer. Read-only.</td></tr>
+        <tr><td>The research team</td><td>Codebase locator, analyzer, pattern-finder; journal locator and analyzer; and the skeptic, which tries to disprove a finished research document. Read-only.</td></tr>
         <tr><td>Templates</td><td>Plan, research, review, dossier, ledger, scorecard, and the house-rules seed. Copied into your journal at setup. Plugin-owned templates can be refreshed later with the diff shown first; your own files are never overwritten.</td></tr>
         <tr><td><code>HOUSE_RULES.md</code></td><td>Your standing rules. Senior to everything above. Survives every update.</td></tr>
       </tbody>
