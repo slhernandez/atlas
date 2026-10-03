@@ -90,6 +90,16 @@ Skills consult the journal before starting anything, so the system's inputs get 
 every run you complete. `_template.md` files are plugin-owned and refreshed by setup; your
 own documents are never overwritten.
 
+## Explainers
+
+Every message that asks you to decide opens with a short labelled explainer: what is happening, what you decide, and the recommendation. A diagram follows when a flow, a state change or a screen is easier to see than to read. That covers research findings, the scope questions, the plan gate, READY FOR YOU, feedback triage, RUN COMPLETE, and the supervisor window's gates in multi-session mode. One line in `HOUSE_RULES.md` picks how explainers are written:
+
+```
+Explainer register: STE-80
+```
+
+`STE-80` follows most of the writing rules of ASD-STE100, the Simplified Technical English of aerospace maintenance manuals. `plain-language` is jargon-free prose. A missing line means STE-80. Try both: the scorecard has a row for your verdict. The format and the full list of gates are in `references/explainer.md`.
+
 ## Docs
 
 The same pages, rendered: <https://slhernandez.github.io/atlas/>.
@@ -99,6 +109,7 @@ The same pages, rendered: <https://slhernandez.github.io/atlas/>.
 - `docs/cards/quick-start-card.md` — what to type, from an empty machine to your first scorecard
 - `docs/two-modes.md` — the ladder (research → single-session → multi-session) and when to use which
 - `docs/permissions.md` — the doorman pattern and the recommended deny rail
+- `references/explainer.md` — the explainer block, the STE-80 and plain-language registers, and where each gate's explainer appears
 - `docs/patterns/` — generated-client dependency order for multi-repo work; domain-owned content
 
 ## Maintainers

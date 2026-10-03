@@ -29,6 +29,7 @@ It gathers the brief and any richer sources in the journal, establishes facts in
 - **The dossier**, created in its first session, resumable from itself alone through an opening RESUME BLOCK: current phase, live threads, pending prompts verbatim, standing rules.
 - **The commit ledger**: every commit on every branch in plain language plus a summary for QA and product, so humans can exercise a real merge gate over work too large to read as a diff. Events and decisions go in the dossier, never the ledger.
 - **The idempotent-receiver rule**: with many windows, you will re-deliver a message now and then. The supervisor answers "already reviewed, verdict stands" instead of re-running the work.
+- **Explainers at every decision**: the spec gate, each slice's plan gate, each PR verdict and any halt open with a short labelled explainer in the register your `HOUSE_RULES.md` sets, with a diagram of the feature or the slice at the gates.
 
 ## Ground rules
 

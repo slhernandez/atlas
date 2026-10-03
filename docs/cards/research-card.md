@@ -36,6 +36,7 @@ It reads the work item's description **and** comments, decomposes the question, 
 - Every claim carries `file:line`. The document is persistent and will be trusted, so the load-bearing claims are re-read before they are written down.
 - While the skeptic is still running the document is marked `pending-skeptic`; it becomes `current` only after the objections land. The answer is delivered meanwhile, with that caveat said aloud.
 - The document must stand alone. A reader with none of this context should understand it.
+- The document's Summary and the findings in chat open with a labelled explainer in the register your `HOUSE_RULES.md` sets, with a diagram when two or more components are involved.
 
 ---
 *rung one of the ladder: question → verified document → fix in-session, or → /atlas:feature-workflow · [Deck index](../deck.html) · [README](../../README.md)*
