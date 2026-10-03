@@ -24,6 +24,8 @@ agents/             workflow-planner · workflow-implementor (fresh-context role
 templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier
                     (the multi-session supervisor's durable memory) · ledger (plain-language
                     commit tables + QA/Product summary for integration-branch work)
+references/         explainer.md (the short explainer every gate message opens with, in the
+                    STE-80 or plain-language register set in HOUSE_RULES)
 scripts/            atlas-workflow.sh launcher · lint-isms.sh scrub gate
 docs/               the companion site (index · how-it-works · the Deck · cards/ · glossary/) ·
                     two-modes guide · permissions · patterns/

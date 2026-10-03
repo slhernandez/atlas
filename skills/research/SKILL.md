@@ -64,7 +64,7 @@ extra notes directories).
    subagent's read and the write, and this list is the index a planner navigates from. Include the Scope Assessment when researching a work item: what will change,
    blast radius (tests, migrations, other services or clients, generated code), a rough size,
    and the questions to ask the reporter before starting.
-6. **Present findings:** the direct answer first, then the key file references, then the
+6. **Present findings:** open with an explainer block (gate R2) in the register from `HOUSE_RULES.md`, formatted per the plugin's `references/explainer.md` (resolve it relative to this skill file, two directories up); the research document's Summary opens with one too (gate R1). Then the direct answer first, then the key file references, then the
    document path — and the exit: if the fix is now obvious and small, do it in this session;
    if the research shows structural work (3+ tasks, an open design question, shared code with
    many call sites), hand the research doc to `/atlas:feature-workflow` by passing its path as the

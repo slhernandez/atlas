@@ -83,7 +83,7 @@ last_updated: YYYY-MM-DD
 <what and why, then a ### Reasoning subsection defending the non-obvious design choices>
 
 ## Design
-<state machines / data flow where applicable>
+<state machines / data flow where applicable. REQUIRED when the change crosses components or layers: one ASCII diagram of the data flow or state change, which the supervisor reuses at the plan gate. A single-component change writes "N/A — single component".>
 
 ## Task breakdown
 ### T1 — ... (file paths, sketch, **Acceptance:** note)

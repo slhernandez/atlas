@@ -16,6 +16,7 @@ grade: <A / B / C / F>
 |---|---|
 | Work item / size | |
 | Models / effort (supervisor · planner · implementor) | |
+| Explainer register (STE-80 / plain-language) · the operator's one-line verdict | |
 | Duration (launch → PR-open → merge) | |
 | Artifacts (research / plan / review) | |
 | Outcome | |

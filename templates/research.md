@@ -14,7 +14,7 @@ last_updated: YYYY-MM-DD
 <the work item's requirement — with no tracker, the operator's pasted requirement verbatim>
 
 ## Summary
-<the direct answer: what this change is, in a paragraph>
+<opens with the explainer block (see the plugin's references/explainer.md), with a diagram of where it lives and how it flows when two or more components are involved; then the direct answer: what this change is, in a paragraph>
 
 ## Findings
 <each load-bearing fact with its file:line citation — verified, not recalled>
