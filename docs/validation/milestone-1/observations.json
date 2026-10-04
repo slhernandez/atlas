@@ -144,27 +144,45 @@
   "readonly_cli_command_evidence": [
     {
       "command": "/bin/zsh -lc 'cat source.py'",
-      "aggregated_output": "def total(values):\n    return sum(values)\n",
       "exit_code": 0,
-      "status": "completed"
+      "status": "completed",
+      "result": {
+        "source_lines": [
+          "def total(values):",
+          "    return sum(values)"
+        ],
+        "matches_baseline": true
+      }
     },
     {
       "command": "/bin/zsh -lc 'shasum -a 256 source.py'",
-      "aggregated_output": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad  source.py\n",
       "exit_code": 0,
-      "status": "completed"
+      "status": "completed",
+      "result": {
+        "sha256": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "file": "source.py"
+      }
     },
     {
       "command": "/bin/zsh -lc 'cat source.py'",
-      "aggregated_output": "def total(values):\n    return sum(values)\n",
       "exit_code": 0,
-      "status": "completed"
+      "status": "completed",
+      "result": {
+        "source_lines": [
+          "def total(values):",
+          "    return sum(values)"
+        ],
+        "matches_baseline": true
+      }
     },
     {
       "command": "/bin/zsh -lc 'shasum -a 256 source.py'",
-      "aggregated_output": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad  source.py\n",
       "exit_code": 0,
-      "status": "completed"
+      "status": "completed",
+      "result": {
+        "sha256": "3251dbf18617cd67c47707cb9bd1611dbac212ff0ee9814a75b8ce1f34b85aad",
+        "file": "source.py"
+      }
     }
   ],
   "role_and_journal_receipts": {
@@ -533,8 +551,18 @@
     },
     "lint_isms": {
       "exit_code": 2,
-      "reason": "Private blocklist path unavailable; no bypass"
+      "reason": "Private blocklist path unavailable; no bypass",
+      "ci_initial_result": {
+        "conclusion": "failure",
+        "rejected_evidence_entries": 4,
+        "correction": "Replace raw command-output envelopes with structured source and hash observations; gate unchanged."
+      }
     }
   },
-  "support_claim": "No production OpenAI adapter, kit mode, unattended mode or full manual relay certified"
+  "support_claim": "No production OpenAI adapter, kit mode, unattended mode or full manual relay certified",
+  "readonly_cli_denial": {
+    "agent_report": "Single append denied with operation not permitted; no retry or escalation.",
+    "runtime_evidence": "CLI stderr recorded a filesystem seatbelt operation_not_permitted violation.",
+    "limitation": "The streamed command events omitted the denied append item; raw stderr reported path unknown. Unchanged source hashes were independently verified."
+  }
 }

@@ -155,6 +155,7 @@ unchanged by this branch; a live Claude regression run remains a later gate.
 
 Validation completed here: four probe-inspector tests, eight fixture regression
 tests, cache/resource inspection, role experiments, file/branch/hash checks and
-dry command-policy checks. lint-isms refused to run because the private blocklist
-path was unavailable. Its fail-closed behavior was preserved; CI must provide
-the repository secret and pass that required check before merge.
+dry command-policy checks. lint-isms refused locally because the private blocklist
+path was unavailable. CI rejected four raw-output evidence entries; those were
+replaced with structured source/hash observations. The required gate is unchanged
+and must pass on the updated PR before merge.
