@@ -49,6 +49,8 @@
   .dgm-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:10px; background:var(--band); padding:1rem; }
   svg.dgm { display:block; width:100%; min-width:760px; height:auto; }
   figcaption { font-size:.84rem; color:var(--muted); margin-top:.6rem; max-width:68ch; }
+  .flow a { display:block; }
+  .flow img { display:block; width:100%; height:auto; border:1px solid var(--line); border-radius:10px; background:#121212; }
   .legend { display:flex; flex-wrap:wrap; gap:.4rem .9rem; font-size:.78rem; color:var(--muted); margin:1rem 0 0; }
   .legend span { display:inline-flex; align-items:center; gap:.4rem; }
   .legend .sw { width:26px; height:0; border-top:2px solid var(--muted); display:inline-block; }
@@ -263,6 +265,12 @@
       <figcaption>Both modes run the same spine. Gold boxes are the five touchpoints where you act; the plan gate and the merge are the two hard stops. Manual mode swaps the scope questions for a spec gate, repeats the plan-build-PR stretch once per slice, and moves every handoff through you by hand (dashed).</figcaption>
     </figure>
     <div class="legend"><span><i class="sw"></i>subagent handoff, inside one session</span><span><i class="sw relay"></i>relay by hand, between windows</span><span><i class="sw box"></i>a touchpoint: you act here</span></div>
+    <h3>One run, end to end</h3>
+    <p>The same kit-mode run drawn as a flow, from the work item to the merge. Follow the solid arrows for the work and the dashed ones for the loops: research findings and the skeptic's objections back to the supervisor, the plan back to the planner when you hold it, fix lists back to the implementor until the review passes, and every friction back into your house rules.</p>
+    <figure class="flow">
+      <a href="img/atlas-factory-flow.png" title="Open the full-size image"><img src="img/atlas-factory-flow.png" width="2800" height="2120" loading="lazy" alt="Flow of one Atlas kit-mode run. The operator gives the supervisor a work item and answers its scope questions. The supervisor fans out the read-only research team, which reads the codebase and the journal; a skeptic tries to disprove the research, and its objections become open questions. The planner writes the plan and loops with the supervisor until sign-off. At the plan gate the operator approves, or holds and sends it back. The implementor builds in a worktree, CI builds and tests, and the supervisor reviews the PR task by task, sending scoped fix lists back until it passes; feedback triage passes only the comments to apply. At READY FOR YOU the operator smoke-tests and merges, never automated. Close-out writes RUN COMPLETE and the scorecard, an independent grader adds Part 3, and the friction log feeds house rules and kit edits back to the supervisor. A doorman of deny rail, allow list and judgment guards every unattended stretch."></a>
+      <figcaption>Diamonds are the two decisions you hold. ◆ marks every place you act; each of those messages opens with an explainer. Select the image for the full size.</figcaption>
+    </figure>
     <p class="backtop"><a href="#top">↑ top</a></p>
   </section>
 
