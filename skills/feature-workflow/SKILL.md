@@ -221,8 +221,11 @@ When the implementor reports the PR URL:
    mechanical" task commit in isolation (`git diff <sha>^..<sha>`) — its
    zero-behavior-change promise is checkable.
    A finding that is a repeating pattern is reported once with every instance.
-   A finding in code the PR doesn't change (it is on the base, per `git blame`)
-   is **pre-existing**: it stays out of the verdict and the fix list.
+   A finding is **pre-existing** only when its failure scenario also happens on
+   the base: the code is unchanged (`git blame`) *and* nothing the PR changes (a
+   caller, an input, a setting, a removed guard) makes it reachable, more likely,
+   or worse. Pre-existing findings stay out of the verdict and the fix list; if
+   you can't establish that, the finding is the PR's.
 2. Verify amendments landed, assess declared deviations, check commit
    hygiene (subjects, no attribution lines, no unrelated files) and the PR
    body (per the PR-body template in the implementor agent definition,

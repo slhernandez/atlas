@@ -29,8 +29,10 @@ verdict: <APPROVE / FIX LIST / NEEDS DISCUSSION>
 A repeating pattern is one finding listing every instance.>
 
 ## Pre-existing
-<findings in code the PR doesn't change (on the base, per git blame): never in the verdict or the
-fix list; offered to the operator as follow-up candidates>
+<findings whose failure also happens on the base: the code is unchanged (git blame) and nothing the
+PR changes (a caller, an input, a setting, a removed guard) makes it reachable, more likely, or
+worse. Never in the verdict or the fix list; offered to the operator as follow-up candidates.
+If that can't be established, the finding is the PR's.>
 
 ## Fix list sent to implementor
 <the scoped items, or "none — approved as built">
