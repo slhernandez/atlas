@@ -8,6 +8,9 @@ verdict: <APPROVE / FIX LIST / NEEDS DISCUSSION>
 
 # PR Review — TICKET-123 (PR #N)
 
+**N findings: C critical, R recommended, S suggestions · P pre-existing** (or "No findings worth fixing.")
+**How to undo:** <redeploy the previous build / a follow-up migration / a feature flag / an app release>
+
 ## Task-by-task
 | Plan task | Commit(s) | Matches plan? | Notes |
 |---|---|---|---|
@@ -22,9 +25,6 @@ verdict: <APPROVE / FIX LIST / NEEDS DISCUSSION>
 <subjects, no attribution lines, no unrelated files, PR body template + accessible overview>
 
 ## Findings
-**N findings: C critical, R recommended, S suggestions · P pre-existing** (or "No findings worth fixing.")
-**How to undo:** <redeploy the previous build / a follow-up migration / a feature flag / an app release>
-
 <numbered; each with file:line and a concrete failure scenario — a finding without one is a question.
 A repeating pattern is one finding listing every instance.>
 
