@@ -43,7 +43,7 @@
   <article>
   <h1>What is the supervisor review?</h1>
   <p>Phase 6: the <a class="x" href="../cast/supervisor.html">supervisor</a> reviews the pull request against the signed-off <a class="x" href="../run/plan-file.html">plan</a>, task by task, and writes a review document to <code>reviews/</code> in the <a class="x" href="../memory/journal.html">journal</a>.</p>
-<p>It verifies <a class="x" href="../run/mechanical-task.html">mechanical</a> commits in isolation, checks the implementor's reported verification, and reads the diff itself. Anything that needs fixing goes back to the same <a class="x" href="../cast/implementor.html">implementor</a> as an explicit, scoped fix list, and the supervisor re-checks the fix commit on its own. When the review passes, it hands you <a class="x" href="../run/ready-for-you.html">READY FOR YOU</a>.</p>
+<p>It verifies <a class="x" href="../run/mechanical-task.html">mechanical</a> commits in isolation, checks the implementor's reported verification, and reads the diff itself. Anything that needs fixing goes back to the same <a class="x" href="../cast/implementor.html">implementor</a> as an explicit, scoped fix list, and the supervisor re-checks the fix commit on its own. A bug the pull request didn't introduce is marked pre-existing: it never goes in the fix list, and the supervisor offers it to you as a follow-up instead. The review opens with a count of findings and a line saying how the change would be undone. When the review passes, it hands you <a class="x" href="../run/ready-for-you.html">READY FOR YOU</a>.</p>
 <p>Review comments from other people or bots follow the same path; see <a class="x" href="../gates/feedback-triage.html">feedback triage</a>.</p>
   </article>
   <aside class="plug">

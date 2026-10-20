@@ -220,20 +220,29 @@ When the implementor reports the PR URL:
    `git diff <base>...<branch>` when `gh` is unavailable). Verify any "purely
    mechanical" task commit in isolation (`git diff <sha>^..<sha>`) — its
    zero-behavior-change promise is checkable.
+   A finding that is a repeating pattern is reported once with every instance.
+   A finding in code the PR doesn't change (it is on the base, per `git blame`)
+   is **pre-existing**: it stays out of the verdict and the fix list.
 2. Verify amendments landed, assess declared deviations, check commit
    hygiene (subjects, no attribution lines, no unrelated files) and the PR
    body (per the PR-body template in the implementor agent definition,
    including the unlabeled accessible overview).
-3. Write the review doc to `reviews/` from the journal's review template. Verdict + summary go to the operator
+3. Write the review doc to `reviews/` from the journal's review template. It opens
+   with the count line (`N findings: C critical, R recommended, S suggestions ·
+   P pre-existing`, or "No findings worth fixing.") and a **How to undo** line
+   (redeploy / a follow-up migration / a feature flag / an app release).
+   Verdict + summary go to the operator
    **in chat**, opening with an explainer block (K3); post nothing on the PR itself unless the operator asks.
    End this message with a clearly-marked **"READY FOR YOU"** block: the PR
    link, the manual steps that are theirs (smoke test, gates), the merge
-   decision, and — when the plan deferred any part of the work item to a
+   decision with How to undo, any pre-existing findings as follow-up
+   candidates (never filed automatically), and — when the plan deferred any part of the work item to a
    follow-up — a line saying the work item stays open until that follow-up
    lands, so a merge does not close it early. This is the handoff moment — make
    it unmissable.
 4. If fixes are required: send the implementor (SendMessage, context intact)
-   a scoped fix list — concrete items only, "fix these, nothing else". Do
+   a scoped fix list — concrete items only, "fix these, nothing else", never a
+   pre-existing finding. Do
    NOT forward the full review; an approving review gets a one-line
    close-out at most.
 
