@@ -57,10 +57,10 @@ If a check can't run, say which and why. Don't skip it silently.
 ## Step 4 — Measure the run
 
 ```bash
-python3 <this skill's directory>/scripts/run_stats.py <session-id-from-step-0>
+python3 <this skill's directory>/scripts/run_stats.py <session-id-from-step-0> --key <work-item>
 ```
 
-It prints:
+`--key` starts every timing and the cost-to-PR at that work item's launch, even when the session held earlier work. It prints:
 - launch → PR open, and how much of that was waiting on a person;
 - spawns by agent type, with model and effort, verified from the transcript;
 - active minutes per role;

@@ -3,7 +3,8 @@
 Tokens and cost, Time and Models / effort rows.
 
   run_stats.py --find <work-item>          # locate the run session(s) by work-item key
-  run_stats.py <session.jsonl | session-id> [--gate-gap-min 10]
+  run_stats.py <session.jsonl | session-id> [--key <work-item>] [--gate-gap-min 10]
+                                           # --key picks the launch naming that work item
 
 Reads ~/.claude/projects/*/<session>.jsonl and <session>/subagents/*.jsonl
 (+ .meta.json for each subagent's agent type). Read-only; prints markdown.
@@ -74,14 +75,14 @@ def read(path):
                 models[m.get("model")] += 1
                 if d.get("effort"):
                     efforts[d["effort"]] += 1
-            usage[key] = (m.get("model"), m["usage"])
+            usage[key] = (m.get("model"), m["usage"], d.get("timestamp", ""))
     return usage, models, efforts, stamps, turns
 
 
 def tokens(usage):
     t = defaultdict(int)
     cost, unpriced = 0.0, set()
-    for model, u in usage.values():
+    for model, u, *_ in usage.values():
         cc = u.get("cache_creation") or {}
         w5 = cc.get("ephemeral_5m_input_tokens", 0)
         w1 = cc.get("ephemeral_1h_input_tokens", 0)
@@ -102,12 +103,12 @@ def minutes(stamps):
     return (ts(max(stamps)) - ts(min(stamps))).total_seconds() / 60 if stamps else 0.0
 
 
-def waits(turns, gap_min, until=None):
+def waits(turns, gap_min, until=None, since=None):
     """Gaps over gap_min minutes after which the next substantive entry is a person's message:
     time the run sat waiting on a human (gates, questions). Gaps that end in a subagent hand-back,
     a task notification or a tool result are machine time and are not counted."""
     total, n = 0.0, 0
-    turns = sorted(t for t in turns if until is None or t[0] <= until)
+    turns = sorted(t for t in turns if (until is None or t[0] <= until) and (since is None or t[0] >= since))
     for i, ((a, _), (b, _)) in enumerate(zip(turns, turns[1:])):
         g = (ts(b) - ts(a)).total_seconds() / 60
         if g <= gap_min:
@@ -129,9 +130,30 @@ def fmt(n):
     return f"{n / 1e6:.1f}M" if n >= 1e6 else f"{n / 1e3:.0f}k"
 
 
+LAUNCH = r"<command-name>/(?:atlas:)?feature-workflow</command-name>(?:\\n|\s)*<command-args>[^<]*"
+
+
+def launch_pattern(key=None):
+    """A /feature-workflow launch; with a key, one naming that whole identifier (as typed or in a
+    URL), so ABC-1 does not match ABC-123."""
+    if key is None:
+        return re.compile(LAUNCH)
+    return re.compile(LAUNCH + r"(?<![A-Za-z0-9])" + re.escape(key) + r"(?![A-Za-z0-9])")
+
+
+def launch_time(path, key=None):
+    """Timestamp of the session's first (matching) launch entry, or None."""
+    pat = launch_pattern(key)
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:
+            if '"type":"user"' in line and '"isSidechain":false' in line and pat.search(line):
+                return json.loads(line).get("timestamp")
+    return None
+
+
 def find(key):
     """Sessions whose /feature-workflow launch names the ticket (as typed, URL or key)."""
-    pat = re.compile(r"<command-name>/(?:atlas:)?feature-workflow</command-name>(?:\\n|\s)*<command-args>[^<]*" + re.escape(key))
+    pat = launch_pattern(key)
     hits = []
     for path in glob.glob(f"{PROJECTS}/*/*.jsonl"):
         with open(path, encoding="utf-8", errors="replace") as f:
@@ -151,6 +173,7 @@ def main(argv):
     if not argv:
         sys.exit(__doc__)
     gap = float(argv[argv.index("--gate-gap-min") + 1]) if "--gate-gap-min" in argv else 10.0
+    key = argv[argv.index("--key") + 1] if "--key" in argv else None
     path = argv[0]
     if not path.endswith(".jsonl"):
         matches = glob.glob(f"{PROJECTS}/*/{path}.jsonl")
@@ -161,18 +184,27 @@ def main(argv):
 
     usage, models, efforts, stamps, turns = read(path)
     t, cost, unpriced = tokens(usage)
-    pr_open = min((t for t, k in turns if k == "pr-link"), default=None)
+    launch = launch_time(path, key)
+    start = launch or min(stamps)
+    pr_open = min((t for t, k in turns if k == "pr-link" and t >= start), default=None)
     print(f"## Run measurements — `{os.path.basename(path)}`\n")
     print(f"- **Supervisor session:** {len(usage)} replies · models {dict(models)} · effort {dict(efforts)}")
+    if launch is None:
+        print("- **Launch entry not found** (no /feature-workflow command in this session"
+              f"{' naming ' + key if key else ''}); timings start at the session's first entry.")
+    elif (ts(launch) - ts(min(stamps))).total_seconds() > 60:
+        print(f"- **The session began before the launch** ({min(stamps)[:16]}); run timings and the cost to PR start at the launch, {launch[:16]}Z.")
     if pr_open:
-        to_pr = (ts(pr_open) - ts(min(stamps))).total_seconds() / 60
-        w, n = waits(turns, gap, until=pr_open)
-        print(f"- **Launch → PR open** ({min(stamps)[:16]} → {pr_open[:16]}Z): {to_pr:.0f} min, of which "
+        to_pr = (ts(pr_open) - ts(start)).total_seconds() / 60
+        w, n = waits(turns, gap, until=pr_open, since=start)
+        print(f"- **Launch → PR open** ({start[:16]} → {pr_open[:16]}Z): {to_pr:.0f} min, of which "
               f"{w:.0f} min in {n} waits over {gap:.0f} min (waiting on a person) → {to_pr - w:.0f} min of machine and gate time")
     w, n = waits(turns, gap)
     print(f"- **Whole session** (first → last entry, includes anything after the PR): {minutes(stamps):.0f} min, "
           f"of which {w:.0f} min in {n} waits")
 
+    in_run = lambda u: {k: v for k, v in u.items() if start <= v[2] and (pr_open is None or v[2] <= pr_open)}
+    run_usage = dict(in_run(usage))
     roles = defaultdict(lambda: {"n": 0, "min": 0.0, "usage": {}, "models": defaultdict(int), "efforts": defaultdict(int)})
     for sub in sorted(glob.glob(f"{base}/subagents/*.jsonl")):
         meta_path = sub[:-len(".jsonl")] + ".meta.json"
@@ -182,6 +214,7 @@ def main(argv):
         r["n"] += 1
         r["min"] += active(s)
         r["usage"].update({f"{sub}:{k}": v for k, v in u.items()})
+        run_usage.update({f"{sub}:{k}": v for k, v in in_run(u).items()})
         for k, v in m.items():
             r["models"][k] += v
         for k, v in e.items():
@@ -203,7 +236,10 @@ def main(argv):
               f"{', '.join(r['efforts']) or '?'} | {fmt(rt['read'])} | {fmt(rt['w5'] + rt['w1'])} | {fmt(rt['out'])} | ${rc:.2f} |")
     print(f"| **subagents total** | {sum(r['n'] for r in roles.values())} | {sub_min:.1f} | | | "
           f"{fmt(sub_t['read'])} | {fmt(sub_t['w5'] + sub_t['w1'])} | {fmt(sub_t['out'])} | ${sub_cost:.2f} |")
-    print(f"\n- **Total at list price:** ${cost + sub_cost:.2f} · total cache-read {fmt(t['read'] + sub_t['read'])}")
+    print(f"\n- **Total at list price:** ${cost + sub_cost:.2f} · total cache-read {fmt(t['read'] + sub_t['read'])} (whole session)")
+    if pr_open:
+        rt, rc, _ = tokens(run_usage)
+        print(f"- **Cost launch → PR open:** ${rc:.2f} · cache-read {fmt(rt['read'])} (supervisor + subagents; compare runs on this)")
     if unpriced:
         print(f"- **Unpriced models** (add to PRICES): {sorted(unpriced)}")
     print("- Active minutes sum the gaps between a subagent's entries, each capped at 5 min, so idle time before a resume is excluded.")
