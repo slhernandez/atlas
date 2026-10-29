@@ -32,8 +32,8 @@ extra notes directories).
 3. **Spawn parallel read-only subagents**, each told WHAT to find, never HOW to search:
    - `atlas:codebase-locator` — where things live (first pass: what exists)
    - `atlas:codebase-analyzer` — how a component actually works, at file:line (launch as soon
-     as its locator returns — don't wait for the slowest one)
-   - `atlas:codebase-pattern-finder` — existing implementations to model new work on
+     as its locator returns — don't wait for the slowest one); also the closest existing
+     implementation to model new work on
    - `atlas:journal-locator` — prior research, plans, reviews, and decisions in the journal
    - `atlas:journal-analyzer` — deep read of one journal document a locator surfaced
    - the built-in `Explore` agent, if your Claude Code version has it — broad sweeps that

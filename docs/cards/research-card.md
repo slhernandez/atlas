@@ -7,7 +7,7 @@
 | **Card** | Atlas Skill Card 02 |
 | **Invoke** | `/atlas:research <work item or question>` |
 | **Output** | A research document in `<journal>/research/` |
-| **Team** | Codebase locator, analyzer, pattern-finder; journal locator and analyzer |
+| **Team** | Codebase locator and analyzer; journal locator and analyzer |
 | **Exit** | Fix in-session, or hand the document to `/atlas:feature-workflow` |
 
 ## What it does

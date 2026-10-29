@@ -61,9 +61,9 @@ Agents exchange **file paths, never pasted file contents**.
    operator passes one as extra context (`"research: <path>"`) — start from it
    and refresh only what's stale instead of redoing it.
 2. Research the codebase the way `/atlas:research` does: fan out the
-   read-only research team — `atlas:codebase-locator` (where things live),
-   `atlas:codebase-analyzer` (how they actually work), `atlas:codebase-pattern-finder`
-   (the closest existing pattern), `atlas:journal-locator` / `atlas:journal-analyzer`
+   read-only research team — `atlas:codebase-analyzer` (how things actually
+   work, and the closest existing pattern to model on), the built-in `Explore`
+   agent (where things live), `atlas:journal-locator` / `atlas:journal-analyzer`
    (prior research and decisions) — scaled to the question, then verify the
    load-bearing claims yourself at file:line before writing them down. **Before
    declaring any data unreachable, missing, or restricted**, read the app's
@@ -87,7 +87,9 @@ Agents exchange **file paths, never pasted file contents**.
    tests). Fold surviving objections into Open Questions; a report of "nothing refuted"
    is recorded as such. Skip only for a single-component change with no design question.
 4. **Resolve open questions with the operator now** (AskUserQuestion or
-   chat). Decisions made here become the planner's "decided constraints" —
+   chat), and **only after the skeptic has reported** when step 3 runs: its
+   objections change the questions, and a question built on reasoning the
+   skeptic then refutes has to be asked again. Decisions made here become the planner's "decided constraints" —
    the planner is forbidden from re-litigating them, so get them right.
    **For anything a user will see or touch, ask how it behaves, not only what
    and where.** A capability request ("book at quarter past") says nothing

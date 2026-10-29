@@ -58,6 +58,9 @@ stop — do not guess.
    **mutation check** to the verification task: temporarily neuter the guard,
    confirm exactly that test fails, restore, re-verify. Don't rely on the
    implementor volunteering it.
+   **A mutation must be able to fail:** the mutated value must differ from every
+   value the test's fixtures assert. A mutation that swaps in a value equal to a
+   fixture passes whatever the code does, so it proves nothing.
 
 ## Plan file structure
 
