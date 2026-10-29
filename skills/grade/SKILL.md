@@ -33,7 +33,14 @@ python3 <this skill's directory>/scripts/run_stats.py --find <work-item>
 
 ## Step 2 — The PR, on the remote
 
-Find the PR by work-item key, then note its state, base, head SHA and merge commit. Fetch and read the **whole diff against the base** (`git diff origin/<base>...<head-sha>`) and every commit message. The scorecard cites the head SHA you graded.
+Find the PR by work-item key, then note its state, base, head SHA, merge commit and its changed-file, addition and deletion counts. Fetch the base and the PR head.
+
+**Find the PR's own base (`B`) before diffing.** A merged PR's head is already inside `origin/<base>`, so `origin/<base>...<head-sha>` comes back **empty** after a merge.
+- **Open PR:** `B=$(git merge-base origin/<base> <head-sha>)`.
+- **Merged PR:** take the parent of the commit it landed in: `B=$(git merge-base <merge-commit>^1 <head-sha>)`. This works for merge commits, squash merges and rebase merges alike.
+- **Check `B`:** `git diff --shortstat $B <head-sha>` must match the PR's own counts. If it doesn't, stop and work out why before grading.
+
+Read the whole `git diff $B <head-sha>`, not hunks, and every commit message (`git log $B..<head-sha>`). The scorecard cites the head SHA and `B` you graded.
 
 ## Step 3 — Re-run the tests and break the code
 
