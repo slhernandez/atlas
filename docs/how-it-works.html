@@ -315,7 +315,7 @@
       <div><span class="role">implementor</span><p>Fresh context. Builds exactly what was signed off, commit by commit, in an isolated worktree. It never sees the research, so it has nothing to redesign from.</p></div>
       <div class="human"><span class="role">you</span><p>Answer the scope questions. Approve or hold the plan. Smoke-test what agents can't see. Merge, or don't. Judgment stays where judgment lives.</p></div>
     </div>
-    <p>Behind them stands the read-only <strong>research team</strong> the supervisor fans out: a codebase locator (where things live), an analyzer (how they actually work), a pattern-finder (the closest existing implementation to model on), and two journal agents that surface and read prior research and decisions. They report; they never edit.</p>
+    <p>Behind them stands the read-only <strong>research team</strong> the supervisor fans out: a codebase locator (where things live), an analyzer (how they actually work, and the closest existing implementation to model on), and two journal agents that surface and read prior research and decisions. They report; they never edit.</p>
     <p>The point of the split: <strong>every catch comes from fresh context with a verification mandate.</strong> The planner re-verifies the supervisor's research. The supervisor reviews a plan and a diff it did not write. The implementor executes without the temptation to redesign. Inside a run, no role grades its own output. Around the run, the grade itself comes from a session that ran none of it.</p>
     <p>The roles talk through one file. The plan carries a status handshake in its frontmatter (<code>ready-for-supervisor-review</code> → <code>approved-with-amendments</code> → <code>signed-off</code> → <code>merged</code>), the supervisor's review section, the planner's questions and responses, the implementor's progress notes and declared deviations. Agents exchange file paths, never pasted contents.</p>
     <p class="backtop"><a href="#top">↑ top</a></p>
@@ -407,7 +407,7 @@
   <section id="box">
     <p class="num">08</p>
     <h2>What's in the box</h2>
-    <p class="sub">Four skills, eight agents, seven templates, one file that outranks them all.</p>
+    <p class="sub">Five skills, seven agents, seven templates, one file that outranks them all.</p>
     <table>
       <thead><tr><th>Piece</th><th>What it is</th></tr></thead>
       <tbody>
@@ -416,7 +416,7 @@
         <tr><td><code>/atlas:feature-workflow</code></td><td>Rung two. The three roles in one session, two hard gates, one PR.</td></tr>
         <tr><td><code>/atlas:launch-supervisor</code></td><td>Rung three. Writes the prompt that boots a supervisor window for manual mode.</td></tr>
         <tr><td>workflow-planner · workflow-implementor</td><td>The two role agents, described on their cards.</td></tr>
-        <tr><td>The research team</td><td>Codebase locator, analyzer, pattern-finder; journal locator and analyzer; and the skeptic, which tries to disprove a finished research document. Read-only.</td></tr>
+        <tr><td>The research team</td><td>Codebase locator and analyzer; journal locator and analyzer; and the skeptic, which tries to disprove a finished research document. Read-only.</td></tr>
         <tr><td>Templates</td><td>Plan, research, review, dossier, ledger, scorecard, and the house-rules seed. Copied into your journal at setup. Plugin-owned templates can be refreshed later with the diff shown first; your own files are never overwritten.</td></tr>
         <tr><td><code>HOUSE_RULES.md</code></td><td>Your standing rules. Senior to everything above. Survives every update.</td></tr>
       </tbody>

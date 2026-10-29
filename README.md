@@ -20,7 +20,7 @@ skills/             setup (first-run wizard) · research (rung one: scope before
                     launch-supervisor (multi-session kickoff generator)
 agents/             workflow-planner · workflow-implementor (fresh-context roles) · skeptic · the
                     research team: codebase-locator · codebase-analyzer ·
-                    codebase-pattern-finder · journal-locator · journal-analyzer
+                    journal-locator · journal-analyzer
 templates/          plan · research · review · scorecard · HOUSE_RULES seed · dossier
                     (the multi-session supervisor's durable memory) · ledger (plain-language
                     commit tables + QA/Product summary for integration-branch work)
