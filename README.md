@@ -56,7 +56,8 @@ yourself; I want to answer its questions.
 
 After setup, the ladder: `/atlas:research <item>` for bugs and small tasks (then fix
 in-session or escalate), `/atlas:feature-workflow <item>` for features, `/atlas:launch-supervisor`
-for multi-week work. `docs/two-modes.md` has the decision table.
+for multi-week work. `docs/two-modes.md` has the decision table. After a run, `/atlas:grade <item>`
+in a fresh session grades it independently: Part 3 of the scorecard, its cost and time, and the grade.
 
 ## Configuration
 

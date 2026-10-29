@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Who grades a run? | Atlas Glossary</title>
-<meta name="description" content="A session that did none of the work. Today you launch it yourself and point it at the scorecard and the pull request; a grader skill is planned.">
+<meta name="description" content="A session that did none of the work. You open it yourself and run /atlas:grade with the work item; it re-runs the new tests, breaks the code on purpose to prove they catch it, meas">
 <script>try{var t=localStorage.getItem("atlas-glossary-theme");if(/^(terminal|light-green|light|blueprint)$/.test(t))document.documentElement.dataset.theme=t;}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Silkscreen&family=Spline+Sans+Mono:wght@400;500;600&display=swap">
@@ -42,7 +42,7 @@
     <a class="report" href="https://github.com/slhernandez/atlas/issues/new" aria-label="Something seem wrong? Open an issue on GitHub" title="Something seem wrong? Open an issue on GitHub.">?</a></div>
   <article>
   <h1>Who grades a run?</h1><p class="chip big">Part 3</p>
-  <p>A session that did none of the work. Today you launch it yourself and point it at the <a class="x" href="../quality/scorecard.html">scorecard</a> and the pull request; a grader skill is planned.</p>
+  <p>A session that did none of the work. You open it yourself and run <code>/atlas:grade</code> with the work item; it re-runs the new tests, breaks the code on purpose to prove they catch it, measures the run's cost and time from its transcript, and fills Part 3 of the <a class="x" href="../quality/scorecard.html">scorecard</a> and the grade.</p>
 <p>It re-reviews the diff with <a class="x" href="../cast/fresh-context.html">fresh context</a>, lists what the run's own <a class="x" href="../run/pr-review.html">review</a> missed, checks alignment with the <a class="x" href="../run/work-item.html">work item</a> in both directions, and runs <a class="x" href="../quality/mutation-check.html">mutation checks</a> in a scratch worktree. Then it fills Part 3 and gives the grade. Inside a run, no role grades its own output. Around the run, the grade itself comes from outside.</p>
 <p>A grader that writes its expectations down before a run finishes keeps them in a <code>grader/</code> folder, which the <a class="x" href="../cast/journal-locator.html">journal locator</a> never searches.</p>
   </article>

@@ -8,8 +8,8 @@ grade: <A / B / C / F>
 # Run Scorecard — TICKET-123
 
 > Grade after merge (or abort). Part 3 is graded by an independent session that did not
-> run the work — the writer is never the grader. (Launch a fresh Claude Code session by
-> hand and point it at this file and the PR; a grader skill is planned for a later phase.)
+> run the work — the writer is never the grader. (In a fresh Claude Code session, run
+> `/atlas:grade <work-item>`; it fills Part 3, the measurement rows and the grade.)
 
 ## Run metadata
 | | |
@@ -17,7 +17,10 @@ grade: <A / B / C / F>
 | Work item / size | |
 | Models / effort (supervisor · planner · implementor) | |
 | Explainer register (STE-80 / plain-language) · the operator's one-line verdict | |
-| Duration (launch → PR-open → merge) | |
+| Dates (launch · PR open · merge) | |
+| Tokens and cost (supervisor and subagents separately: cache-read · cache-write · output; total; measured cost at list price; plan allowance used, if any. Measured from the transcripts, not estimated) | |
+| Success (grade · fix rounds after the PR review · plan revisions at the gate · plan gate and merge gate held / broken) | |
+| Time (wall clock launch → PR open · of which waiting on the operator at gates · active subagent minutes, per role) | |
 | Artifacts (research / plan / review) | |
 | Outcome | |
 | Permission escalations (as observed by the supervisor; "auto mode: none surfaced" is a valid answer) | |

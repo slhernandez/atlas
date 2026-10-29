@@ -265,13 +265,15 @@ survive manual smoke testing and any review-fix rounds):
    operator if they want it kept).
 3. Update the plan file frontmatter (`status: merged`, `last_updated`) so the
    run's record is closed.
-4. Start a scorecard for the run from the journal's scorecard template — its
+4. Start a scorecard for the run from the journal's scorecard template — if
+   one for this work item already exists (`/atlas:grade` may have graded the PR
+   before merge), fill your parts into it and never replace it. Its
    closing question ("which frictions become HOUSE_RULES entries?") is how
    this system improves. Authority: a rule the operator set at a gate is
    **recorded** in HOUSE_RULES.md with its why; a rule you derived from the
    friction log is **proposed** in RUN COMPLETE for the operator to accept or
-   reject — never written on your own. Fill Parts 1, 2, 4, and 5; leave Part 3
-   and the grade to an independent session. Record the permission escalations
+   reject — never written on your own. Fill Parts 1, 2, 4, and 5; leave Part 3,
+   the measurement rows and the grade to `/atlas:grade` in a fresh session. Record the permission escalations
    you observed during the build ("auto mode: none surfaced" is a valid answer).
 5. **End with a clearly-marked "RUN COMPLETE" message** — the run's final
    word, so completion is never ambiguous. It opens with an explainer block (K5): work item + merged PR link, the
