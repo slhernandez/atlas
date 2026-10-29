@@ -32,6 +32,26 @@ def m_content(d):
     return m.get("content") if isinstance(m, dict) else None
 
 
+MACHINE_PREFIXES = ("<task-notification", "<agent-message", "<system-reminder", "<command-", "<local-command")
+
+
+def kind_of(d):
+    """'person' for a message a human typed (directly or queued while the model was busy),
+    'tool_result' for tool output, else the entry type."""
+    kind, c = d.get("type"), m_content(d)
+    if kind == "queue-operation":
+        text = str(d.get("content") or "")
+        return "person" if d.get("operation") == "enqueue" and text and not text.lstrip().startswith(MACHINE_PREFIXES) else kind
+    if kind != "user" or d.get("isSidechain"):
+        return kind
+    if isinstance(c, list) and c and isinstance(c[0], dict):
+        if c[0].get("type") == "tool_result":
+            return "tool_result"
+        c = c[0].get("text", "")
+    text = c if isinstance(c, str) else ""
+    return "person" if text.strip() and not text.lstrip().startswith(MACHINE_PREFIXES) else kind
+
+
 def ts(s):
     return datetime.fromisoformat(s.replace("Z", "+00:00"))
 
@@ -46,11 +66,7 @@ def read(path):
             continue
         if d.get("timestamp"):
             stamps.append(d["timestamp"])
-            c = m_content(d)
-            kind = d.get("type")
-            if kind == "user" and isinstance(c, list) and c and isinstance(c[0], dict) and c[0].get("type") == "tool_result":
-                kind = "tool_result"
-            turns.append((d["timestamp"], kind))
+            turns.append((d["timestamp"], kind_of(d)))
         m = d.get("message") or {}
         if d.get("type") == "assistant" and m.get("usage"):
             key = m.get("id") or d.get("uuid")
@@ -87,13 +103,17 @@ def minutes(stamps):
 
 
 def waits(turns, gap_min, until=None):
-    """Gaps over gap_min minutes that end in something other than the model or a tool
-    (a person's message, an attachment, a queued input): time waiting on a person."""
+    """Gaps over gap_min minutes after which the next substantive entry is a person's message:
+    time the run sat waiting on a human (gates, questions). Gaps that end in a subagent hand-back,
+    a task notification or a tool result are machine time and are not counted."""
     total, n = 0.0, 0
     turns = sorted(t for t in turns if until is None or t[0] <= until)
-    for (a, _), (b, kind) in zip(turns, turns[1:]):
+    for i, ((a, _), (b, _)) in enumerate(zip(turns, turns[1:])):
         g = (ts(b) - ts(a)).total_seconds() / 60
-        if kind not in ("assistant", "tool_result") and g > gap_min:
+        if g <= gap_min:
+            continue
+        nxt = next((k for _, k in turns[i + 1:i + 8] if k not in ("attachment", "system", "file-history-delta")), None)
+        if nxt == "person":
             total, n = total + g, n + 1
     return total, n
 
