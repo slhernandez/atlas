@@ -74,7 +74,7 @@ python3 <this skill's directory>/scripts/run_stats.py <session-id-from-step-0> -
 - tokens per role and the cost at list price.
 
 Copy the numbers into the scorecard's **Models / effort**, **Tokens and cost** and **Time** rows. Two limitations to note on the scorecard:
-- **The cost is transcript-based** and runs slightly under `/usage`; a `/usage` reading the run recorded wins.
+- **The cost is transcript-based** and ran 9–31% under `/usage` across three measured runs, because calls that leave no transcript entry aren't counted. Always record the run session's `/usage` total at PR open; that reading wins.
 - **The session may contain other work** after the run. Say so when it does.
 
 ## Step 5 — Write the grade
