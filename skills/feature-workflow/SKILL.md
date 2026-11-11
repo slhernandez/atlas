@@ -235,7 +235,7 @@ When the implementor reports the PR URL:
 3. Write the review doc to `reviews/` from the journal's review template. It opens
    with the count line (`N findings: C critical, R recommended, S suggestions ·
    P pre-existing`, where N = C + R + S and pre-existing findings count only in
-   P; or "No findings worth fixing.") and a **How to undo** line
+   P; always the whole line, zeros included: `0 findings: 0 critical, …`) and a **How to undo** line
    (redeploy / a follow-up migration / a feature flag / an app release).
    Verdict + summary go to the operator
    **in chat**, opening with an explainer block (K3); post nothing on the PR itself unless the operator asks.
