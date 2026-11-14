@@ -244,7 +244,7 @@ def main(argv):
         print(f"- **Unpriced models** (add to PRICES): {sorted(unpriced)}")
     print("- Active minutes sum the gaps between a subagent's entries, each capped at 5 min, so idle time before a resume is excluded.")
     print("- Transcript-based: calls that leave no transcript entry (auto-mode safety checks, titles) are not counted."
-          " In one measured run the transcript total was about 9% under the /usage reading; prefer a /usage reading when the run recorded one.")
+          " Across three measured runs the transcript total was 9-31% under the /usage reading; always record /usage at PR open and prefer it.")
     print("- The session also contains anything else done in it (follow-ups, grading questions); say so on the scorecard if it does.")
 
 
