@@ -8,8 +8,8 @@ verdict: <APPROVE / FIX LIST / NEEDS DISCUSSION>
 
 # PR Review — TICKET-123 (PR #N)
 
-**N findings: C critical, R recommended, S suggestions · P pre-existing** (or "No findings worth fixing.")
-<N = C + R + S; pre-existing findings count only in P, never in N>
+**N findings: C critical, R recommended, S suggestions · P pre-existing**
+<N = C + R + S; pre-existing findings count only in P, never in N. Always the whole line, zeros included: **0 findings: 0 critical, 0 recommended, 0 suggestions · 0 pre-existing**>
 **How to undo:** <redeploy the previous build / a follow-up migration / a feature flag / an app release>
 
 ## Task-by-task
